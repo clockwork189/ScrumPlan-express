@@ -1,0 +1,63 @@
+<% include header.ejs %>
+<!-- Call to Action Panel -->
+<div class="row">
+    <div class="twelve columns">
+        <div class="panel">
+            <h4>Log into Scrum Plan</h4>
+            <div class="row">
+                <div class="ten columns">
+                    <p>Enter your ScrumPlan Email and Password below to access your ScrumPlan account</p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <form id="beta-form" action="http://www.mitchellbutler.com/ScrumBeta.php" method="post">
+                    <div class="row">
+                        <div class="two columns">
+                            <label class="right inline">Email:</label>
+                        </div>
+                        <div class="seven columns">
+                            <input type="email" name="email" placeholder="Enter Your Email" class="twelve email">
+                        </div>
+                        <div class="three columns">
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="two columns">
+                            <label class="right inline">Password:</label>
+                        </div>
+                        <div class="seven columns">
+                            <input type="email" name="email" placeholder="Enter Your Email" class="twelve email">
+                        </div>
+                        <div class="three columns">
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="four columns">
+                            
+                        </div>
+                        <div class="four columns">
+                            <div class="error"></div>
+                            <button class="success radius button left">Submit</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="beta-alert" class="alert-box" style="display:none;"></div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer class="row">
+    <div class="twelve columns">
+        <hr />
+            <div class="row">
+                <div class="six columns">
+                    <p>Built by <a href="https://github.com/mitchellbutler">Mitchell Butler</a>, view this project on <a href="https://github.com/mitchellbutler/ScrumPlan">GitHub</a>.</p>
+                </div>
+             </div>
+        </div> 
+    </div> 
+</footer>
