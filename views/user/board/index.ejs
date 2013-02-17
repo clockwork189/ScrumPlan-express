@@ -1,7 +1,26 @@
 <% include ../layout/header.ejs %>
 <!-- Call to Action Panel -->
 <div id="content" data-app="board">
-    <table class="scrum-board"></table>
+    <table class="scrum-board">
+        <thead>
+            <tr>
+                <th class="project">Project</th>
+                <th>To Do</th>
+                <th>In Progress</th> 
+                <th>Verify</th>
+                <th>Done</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#">New Project</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <script src="/app/user/javascript/board.js"></script>
 <% include ../layout/footer.ejs %>

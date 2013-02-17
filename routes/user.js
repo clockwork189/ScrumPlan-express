@@ -9,7 +9,7 @@ exports.auth = function(req, res){
             req.session.regenerate(function(){
                 // Store the user's primary key in the session store to be retrieved, or in this case the entire user object
                 req.session.user = user;
-                res.redirect('app/manage');
+                res.redirect('app/dashboard');
           });
         } else {
             req.session.error = 'Authentication failed, please check your username and password.';
@@ -35,17 +35,25 @@ exports.create = function(req, res){
             req.session.regenerate(function() {
                 req.session.user = user;
             });
-            res.redirect('app/manage');
+            res.redirect('app/dashboard');
         });
     });
 };
 
-exports.manage = function(req, res){
-    res.render('user/manage/index.ejs', { title: 'ScrumPlan: User Dashboard', layout: 'user/layout/layout' });
+exports.dashboard = function(req, res){
+    res.render('user/dashboard/index.ejs', { title: 'ScrumPlan: User Dashboard', layout: 'user/layout/layout' });
+};
+
+exports.manage_users = function(req, res){
+    res.render('user/manage/users.ejs', { title: 'ScrumPlan: Manage Users', layout: 'user/layout/layout' });
+};
+
+exports.manage_projects_tasks = function(req, res){
+    res.render('user/manage/projects_tasks.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout' });
 };
 
 exports.board = function(req, res){
-    res.render('user/board/index.ejs', { title: 'ScrumPlan: Board', layout: 'user/layout/layout' });
+    res.render('user/board/index.ejs', { title: 'ScrumPlan: Board', layout: 'user/board/layout' });
 };
 
 exports.stats = function(req, res){

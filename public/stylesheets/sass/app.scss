@@ -53,10 +53,6 @@
 
 @import "chosen";
 
-#content {
-	display: none;
-}
-
 .avatar {
 	height: 40px;
 	width: 40px;
@@ -75,6 +71,10 @@
 	font-size: 20px;
 }
 
+.top-bar {
+	margin: 0px;
+}
+
 table.scrum-board {
 	width: 100%;
 	margin-top: -30px;
@@ -82,6 +82,12 @@ table.scrum-board {
 	.project-title {
 		font-weight: bold;
 		width: 150px;
+	}
+	th {
+		text-align: center;
+		.project {
+			width:100px;
+		}
 	}
 	td {
 		padding: 20px;

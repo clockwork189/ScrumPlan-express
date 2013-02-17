@@ -1,14 +1,27 @@
 <!-- Basic Navigation -->
 <nav class="top-bar">
     <ul>
-        <li class="name"><h1><a href="/app/">ScrumPlan</a></h1></li>
+        <li class="name"><h1><a href="/app/dashboard">ScrumPlan</a></h1></li>
         <li class="toggle-topbar"><a href="#"></a></li>
     </ul>
     <section>
         <ul class="right">
-            <li><a href="/app/manage">Manage</a></li>
+            <li class="has-dropdown">
+                <a href="#">Manage</a>
+                <ul class="dropdown">
+                    <li><a href="/app/manage/users">Users</a></li>
+                    <li><a href="/app/manage/projects">Projects &amp; Tasks</a></li>
+                </ul>
+            </li>
             <li><a href="/app/board">Board</a></li>
-            <li><a href="/app/list">List</a></li>
+            <li class="has-dropdown">
+                <a href="#">List</a>
+                <ul class="dropdown">
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Tasks</a></li>
+                </ul>
+            </li>
             <li><a href="/app/stats">Stats</a></li>
             <li><a href="/app/logout">Logout</a></li>
         </ul>

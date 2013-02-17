@@ -26,7 +26,6 @@ var iterations = 12000;
 */
 exports.hash = function (pwd, salt, fn) {
     if (3 == arguments.length) {
-        console.log("pwd:", pwd, "   salt:", salt);
         crypto.pbkdf2(pwd, salt, iterations, len, fn);
     } else {
         fn = salt;
