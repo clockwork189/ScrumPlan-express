@@ -70,9 +70,9 @@ function restrict(req, res, next) {
 
 app.get('/', routes.index);
 app.get('/login', routes.login);
+app.post('/login', user.auth);
 app.get('/register', routes.register);
 app.post('/register', user.create);
-app.get('/auth', user.auth);
 app.get('/app/manage', user.manage);
 app.get('/app/board', user.board);
 app.get('/app/stats', user.stats);

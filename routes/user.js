@@ -3,8 +3,19 @@ var Task = require("./../models/Task.js");
 var hash = require('./../library/Password').hash;
 
 exports.auth = function(req, res){
-    var username = req.body.email;
-    var password = req.body.password;
+    authenticate(req.body.email, req.body.password, function(err, user){
+        if (user) {
+            // Regenerate session when signing in to prevent fixation
+            req.session.regenerate(function(){
+                // Store the user's primary key in the session store to be retrieved, or in this case the entire user object
+                req.session.user = user;
+                res.redirect('app/manage');
+          });
+        } else {
+            req.session.error = 'Authentication failed, please check your username and password.';
+            res.redirect('login');
+        }
+    });
     //res.render('login/index.ejs', { title: 'ScrumPlan: Login', layout: 'login/layout' });
 };
 
@@ -46,5 +57,29 @@ exports.list = function(req, res){
 };
 
 exports.logout = function(req, res){
-    res.render('user/list/index.ejs', { title: 'ScrumPlan: User List', layout: 'user/layout/layout' });
+    req.session.destroy(function(){
+        res.redirect('/');
+    });
 };
+
+// Authenticate using our plain-object database of doom!
+function authenticate(email, pass, fn) {
+    if (!module.parent) console.log('authenticating %s:%s', email, pass);
+    User.getUserByEmail(email, function(err, user) {
+        if (!user) return fn(new Error('cannot find user'));
+        hash(pass, user.salt, function(err, hash) {
+            if (err) return fn(err);
+            if (hash == user.hash) return fn(null, user);
+            fn(new Error('invalid password'));
+        });
+    });
+}
+
+function restrict(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    req.session.error = 'Access denied!';
+    res.redirect('/login');
+  }
+}
