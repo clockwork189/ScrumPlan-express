@@ -6,6 +6,8 @@
 var express = require('express'),
 	routes = require('./routes'),
 	user = require('./routes/user'),
+	project = require('./routes/project'),
+	task = require('./routes/task'),
 	http = require('http'),
 	expressLayouts = require("express-ejs-layouts"),
 	path = require('path');
@@ -80,6 +82,8 @@ app.get('/app/board', user.board);
 app.get('/app/stats', user.stats);
 app.get('/app/list', user.list);
 app.get('/app/logout', user.logout);
+app.post('/create/project', project.create);
+//app.post('/create/task', task.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

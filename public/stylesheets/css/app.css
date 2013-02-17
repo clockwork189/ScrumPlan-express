@@ -6688,25 +6688,25 @@ div.task-box {
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   position: relative;
 }
-/* line 111, ../sass/app.scss */
+/* line 122, ../sass/app.scss */
 div.task-box.success {
   background-color: #5da423;
   color: #fff;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
 }
-/* line 112, ../sass/app.scss */
+/* line 123, ../sass/app.scss */
 div.task-box.alert {
   background-color: #c60f13;
   color: #fff;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
 }
-/* line 113, ../sass/app.scss */
+/* line 124, ../sass/app.scss */
 div.task-box.secondary {
   background-color: #e9e9e9;
   color: #505050;
   text-shadow: 0 1px rgba(255, 255, 255, 0.3);
 }
-/* line 115, ../sass/app.scss */
+/* line 130, ../sass/app.scss */
 div.task-box a.close {
   color: #333;
   position: absolute;
@@ -6716,11 +6716,11 @@ div.task-box a.close {
   opacity: 0.2;
   padding: 4px;
 }
-/* line 116, ../sass/app.scss */
+/* line 131, ../sass/app.scss */
 div.task-box a.close:hover, div.task-box a.close:focus {
   opacity: 0.4;
 }
-/* line 118, ../sass/app.scss */
+/* line 133, ../sass/app.scss */
 div.task-box.selected {
   background-color: #f9f9f9 !important;
 }

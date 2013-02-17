@@ -1,6 +1,6 @@
 var User = require("./../models/User.js");
-var Task = require("./../models/Task.js");
 var hash = require('./../library/Password').hash;
+var Project = require("./../models/Project.js");
 
 exports.auth = function(req, res){
     authenticate(req.body.email, req.body.password, function(err, user){
@@ -16,7 +16,6 @@ exports.auth = function(req, res){
             res.redirect('login');
         }
     });
-    //res.render('login/index.ejs', { title: 'ScrumPlan: Login', layout: 'login/layout' });
 };
 
 exports.create = function(req, res){
@@ -25,8 +24,7 @@ exports.create = function(req, res){
     var last_name = req.body.last_name;
     var email = req.body.email;
     var password = req.body.password;
-    // when you create a user, generate a salt
-    // and hash the password ('foobar' is the pass here)
+
     hash(password, function(err, salt, hash){
         if (err) throw err;
         user_salt = salt;
@@ -49,7 +47,9 @@ exports.manage_users = function(req, res){
 };
 
 exports.manage_projects_tasks = function(req, res){
-    res.render('user/manage/projects_tasks.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout' });
+    Project.getAllProjects(function(err, projects) {
+        res.render('user/manage/projects_tasks.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects });
+    });
 };
 
 exports.board = function(req, res){
@@ -70,7 +70,6 @@ exports.logout = function(req, res){
     });
 };
 
-// Authenticate using our plain-object database of doom!
 function authenticate(email, pass, fn) {
     if (!module.parent) console.log('authenticating %s:%s', email, pass);
     User.getUserByEmail(email, function(err, user) {
