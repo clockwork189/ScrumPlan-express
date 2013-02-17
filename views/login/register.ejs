@@ -3,21 +3,43 @@
 <div class="row">
     <div class="twelve columns">
         <div class="panel">
-            <h4>Log into Scrum Plan</h4>
+            <h4>Register for Scrum Plan</h4>
             <div class="row">
                 <div class="ten columns">
-                    <p>Enter your ScrumPlan Email and Password below to access your ScrumPlan account</p>
+                    <p>Enter the following details to get setup with your very own ScrumPlan account!</p>
                 </div>
             </div>
             <hr />
             <div class="row">
-                <form id="beta-form" action="http://www.mitchellbutler.com/ScrumBeta.php" method="post">
+                <form id="beta-form" action="/register" method="post">
                     <div class="row">
                         <div class="two columns">
-                            <label class="right inline">Email:</label>
+                            <label class="right inline">First Name:</label>
                         </div>
                         <div class="seven columns">
-                            <input type="email" name="email" placeholder="Enter Your Email" class="twelve email">
+                            <input type="text" name="first_name" placeholder="Enter Your First Name" class="twelve">
+                        </div>
+                        <div class="three columns">
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="two columns">
+                            <label class="right inline">Last Name:</label>
+                        </div>
+                        <div class="seven columns">
+                            <input type="text" name="last_name" placeholder="Enter Your Last Name" class="twelve">
+                        </div>
+                        <div class="three columns">
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="two columns">
+                            <label class="right inline">Email Address:</label>
+                        </div>
+                        <div class="seven columns">
+                            <input type="text" name="email" placeholder="Enter Your Email" class="twelve">
                         </div>
                         <div class="three columns">
                             <div class="error"></div>
@@ -28,7 +50,7 @@
                             <label class="right inline">Password:</label>
                         </div>
                         <div class="seven columns">
-                            <input type="email" name="email" placeholder="Enter Your Email" class="twelve email">
+                            <input type="password" name="password" placeholder="Enter a Password" class="twelve email">
                         </div>
                         <div class="three columns">
                             <div class="error"></div>

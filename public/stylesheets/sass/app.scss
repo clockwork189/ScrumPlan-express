@@ -1,0 +1,113 @@
+// Your custom settings file to override Foundation defaults
+@import "settings";
+
+// Comment out this import if you are customizing you imports below
+@import "foundation";
+
+// ----------------------------------------
+// Import specific parts of Foundation by commenting the import "foundation"
+// and uncommenting what you want below. You must uncomment the following if customizing
+
+// @import "compass/css3";
+// @import "foundation/settings";
+// @import "foundation/functions/all";
+
+// Control which mixins you have access too
+
+// @import "foundation/mixins/clearfix";
+// @import "foundation/mixins/css-triangle";
+// @import "foundation/mixins/font-size";
+
+// Must include next two for semantic grid to work
+
+// @import "foundation/mixins/respond-to";
+// @import "foundation/mixins/semantic-grid";
+
+// @import "modular-scale";
+// @import "foundation/common/globals";
+
+// Must include the grid for any responsiveness
+
+// @import "foundation/components/grid";
+
+// Control which common styles get compiled
+
+// @import "foundation/common/typography";
+// @import "foundation/common/forms";
+
+// Control which components you get if customizing
+
+// @import "foundation/components/modules/buttons";
+// @import "foundation/components/modules/tabs";
+// @import "foundation/components/modules/ui";
+// @import "foundation/components/modules/topbar";
+// @import "foundation/components/modules/navbar";
+// @import "foundation/components/modules/orbit";
+// @import "foundation/components/modules/reveal";
+// @import "foundation/components/modules/offcanvas";
+// @import "foundation/components/modules/clearing";
+// @import "foundation/components/modules/joyride";
+
+// Media Queries Overrides
+// @import "foundation/components/modules/mqueries";
+
+@import "chosen";
+
+#content {
+	display: none;
+}
+
+.avatar {
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	float: left;
+	margin-right: 10px;
+}
+
+#loading {
+	display: block;
+	z-index: 9999;
+	height: 25px;
+	width: 100%;
+	position: absolute;
+	text-align: center;
+	font-size: 20px;
+}
+
+table.scrum-board {
+	width: 100%;
+	margin-top: -30px;
+	@include border-radius(0);
+	.project-title {
+		font-weight: bold;
+		width: 150px;
+	}
+	td {
+		padding: 20px;
+		@include transition-property('background-color');
+		@include transition-duration(1s);
+		&.drag-over {
+			background: #EFEFEF;
+		}
+		> div {
+			max-width: 200px;
+			min-height: 100px;
+			float: left;
+			margin-right: 10px;
+		}
+	}
+}
+
+div.task-box { display: block; padding: 6px 7px 7px; font-weight: bold; font-size: ms(0); color: $white; background-color: $mainColor; border: 1px solid rgba(#000,.1); margin-bottom: 12px; @include border-radius($alertBorderRadius); text-shadow: 0 -1px rgba(#000,.3); position: relative;
+
+
+  &.success { background-color: $successColor; color: #fff; text-shadow: 0 -1px rgba(#000,.3); }
+  &.alert { background-color: $alertColor; color: #fff; text-shadow: 0 -1px rgba(#000,.3); }
+  &.secondary { background-color: $secondaryColor; color: darken($secondaryColor, 60%); text-shadow: 0 1px rgba(#fff,.3); }
+
+  a.close { color: #333; position: absolute; #{$defaultOpposite}: 4px; top: -1px; font-size: ms(1); opacity: 0.2; padding: 4px; }
+  a.close:hover, a.close:focus { opacity: 0.4; }
+
+	&.selected { background-color: #f9f9f9 !important; }
+}

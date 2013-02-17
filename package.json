@@ -10,6 +10,7 @@
     "ejs": "*",
   	"socket.io": "0.9.13",
   	"mongoose": "3.5.5",
+  	"crypto": "*",
   	"express-ejs-layouts": "0.3.1"
   }
 }
