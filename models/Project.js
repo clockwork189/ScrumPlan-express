@@ -9,7 +9,7 @@ var ProjectSchema = new db.Schema({
 var Project = db.mongoose.model("Project", ProjectSchema);
 
 module.exports.addProject = addProject;
-module.exports.getAllProjects = getAllProjects;
+module.exports.getProjectsByOrganization = getProjectsByOrganization;
 
 function addProject(project_name, organization_name, callback) {
     var instance = new Project();
@@ -25,8 +25,8 @@ function addProject(project_name, organization_name, callback) {
     });
 }
 
-function getAllProjects(callback) {
-    Project.find(function (err, projects) {
+function getProjectsByOrganization(organization_name, callback) {
+    Project.find({organization_name: organization_name}, function (err, projects) {
         if(err) {
             callback(err);
         } else {

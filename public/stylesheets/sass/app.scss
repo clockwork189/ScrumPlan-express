@@ -124,7 +124,6 @@ div.task-box {
 	text-shadow: 0 -1px rgba(#000,.3); 
 	position: relative;
 
-
   &.success { background-color: $successColor; color: #fff; text-shadow: 0 -1px rgba(#000,.3); }
   &.alert { background-color: $alertColor; color: #fff; text-shadow: 0 -1px rgba(#000,.3); }
   &.secondary { 

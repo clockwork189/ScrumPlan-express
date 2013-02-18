@@ -17,6 +17,7 @@ var User = db.mongoose.model("User", UserSchema);
 module.exports.addUser = addUser;
 module.exports.getUserByEmail = getUserByEmail;
 module.exports.getAllUsers = getAllUsers;
+module.exports.getUsersByOrganization = getUsersByOrganization;
 
 function addUser(firstname, lastname, email, organization_name, user_salt, user_hash, callback) {
 	var instance = new User();
@@ -47,6 +48,18 @@ function getUserByEmail(email, callback) {
 		}
 	});
 }
+
+function getUsersByOrganization(organization_name, callback) {
+    User.find({organization_name: organization_name}, function (err, users) {
+        if(err) {
+            callback(err);
+        } else {
+            callback(null, users);
+        }
+    });
+}
+
+
 
 function getAllUsers(callback) {
     User.find(function (err, users) {

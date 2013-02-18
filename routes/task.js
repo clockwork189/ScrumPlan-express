@@ -19,9 +19,13 @@ exports.create = function(req, res){
 
     Task.addTask(project_name, organization_name, delegatesArray, task_name, time_estimate, priority, status, notes, function(err, task){
         res.redirect("/app/manage/projects");
+        //res.json({status: "success"});
     });
+};
 
-    // Project.addProject(project_name, function(err, projectName) {
-    //     res.redirect("/app/manage/projects");
-    // });
+exports.getTasksByOrganization = function(req, res) {
+    var organization_name = req.session.organization_name;
+    Task.getTasksByOrganization(organization_name, function(err, tasks) {
+        res.json({tasks: tasks});
+    });
 };

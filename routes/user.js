@@ -51,9 +51,13 @@ exports.manage_users = function(req, res){
 };
 
 exports.manage_projects_tasks = function(req, res){
-    Project.getAllProjects(function(err, projects) {
-        User.getAllUsers(function(err, users) {
-            Task.getAllTasks(function(err, tasks) {
+    var organization_name = req.session.organization_name;
+    Project.getProjectsByOrganization(organization_name, function(err, projects) {
+        User.getUsersByOrganization(organization_name, function(err, users) {
+            Task.getTasksByOrganization(organization_name, function(err, tasks) {
+                console.log("Tasks: ", tasks);
+                console.log("projects: ", projects);
+                console.log("Users: ", users);
                 res.render('user/manage/projects_tasks.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks });
             });
         });
@@ -61,9 +65,13 @@ exports.manage_projects_tasks = function(req, res){
 };
 
 exports.board = function(req, res){
-    Project.getAllProjects(function(err, projects) {
-        User.getAllUsers(function(err, users) {
-            Task.getAllTasks(function(err, tasks) {
+    var organization_name = req.session.organization_name;
+    Project.getProjectsByOrganization(organization_name, function(err, projects) {
+        User.getUsersByOrganization(organization_name, function(err, users) {
+            Task.getTasksByOrganization(organization_name, function(err, tasks) {
+                console.log("Tasks: ", tasks);
+                console.log("projects: ", projects);
+                console.log("Users: ", users);
                 res.render('user/board/index.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks });
             });
         });

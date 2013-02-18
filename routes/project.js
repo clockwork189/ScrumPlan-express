@@ -9,6 +9,14 @@ exports.create = function(req, res){
         organization_name = "MappedIn";
     }
     Project.addProject(project_name, organization_name, function(err, projectName) {
+        //res.json({status: "success"});
         res.redirect("/app/manage/projects");
+    });
+};
+
+exports.getProjectsByOrganization = function(req, res) {
+    var organization_name = req.session.organization_name;
+    Project.getProjectsByOrganization(organization_name, function(err, projects) {
+        res.json({projects: projects});
     });
 };
