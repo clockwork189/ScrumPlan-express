@@ -1,28 +1,30 @@
 var db = require("../lib/db");
 
-var WorkoutSchema = new db.Schema({
-    username: String,
-    workoutname: String,
-    workoutday: Date,
-    reps: Number,
-    sets: Number,
-    weight: Number,
+var TaskSchema = new db.Schema({
+    project_name: String,
+    delegates: Array,
+    task_name: String,
+    time_estimate: String,
+    priority: String,
+    status: String,
+    notes: String,
     date_created: Date
 });
 
-var Workout = db.mongoose.model("Workouts", WorkoutSchema);
+var Task = db.mongoose.model("Tasks", TaskSchema);
 
-module.exports.addWorkout = addWorkout;
-module.exports.getUsersWorkouts = getUsersWorkouts;
+module.exports.addTask = addTask;
+module.exports.getAllTasks = getAllTasks;
 
-function addWorkout(username, workoutname, workoutday, reps, sets, weight, callback) {
-    var instance = new Workout();
-    instance.username = username;
-    instance.workoutname = workoutname;
-    instance.workoutday = workoutday;
-    instance.reps = reps;
-    instance.sets = sets;
-    instance.weight = weight;
+function addTask(project_name, delegates, task_name, time_estimate, priority, status_select, notes, callback) {
+    var instance = new Task();
+    instance.project_name = project_name;
+    instance.delegates = delegates;
+    instance.task_name = task_name;
+    instance.time_estimate = time_estimate;
+    instance.priority = priority;
+    instance.status = status_select;
+    instance.notes = notes;
     instance.date_created = Date.now();
 
     instance.save(function (err) {
@@ -34,14 +36,12 @@ function addWorkout(username, workoutname, workoutday, reps, sets, weight, callb
     });
 }
 
-function getUsersWorkouts(username, callback) {
-    Workout.find({username: username}, function (err, workouts) {
+function getAllTasks(callback) {
+    Task.find(function (err, tasks) {
         if(err) {
-            console.log("Error:", err);
+            callback(err);
         } else {
-            callback(workouts);
+            callback(null, tasks);
         }
     });
 }
-
-

@@ -1,6 +1,7 @@
 var User = require("./../models/User.js");
 var hash = require('./../library/Password').hash;
 var Project = require("./../models/Project.js");
+var Task = require("./../models/Task.js");
 
 exports.auth = function(req, res){
     authenticate(req.body.email, req.body.password, function(err, user){
@@ -24,7 +25,7 @@ exports.create = function(req, res){
     var last_name = req.body.last_name;
     var email = req.body.email;
     var password = req.body.password;
-
+    console.log("Email Address: ", email);
     hash(password, function(err, salt, hash){
         if (err) throw err;
         user_salt = salt;
@@ -33,6 +34,7 @@ exports.create = function(req, res){
             req.session.regenerate(function() {
                 req.session.user = user;
             });
+            console.log("Added User: ", user);
             res.redirect('app/dashboard');
         });
     });
@@ -48,7 +50,11 @@ exports.manage_users = function(req, res){
 
 exports.manage_projects_tasks = function(req, res){
     Project.getAllProjects(function(err, projects) {
-        res.render('user/manage/projects_tasks.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects });
+        User.getAllUsers(function(err, users) {
+            Task.getAllTasks(function(err, tasks) {
+                res.render('user/manage/projects_tasks.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks });
+            });
+        });
     });
 };
 

@@ -1,0 +1,135 @@
+<% include ../layout/header.ejs %>
+	<!-- Call to Action Panel -->
+	<div id="content" data-app="manage">
+		<div class="row">
+			<h4>Projects</h4>
+		</div>
+		<% if(projects.length > 0) {%>
+		 	<div class="row">
+		 		<div class="projects-container">
+		 			<% for(var i in projects) { %>
+		 				<div class="task-box secondary project"><%= projects[i].project_name%><a class="close">x</a></div>
+		 			<% } %>
+		 		</div>
+		 	</div>
+		<% }%>
+		<form class="project-creation" action="/create/project" method="post">
+			<div class="row">
+		  		<div class="two mobile-one columns">
+					<label class="right inline">Project Name:</label>
+		  		</div>
+			  	<div class="ten mobile-three columns">
+					<input type="text" name="project_name" class="eight project-name">
+			  	</div>
+			</div>
+			<div class="actions row">
+				<input type="submit" class="success radius button create" value="Create Project"/>
+			</div>
+	  	</form>
+	  	<% if(projects.length > 0) {%>
+		 	<div class="row">
+				<h4>Tasks</h4>
+			</div>
+			<% if(tasks.length > 0) {%>
+				<div class="row">
+					<div class="tasks-container">
+						<% for(var i in tasks) { %>
+							<div class="task-box secondary task">
+								(<%= tasks[i].time_estimate %>) <%= tasks[i].task_name %><a class="close">x</a>
+								<p><%= tasks[i].notes %></p>
+								<small>
+									<% for(var n = 0; n < tasks[i].delegates.length; n++) { %>
+										<%= tasks[i].delegates[n] %>
+									<% } %>
+								</small>
+							</div>
+						<% } %>
+					</div>
+				</div>
+				<% }%>
+			<form class="task-creation" action="/create/task" method="post">
+				<div class="row">
+			  		<div class="two mobile-one columns">
+						<label class="right inline">Project:</label>
+			  		</div>
+			  		<div class="ten mobile-three columns">
+						<select class="eight project_select" name="project_name">
+							<% for(var i in projects) { %>
+								<option value="<%= projects[i].project_name%>"><%= projects[i].project_name%></option>
+		 					<% } %>
+						</select>
+			  		</div>
+				</div>
+				<div class="row">
+			  		<div class="two mobile-one columns">
+						<label class="right inline">Delegates:</label>
+			  		</div>
+			  		<div class="ten mobile-three columns">
+						<select class="eight user_select" name="delegates" multiple>
+							<% if(users.length > 0) {%>
+								<% for(var i in users) { %>
+									<option value="<%= users[i].email%>"><%= users[i].firstname%> <%= users[i].lastname%> &#60; <%= users[i].email%> &#62;</option>
+		 						<% } %>
+							<% } %>
+						</select>
+			  		</div>
+				</div>
+				<div class="row">
+			  		<div class="two mobile-one columns">
+						<label class="right inline">Task Name:</label>
+			  		</div>
+			  		<div class="ten mobile-three columns">
+						<input type="text" name="task_name" placeholder="Describe the Task" class="eight name">
+			  		</div>
+				</div>
+				<div class="row">
+			  		<div class="two mobile-one columns">
+						<label class="right inline">Time Estimate:</label>
+			  		</div>
+			  		<div class="ten mobile-three columns">
+						<input type="text" name="time_estimate" class="eight time">
+			  		</div>
+				</div>
+				<div class="row">
+			  		<div class="two mobile-one columns">
+						<label class="right inline">Priority:</label>
+			  		</div>
+			  		<div class="ten mobile-three columns">
+						<select class="eight status priority_select" name="priority">
+							<option value="1">Good to have</option>
+							<option value="2">Not Important</option>
+							<option value="3">Important</option>
+							<option value="4">Very Important</option>
+							<option value="5">Urgent</option>
+						</select>
+			  		</div>
+				</div>
+				<div class="row">
+			  		<div class="two mobile-one columns">
+						<label class="right inline">Status:</label>
+			  		</div>
+			  		<div class="ten mobile-three columns">
+						<select class="eight status status_select" name="status">
+							<option value="To-do">To-do</option>
+							<option value="In Progress">In Progress</option>
+							<option value="Verify">Verify</option>
+							<option value="Done">Done</option>
+						</select>
+			  		</div>
+				</div>
+				<div class="row">
+			  		<div class="two mobile-one columns">
+						<label class="right inline">Notes:</label>
+			  		</div>
+			  		<div class="ten mobile-three columns">
+						<textarea type="text" class="eight notes" name="notes"></textarea>
+			  		</div>
+				</div>
+				<div class="actions row">
+					<input type="submit" value="Create Task" class="success radius button create">
+				</div>
+		  	</form>
+		<% }%>
+	</div>
+	<script src="/app/user/projects_tasks.js"></script>
+<% include ../layout/footer.ejs %>

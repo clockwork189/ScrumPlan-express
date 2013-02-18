@@ -1,8 +1,8 @@
 var db = require("../lib/db");
 
 var UserSchema = new db.Schema({
-	firstname: String,
-	lastname: String,
+	firstname: {type: String, unique: false},
+	lastname: {type: String, unique: false},
 	email: {type:String, unique: true},
 	github_username: String,
 	twitter_id: String,
@@ -15,6 +15,7 @@ var User = db.mongoose.model("User", UserSchema);
 
 module.exports.addUser = addUser;
 module.exports.getUserByEmail = getUserByEmail;
+module.exports.getAllUsers = getAllUsers;
 
 function addUser(firstname, lastname, email, user_salt, user_hash, callback) {
 	var instance = new User();
@@ -26,8 +27,10 @@ function addUser(firstname, lastname, email, user_salt, user_hash, callback) {
 	instance.date_created = Date.now();
 	instance.save(function (err) {
 		if (err) {
+			console.log("Error:", err);
 			callback(err);
 		} else {
+			console.log(instance);
 			callback(null, instance);
 		}
 	});
@@ -43,3 +46,12 @@ function getUserByEmail(email, callback) {
 	});
 }
 
+function getAllUsers(callback) {
+    User.find(function (err, users) {
+        if(err) {
+            callback(err);
+        } else {
+            callback(null, users);
+        }
+    });
+}
