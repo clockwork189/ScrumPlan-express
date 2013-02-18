@@ -11,15 +11,62 @@
                 <th>Done</th> 
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td><a href="#">New Project</a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
+        <% if(projects.length > 0) { 
+            for(var i in projects) { %> 
+                <tr>
+                    <td><%= projects[i].project_name %></td>
+                    <td>
+                        <% for(var n in tasks) { 
+                            if(tasks[n].project_name === projects[i].project_name && tasks[n].status === "1") { %>
+                                <div class="task-box">
+                                    <%= tasks[n].task_name %><br/>
+                                    <% for(var x = 0; x < tasks[n].delegates.length; x++) { %>
+                                        <%= tasks[n].delegates[x] %>,
+                                    <% } %>
+                                </div>
+                        <%  }
+                        } %>
+                    </td>
+                    <td>
+                        <% for(var n in tasks) { 
+                            if(tasks[n].project_name === projects[i].project_name && tasks[n].status === "2") { %>
+                                <div class="task-box">
+                                    <%= tasks[n].task_name %><br/>
+                                    <% for(var x = 0; x < tasks[n].delegates.length; x++) { %>
+                                        <%= tasks[n].delegates[x] %>,
+                                    <% } %>
+                                </div>
+                        <%  }
+                        } %>
+                    </td>
+                    <td>
+                        <% for(var n in tasks) { 
+                            if(tasks[n].project_name === projects[i].project_name && tasks[n].status === "3") { %>
+                                <div class="task-box">
+                                    <%= tasks[n].task_name %><br/>
+                                    <% for(var x = 0; x < tasks[n].delegates.length; x++) { %>
+                                        <%= tasks[n].delegates[x] %>,
+                                    <% } %>
+                                </div>
+                        <%  }
+                        } %>
+                    </td>
+                    <td>
+                        <% for(var n in tasks) { 
+                            if(tasks[n].project_name === projects[i].project_name && tasks[n].status === "4") { %>
+                                <div class="task-box">
+                                    <%= tasks[n].task_name %><br/>
+                                    <% for(var x = 0; x < tasks[n].delegates.length; x++) { %>
+                                        <%= tasks[n].delegates[x] %>,
+                                    <% } %>
+                                </div>
+                        <%  }
+                        } %>
+                    </td>
+                </tr>
+        <% 
+            } 
+        }%>
     </table>
 </div>
 <script src="/app/user/board.js"></script>

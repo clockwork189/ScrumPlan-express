@@ -59,7 +59,13 @@ exports.manage_projects_tasks = function(req, res){
 };
 
 exports.board = function(req, res){
-    res.render('user/board/index.ejs', { title: 'ScrumPlan: Board', layout: 'user/board/layout' });
+    Project.getAllProjects(function(err, projects) {
+        User.getAllUsers(function(err, users) {
+            Task.getAllTasks(function(err, tasks) {
+                res.render('user/board/index.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks });
+            });
+        });
+    });
 };
 
 exports.stats = function(req, res){
