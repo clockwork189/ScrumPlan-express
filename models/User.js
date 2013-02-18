@@ -3,7 +3,8 @@ var db = require("../lib/db");
 var UserSchema = new db.Schema({
 	firstname: {type: String, unique: false},
 	lastname: {type: String, unique: false},
-	email: {type:String, unique: true},
+	email: {type:String, unique: false},
+	organizations: Array,
 	github_username: String,
 	twitter_id: String,
 	salt: String,
