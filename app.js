@@ -10,6 +10,8 @@ var express = require('express'),
 	task = require('./routes/task'),
 	http = require('http'),
 	expressLayouts = require("express-ejs-layouts"),
+	MongoStore = require("connect-mongodb"),
+	db = require("./lib/db"),
 	path = require('path');
 
 var app = express();
@@ -26,6 +28,11 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(express.cookieParser('your secret here'));
 	app.use(express.session());
+	app.use(express.session({
+		secret : "Stays my secret",
+		maxAge : new Date(Date.now() + 3600000), //1 Hour
+		store  : new MongoStore({ db: db })
+	}));
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
 	// Session-persisted message middleware

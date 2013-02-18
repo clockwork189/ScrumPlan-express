@@ -4,6 +4,7 @@ exports.create = function(req, res){
     var project_name = req.body.project_name;
     var delegates = req.body.delegates;
     var task_name = req.body.task_name;
+    var organization_name = req.session.organization_name;
     var time_estimate = req.body.time_estimate;
     var priority = req.body.priority;
     var status = req.body.status;
@@ -16,7 +17,7 @@ exports.create = function(req, res){
         delegatesArray = delegates;
     }
 
-    Task.addTask(project_name, delegatesArray, task_name, time_estimate, priority, status, notes, function(err, task){
+    Task.addTask(project_name, organization_name, delegatesArray, task_name, time_estimate, priority, status, notes, function(err, task){
         res.redirect("/app/manage/projects");
     });
 

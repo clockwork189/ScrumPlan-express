@@ -75,6 +75,10 @@
 	margin: 0px;
 }
 
+div.actions {
+	height: 75px;
+}
+
 table.scrum-board {
 	width: 100%;
 	margin-top: -30px;
@@ -85,10 +89,12 @@ table.scrum-board {
 	}
 	th {
 		text-align: center;
-		.project {
-			width:100px;
+
+		&.project {
+			width:150px;
 		}
 	}
+
 	td {
 		padding: 20px;
 		@include transition-property('background-color');

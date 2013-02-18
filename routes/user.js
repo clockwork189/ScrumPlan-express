@@ -2,16 +2,16 @@ var User = require("./../models/User.js");
 var hash = require('./../library/Password').hash;
 var Project = require("./../models/Project.js");
 var Task = require("./../models/Task.js");
+var Organization = require("./../models/Organization.js");
 
 exports.auth = function(req, res){
     authenticate(req.body.email, req.body.password, function(err, user){
         if (user) {
-            // Regenerate session when signing in to prevent fixation
-            req.session.regenerate(function(){
-                // Store the user's primary key in the session store to be retrieved, or in this case the entire user object
+            req.session.regenerate(function() {
                 req.session.user = user;
+                req.session.organization_name = user.organization_name;
                 res.redirect('app/dashboard');
-          });
+            });
         } else {
             req.session.error = 'Authentication failed, please check your username and password.';
             res.redirect('login');
@@ -25,17 +25,19 @@ exports.create = function(req, res){
     var last_name = req.body.last_name;
     var email = req.body.email;
     var password = req.body.password;
-    console.log("Email Address: ", email);
+    var organization_name = req.body.organization_name;
     hash(password, function(err, salt, hash){
         if (err) throw err;
         user_salt = salt;
         user_hash = hash;
-        User.addUser(first_name, last_name, email, user_salt, user_hash, function(err, user) {
-            req.session.regenerate(function() {
-                req.session.user = user;
+        User.addUser(first_name, last_name, email, organization_name, user_salt, user_hash, function(err, user) {
+            Organization.addOrganization(organization_name, email, function(err, organization) {
+                req.session.regenerate(function() {
+                    req.session.user = user;
+                    req.session.organization_name = organization.organization_owner_email;
+                    res.redirect('app/dashboard');
+                });
             });
-            console.log("Added User: ", user);
-            res.redirect('app/dashboard');
         });
     });
 };

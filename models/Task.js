@@ -2,6 +2,7 @@ var db = require("../lib/db");
 
 var TaskSchema = new db.Schema({
     project_name: String,
+    organization_name: String,
     delegates: Array,
     task_name: String,
     time_estimate: String,
@@ -16,7 +17,7 @@ var Task = db.mongoose.model("Tasks", TaskSchema);
 module.exports.addTask = addTask;
 module.exports.getAllTasks = getAllTasks;
 
-function addTask(project_name, delegates, task_name, time_estimate, priority, status_select, notes, callback) {
+function addTask(project_name, organization_name, delegates, task_name, time_estimate, priority, status_select, notes, callback) {
     var instance = new Task();
     instance.project_name = project_name;
     instance.delegates = delegates;

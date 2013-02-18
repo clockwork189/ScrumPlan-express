@@ -4,7 +4,7 @@ var UserSchema = new db.Schema({
 	firstname: {type: String, unique: false},
 	lastname: {type: String, unique: false},
 	email: {type:String, unique: false},
-	organizations: Array,
+	organization_name: String,
 	github_username: String,
 	twitter_id: String,
 	salt: String,
@@ -18,11 +18,12 @@ module.exports.addUser = addUser;
 module.exports.getUserByEmail = getUserByEmail;
 module.exports.getAllUsers = getAllUsers;
 
-function addUser(firstname, lastname, email, user_salt, user_hash, callback) {
+function addUser(firstname, lastname, email, organization_name, user_salt, user_hash, callback) {
 	var instance = new User();
 	instance.firstname = firstname;
 	instance.lastname = lastname;
 	instance.email = email;
+	instance.organization_name = organization_name;
 	instance.hash = user_hash;
 	instance.salt = user_salt;
 	instance.date_created = Date.now();
