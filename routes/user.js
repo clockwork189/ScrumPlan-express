@@ -43,6 +43,7 @@ exports.create = function(req, res){
 };
 
 exports.dashboard = function(req, res){
+    console.log(req.session.organization_name);
     res.render('user/dashboard/index.ejs', { title: 'ScrumPlan: User Dashboard', layout: 'user/layout/layout' });
 };
 
