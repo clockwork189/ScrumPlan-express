@@ -43,6 +43,7 @@ var Board = function() {
             getDoneTasks(boardObject[i]).appendTo(tr);
             tr.appendTo(table_div);
         }
+        $( ".draggable" ).draggable({ snap: true });
     };
 
     var getTodoTasks = function (project) {
@@ -102,7 +103,7 @@ var Board = function() {
     };
 
     var createTaskDiv = function (task, priority) {
-        var div = $("<div />").addClass("task-box").addClass(status_object[priority]).text(task.name);
+        var div = $("<div />").addClass("task-box draggable").addClass(status_object[priority]).text(task.name);
         div.append("<br/>");
         var delegatesString = "";
         //console.log(typeof task.delegates);
