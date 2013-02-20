@@ -12,7 +12,8 @@
   	"mongoose": "3.5.5",
     "mongodb": "*",
   	"crypto": "*",
-  	"connect-redis": "*",
+    "connect": "*",
+  	"connect-mongo": "*",
   	"express-ejs-layouts": "0.3.1"
   }
 }
