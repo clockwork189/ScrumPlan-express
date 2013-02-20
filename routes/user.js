@@ -113,3 +113,13 @@ function restrict(req, res, next) {
     res.redirect('/login');
   }
 }
+
+function generatepass(){
+    var keylist="abcdefghijklmnopqrstuvwxyz123456789";
+    var pLength = 10;
+    var temp='';
+    for (var i = 0; i < plength; i++) {
+        temp += keylist.charAt(Math.floor(Math.random()*keylist.length));
+    }
+    return temp;
+}

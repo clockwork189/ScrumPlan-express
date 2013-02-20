@@ -59,8 +59,6 @@ function getUsersByOrganization(organization_name, callback) {
     });
 }
 
-
-
 function getAllUsers(callback) {
     User.find(function (err, users) {
         if(err) {

@@ -4,13 +4,13 @@
     <div class="row">
         <h4>People</h4>
     </div>
-    <form class="person-creation">
+    <form class="person-creation" method="post" target="">
         <div class="row">
             <div class="two mobile-one columns">
                 <label class="right inline">First Name:</label>
             </div>
             <div class="ten mobile-three columns">
-                <input type="text" placeholder="eg. Mitchell" class="eight first-name">
+                <input type="text" name="first_name" placeholder="eg. Mitchell" class="eight first-name">
             </div>
         </div>
         <div class="row">
@@ -18,35 +18,19 @@
                 <label class="right inline">Last Name:</label>
             </div>
             <div class="ten mobile-three columns">
-                <input type="text" class="eight last-name">
+                <input type="text" name="last_name"  class="eight last-name">
             </div>
-        </div>
+        </div> 
         <div class="row">
             <div class="two mobile-one columns">
-                <label class="right inline">Title:</label>
+                <label class="right inline">Email Address:</label>
             </div>
             <div class="ten mobile-three columns">
-                <input type="text" class="eight title">
-            </div>
-        </div>
-        <div class="row">
-            <div class="two mobile-one columns">
-                <label class="right inline">Gravatar Email:</label>
-            </div>
-            <div class="ten mobile-three columns">
-                <input type="text" class="eight gravatar">
-            </div>
-        </div>
-        <div class="row">
-            <div class="two mobile-one columns">
-                <label class="right inline">User ID:</label>
-            </div>
-            <div class="ten mobile-three columns">
-                <input type="text" class="eight id">
+                <input type="text" name="email" class="eight">
             </div>
         </div>
         <div class="actions row">
-            <a class="succes`s radius button create">Create Person</a>
+            <input class="success radius button create" value="Create Person" type="submit">
             <a class="radius button cancel">Cancel</a>
         </div>
     </form>

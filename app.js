@@ -11,7 +11,6 @@ var express = require('express'),
 	http = require('http'),
 	expressLayouts = require("express-ejs-layouts"),
 	mongoStore = require('connect-mongo')(express),
-	//RedisStore = require('connect-redis')(express),
 	db = require("./lib/db"),
 	path = require('path');
 
