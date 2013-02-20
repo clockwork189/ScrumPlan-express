@@ -76,6 +76,7 @@ app.get('/app/list', user.list);
 app.get('/app/logout', user.logout);
 app.post('/create/project', project.create);
 app.post('/create/task', task.create);
+app.post('/set/task', task.setTask);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

@@ -8,7 +8,7 @@
     <table class="scrum-board">
         <thead>
             <tr>
-                <th class="project">Project</th>
+                <th>Project</th>
                 <th>To Do</th>
                 <th>In Progress</th> 
                 <th>Verify</th>
@@ -28,14 +28,17 @@
         boardObject[project_name] = {};
         boardObject[project_name].tasks = [];
     <% } %>
-    <% for(var n in tasks) { %> 
+    <% for(var n in tasks) { %>
         var project_name = "<%= tasks[n].project_name %>";
         var taskObj = {};
+        taskObj.id = "<%= tasks[n]._id %>";
+        taskObj.project_name = "<%= tasks[n].project_name %>";
         taskObj.name = "<%= tasks[n].task_name %>";
         taskObj.status = "<%= tasks[n].status %>";
         taskObj.delegates = "<%= tasks[n].delegates %>";
         taskObj.notes = "<%= tasks[n].notes %>";
         taskObj.time_estimate = "<%= tasks[n].time_estimate %>";
+        taskObj.organization_name = "<%= tasks[n].organization_name %>";
         taskObj.priority = "<%= tasks[n].priority %>";
 
         boardObject[project_name].tasks.push(taskObj);

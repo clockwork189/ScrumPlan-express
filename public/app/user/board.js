@@ -37,25 +37,54 @@ var Board = function() {
         });
         
         var moveTask = function (element, container) {
-            var taskID = $(element).data('task');
-            console.log(container.data("status"));
-            console.log($(element).data("task"));
-            console.log(container.parent("tr").data("project"));
+            var taskName = $(element).data('task');
+            var newStatus = container.data("status");
+            var newProject = container.parent('tr').data('project');
+            var oldStatus, oldProject;
+            var task = {};
             for(var i in boardObject) {
                 if(boardObject[i].hasOwnProperty("tasks")) {
                     for(var n = 0; n < boardObject[i].tasks.length; n++) {
-
+                        if(boardObject[i].tasks[n].name === taskName) {
+                            oldStatus = task.status;
+                            oldProject = task.project_name;
+                            task = boardObject[i].tasks[n];
+                            task.project_name = newProject;
+                            task.status = newStatus;
+                        }
                     }
                 }
             }
-            // console.log(taskID);
-            // var newTask = tasks[taskID];
 
+            if(!jQuery.isEmptyObject(task)) {
+                console.log(newStatus, "   ", task.status);
+                console.log(newProject, "   ", task.project_name);
+                if(oldStatus !== task.status || oldProject !== task.project_name) {
+                    setTask(task);
+                }
+            }
+            // Set Task;
+            // console.log($(element).data("status"));
+            // console.log($(element).data("task"));
+            // console.log(container.parent("tr").data("project"));
             // newTask['status'] = container.data('status');
             // newTask['project'] = container.parent('tr').data('project');
             
             //scrumData.setTask(taskID, newTask);
         };
+    };
+
+    var setTask = function (task) {
+        $.ajax({
+            url: "/set/task",
+            type: "POST",
+            data: {task : task},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+            }
+
+        });
     };
 
     var initForm = function () {
@@ -93,10 +122,10 @@ var Board = function() {
                 if(task.status === "1") {
                     var div = createTaskDiv(task, task.priority, project_name, task_status[task.status]);
                     div.appendTo(td);
-                    td.data("status", task.status);
                 }
             }
         }
+        td.data("status", "1");
         return td;
     };
 
@@ -112,6 +141,7 @@ var Board = function() {
                 }
             }
         }
+        td.data("status", "2");
         return td;
     };
 
@@ -127,6 +157,7 @@ var Board = function() {
                 }
             }
         }
+        td.data("status", "3");
         return td;
     };
 
@@ -142,6 +173,7 @@ var Board = function() {
                 }
             }
         }
+        td.data("status", "4");
         return td;
     };
 

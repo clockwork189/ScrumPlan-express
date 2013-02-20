@@ -16,8 +16,9 @@ var Task = db.mongoose.model("Tasks", TaskSchema);
 
 module.exports.addTask = addTask;
 module.exports.getTasksByOrganization = getTasksByOrganization;
+module.exports.setTask = setTask;
 
-function addTask(project_name, organization_name, delegates, task_name, time_estimate, priority, status_select, notes, callback) {
+function addTask(project_name, organization_name, delegates, task_name, time_estimate, priority, status, notes, callback) {
     var instance = new Task();
     instance.project_name = project_name;
     instance.delegates = delegates;
@@ -25,7 +26,7 @@ function addTask(project_name, organization_name, delegates, task_name, time_est
     instance.task_name = task_name;
     instance.time_estimate = time_estimate;
     instance.priority = priority;
-    instance.status = status_select;
+    instance.status = status;
     instance.notes = notes;
     instance.date_created = Date.now();
 
@@ -44,6 +45,29 @@ function getTasksByOrganization(organization_name, callback) {
             callback(err);
         } else {
             callback(null, tasks);
+        }
+    });
+}
+
+function setTask (task, callback) {
+    //Task.find({task})
+    console.log(task);
+    Task.findByIdAndUpdate(task.id, { $set: {
+        project_name: task.project_name,
+        status: task.status,
+        task_name: task.name,
+        delegates: task.delegates,
+        time_estimate: task.time_estimate,
+        priority: task.priority,
+        notes: task.notes,
+        organization_name: task.organization_name
+    }}, function (err, newTask) {
+        if (err) {
+            console.log(err);
+            callback(err);
+        } else {
+            console.log(newTask);
+            callback(null, newTask);
         }
     });
 }

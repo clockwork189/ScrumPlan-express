@@ -23,6 +23,16 @@ exports.create = function(req, res){
     });
 };
 
+exports.setTask = function(req, res) {
+    var task = req.body.task;
+    console.log(task);
+    Task.setTask(task, function(err, task) {
+        if(task !== null && task !== undefined) {
+            res.json({status: "success"});
+        }
+    });
+};
+
 exports.getTasksByOrganization = function(req, res) {
     var organization_name = req.session.organization_name;
     Task.getTasksByOrganization(organization_name, function(err, tasks) {
