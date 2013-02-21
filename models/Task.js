@@ -18,16 +18,16 @@ module.exports.addTask = addTask;
 module.exports.getTasksByOrganization = getTasksByOrganization;
 module.exports.setTask = setTask;
 
-function addTask(project_name, organization_name, delegates, task_name, time_estimate, priority, status, notes, callback) {
+function addTask(task, callback) {
     var instance = new Task();
-    instance.project_name = project_name;
-    instance.delegates = delegates;
-    instance.organization_name = organization_name;
-    instance.task_name = task_name;
-    instance.time_estimate = time_estimate;
-    instance.priority = priority;
-    instance.status = status;
-    instance.notes = notes;
+    instance.project_name = task.project_name;
+    instance.delegates = task.delegates;
+    instance.organization_name = task.organization_name;
+    instance.task_name = task.task_name;
+    instance.time_estimate = task.time_estimate;
+    instance.priority = task.priority;
+    instance.status = task.status;
+    instance.notes = task.notes;
     instance.date_created = Date.now();
 
     instance.save(function (err) {

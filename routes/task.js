@@ -1,8 +1,9 @@
 var Task = require("./../models/Task.js");
-
+exports.createTask = createTask;
 exports.create = function(req, res){
     var task = {};
     var delegates = req.body.delegates;
+    var delegatesArray = [];
     task.project_name = req.body.project_name;
     task.task_name = req.body.task_name;
     task.organization_name = req.session.organization_name;
@@ -10,13 +11,13 @@ exports.create = function(req, res){
     task.priority = req.body.priority;
     task.status = req.body.status;
     task.notes = req.body.notes;
-    task.delegatesArray = [];
     
     if(typeof delegates == "string") {
         delegatesArray.push(delegates);
     } else {
         delegatesArray = delegates;
     }
+    task.delegates = delegatesArray;
     createTask(task, function(err, task) {
         if(err) {
             console.log("Error: ", err);
@@ -43,12 +44,13 @@ exports.getTasksByOrganization = function(req, res) {
     });
 };
 
-exports.createTask = function(task, callback) {
-    Task.addTask(task.project_name, task.organization_name, task.delegatesArray, task.task_name, task.time_estimate, task.priority, task.status, task.notes, function(err, task){
+function createTask (newtask, callback) {
+    Task.addTask(newtask, function(err, task){
         if(err) {
-            callback.call(err);
+            console.log("****************Error", err);
+            callback(err);
         } else {
-            callback.call(null, task);
+            callback(null, task);
         }
         //res.redirect("/app/manage/projects");
         //res.json({status: "success"});
