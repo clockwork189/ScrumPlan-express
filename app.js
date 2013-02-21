@@ -12,11 +12,12 @@ var express = require('express'),
 	expressLayouts = require("express-ejs-layouts"),
 	mongoStore = require('connect-mongo')(express),
 	db = require("./lib/db"),
-    server = http.createServer(app),
-    io = require('socket.io').listen(server),
+    socket = require('socket.io'),
 	path = require('path');
 
 var app = express();
+var server = http.createServer(app);
+var io = socket.listen(server);
 
 app.configure('development', function() {
   app.set('db-name', "ScrumPlan");
