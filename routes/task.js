@@ -1,5 +1,8 @@
 var Task = require("./../models/Task.js");
+
 exports.createTask = createTask;
+exports.changeTask = changeTask;
+
 exports.create = function(req, res){
     var task = {};
     var delegates = req.body.delegates;
@@ -27,16 +30,6 @@ exports.create = function(req, res){
     });
 };
 
-exports.setTask = function(req, res) {
-    var task = req.body.task;
-    console.log(task);
-    Task.setTask(task, function(err, task) {
-        if(task !== null && task !== undefined) {
-            res.json({status: "success"});
-        }
-    });
-};
-
 exports.getTasksByOrganization = function(req, res) {
     var organization_name = req.session.organization_name;
     Task.getTasksByOrganization(organization_name, function(err, tasks) {
@@ -47,7 +40,16 @@ exports.getTasksByOrganization = function(req, res) {
 function createTask (newtask, callback) {
     Task.addTask(newtask, function(err, task){
         if(err) {
-            console.log("****************Error", err);
+            callback(err);
+        } else {
+            callback(null, task);
+        }
+    });
+}
+
+function changeTask (newtask, callback) {
+    Task.setTask(newtask, function(err, task) {
+        if(err) {
             callback(err);
         } else {
             callback(null, task);

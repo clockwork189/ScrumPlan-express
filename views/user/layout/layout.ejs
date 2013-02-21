@@ -23,6 +23,9 @@
         <script src="/foundation/javascripts/modernizr.foundation.js"></script>
         <script src="/javascripts/jquery.chosen.js"></script>
         <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://localhost:3000');
+        </script>
     </head>
     <body>
         <%- body %>

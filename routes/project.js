@@ -1,5 +1,7 @@
 var Project = require("./../models/Project.js");
 
+exports.createProject = createProject;
+
 exports.create = function(req, res){
     var project = {};
     project.project_name = req.body.project_name;

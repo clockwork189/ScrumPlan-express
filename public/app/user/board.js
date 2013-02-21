@@ -75,17 +75,8 @@ var Board = function() {
         $(table_div).sortable();
     };
 
-    var setTask = function (task) {
-        $.ajax({
-            url: "/set/task",
-            type: "POST",
-            data: {task : task},
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-            }
-
-        });
+    var setTask = function (newtask) {
+        socket.emit('change_task', { task: newtask });
     };
 
     var initForm = function () {

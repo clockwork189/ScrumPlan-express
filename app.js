@@ -77,11 +77,19 @@ app.get('/app/list', user.list);
 app.get('/app/logout', user.logout);
 app.post('/create/project', project.create);
 app.post('/create/task', task.create);
-app.post('/set/task', task.setTask);
 
 io.sockets.on("connection", function (socket) {
     socket.on("new_task", function (data) {
         
+    });
+    socket.on("change_task", function (data) {
+        task.changeTask(data, function(err, task) {
+            if(err) {
+                console.log("***ERROR: ", err);
+            } else {
+                console.log("Task Set Successfully");
+            }
+        });
     });
 });
 

@@ -52,7 +52,14 @@ function getTasksByOrganization(organization_name, callback) {
 function setTask (task, callback) {
     //Task.find({task})
     console.log(task);
-    Task.findByIdAndUpdate(task.id, { $set: {
+    // Task.findById(task.id, function(err, task) {
+    //     if (err) {
+    //         console.log("%&%&%&EROR", err);
+    //     } else {
+    //         console.log("SUCCESS!!!", task);
+    //     }
+    // });
+    Task.findByIdAndUpdate(task.id, {
         project_name: task.project_name,
         status: task.status,
         task_name: task.name,
@@ -61,12 +68,10 @@ function setTask (task, callback) {
         priority: task.priority,
         notes: task.notes,
         organization_name: task.organization_name
-    }}, function (err, newTask) {
+    }, function (err, newTask) {
         if (err) {
-            console.log(err);
             callback(err);
         } else {
-            console.log(newTask);
             callback(null, newTask);
         }
     });
