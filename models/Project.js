@@ -11,10 +11,10 @@ var Project = db.mongoose.model("Project", ProjectSchema);
 module.exports.addProject = addProject;
 module.exports.getProjectsByOrganization = getProjectsByOrganization;
 
-function addProject(project_name, organization_name, callback) {
+function addProject(project, callback) {
     var instance = new Project();
-    instance.project_name = project_name;
-    instance.organization_name = organization_name;
+    instance.project_name = project.project_name;
+    instance.organization_name = project.organization_name;
     instance.date_created = Date.now();
     instance.save(function (err) {
         if (err) {

@@ -52,7 +52,5 @@ function createTask (newtask, callback) {
         } else {
             callback(null, task);
         }
-        //res.redirect("/app/manage/projects");
-        //res.json({status: "success"});
     });
 }
