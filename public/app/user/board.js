@@ -72,6 +72,7 @@ var Board = function() {
             
             //scrumData.setTask(taskID, newTask);
         };
+        $(table_div).sortable();
     };
 
     var setTask = function (task) {
@@ -178,7 +179,7 @@ var Board = function() {
     };
 
     var createTaskDiv = function (task, priority, project_name, task_status) {
-        var div = $("<div />").addClass('task task-box ' + status_object[priority])
+        var div = $("<div />").addClass('task task-box ')
                             .text(task.name)
                             .attr("data-project_name", project_name)
                             .attr("data-task_status", task_status)

@@ -12,12 +12,13 @@ var express = require('express'),
 	expressLayouts = require("express-ejs-layouts"),
 	mongoStore = require('connect-mongo')(express),
 	db = require("./lib/db"),
+    server = http.createServer(app),
+    io = require('socket.io').listen(server),
 	path = require('path');
 
 var app = express();
 
 app.configure('development', function() {
-  app.set('db-uri', "mongodb://127.0.0.1:27017/ScrumPlan");
   app.set('db-name', "ScrumPlan");
   app.use(express.errorHandler({ dumpExceptions: true }));
   app.set('view options', {
@@ -26,7 +27,6 @@ app.configure('development', function() {
 });
 
 app.configure('production', function() {
-  app.set('db-uri', "mongodb://127.0.0.1:27017/ScrumPlan");
   app.set('db-name', "ScrumPlan");
 });
 
@@ -78,6 +78,12 @@ app.post('/create/project', project.create);
 app.post('/create/task', task.create);
 app.post('/set/task', task.setTask);
 
-http.createServer(app).listen(app.get('port'), function(){
+io.sockets.on("connection", function (socket) {
+    socket.on("new_task", function (data) {
+        
+    });
+});
+
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });

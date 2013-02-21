@@ -1,25 +1,28 @@
 var Task = require("./../models/Task.js");
 
 exports.create = function(req, res){
-    var project_name = req.body.project_name;
+    var task = {};
     var delegates = req.body.delegates;
-    var task_name = req.body.task_name;
-    var organization_name = req.session.organization_name;
-    var time_estimate = req.body.time_estimate;
-    var priority = req.body.priority;
-    var status = req.body.status;
-    var notes = req.body.notes;
-    var delegatesArray = [];
+    task.project_name = req.body.project_name;
+    task.task_name = req.body.task_name;
+    task.organization_name = req.session.organization_name;
+    task.time_estimate = req.body.time_estimate;
+    task.priority = req.body.priority;
+    task.status = req.body.status;
+    task.notes = req.body.notes;
+    task.delegatesArray = [];
     
     if(typeof delegates == "string") {
         delegatesArray.push(delegates);
     } else {
         delegatesArray = delegates;
     }
-
-    Task.addTask(project_name, organization_name, delegatesArray, task_name, time_estimate, priority, status, notes, function(err, task){
-        res.redirect("/app/manage/projects");
-        //res.json({status: "success"});
+    createTask(task, function(err, task) {
+        if(err) {
+            console.log("Error: ", err);
+        } else {
+            res.redirect("/app/manage/projects");
+        }
     });
 };
 
@@ -39,3 +42,15 @@ exports.getTasksByOrganization = function(req, res) {
         res.json({tasks: tasks});
     });
 };
+
+exports.createTask = function(task, callback) {
+    Task.addTask(task.project_name, task.organization_name, task.delegatesArray, task.task_name, task.time_estimate, task.priority, task.status, task.notes, function(err, task){
+        if(err) {
+            callback.call(err);
+        } else {
+            callback.call(null, task);
+        }
+        //res.redirect("/app/manage/projects");
+        //res.json({status: "success"});
+    });
+}

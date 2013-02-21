@@ -19,3 +19,5 @@ codekit-config.json
 
 npm-debug.log
 node_modules
+
+manifest.yml
