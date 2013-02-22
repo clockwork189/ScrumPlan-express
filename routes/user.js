@@ -95,7 +95,7 @@ exports.logout = function(req, res){
 
 function authenticate(email, pass, fn) {
     if (!module.parent) console.log('authenticating %s:%s', email, pass);
-    User.getUserByEmail(email, function(err, user) {
+    User.findByEmail(email, function(err, user) {
         if (!user) return fn(new Error('cannot find user'));
         hash(pass, user.salt, function(err, hash) {
             if (err) return fn(err);

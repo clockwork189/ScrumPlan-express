@@ -1,4 +1,4 @@
-var db = require("../lib/db");
+var MongoSP = require("../lib/db");
 
 // var UserSchema = new db.Schema({
 // 	firstname: {type: String, unique: false},
@@ -71,10 +71,10 @@ var db = require("../lib/db");
 
 // Native Driver
 exports.openDb = function() {
-    db.open(function(err, db) {
+    MongoSP.db.open(function(err, db) {
     if(!err) {
         console.log("Connected to ScrumPlan database");
-        db.collection('users', {safe:true}, function(err, collection) {
+        MongoSP.db.collection('users', {safe:true}, function(err, collection) {
             if (err) {
                 console.log("The  collection doesn't exist. Creating it now...");
             }
@@ -85,7 +85,7 @@ exports.openDb = function() {
 
 exports.findById = function(id, callback) {
     console.log('Retrieving user: ' + id);
-    db.collection('users', function(err, collection) {
+    MongoSP.db.collection('users', function(err, collection) {
         collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, user) {
             if(err) {
                 callback(err);
@@ -98,8 +98,8 @@ exports.findById = function(id, callback) {
 
 
 exports.findByEmail = function(email, callback) {
-    console.log('Retrieving user: ' + id);
-    db.collection('users', function(err, collection) {
+    console.log('Retrieving user by email: ' + email);
+    MongoSP.db.collection('users', function(err, collection) {
         collection.findOne({'email':email}, function(err, user) {
             if(err) {
                 callback(err);
@@ -111,8 +111,8 @@ exports.findByEmail = function(email, callback) {
 };
 
 exports.findAllInOrganization = function(organization_name, callback) {
-    console.log('Retrieving user: ' + id);
-    db.collection('users', function(err, collection) {
+    console.log('Retrieving user by organization name: ' + organization_name);
+    MongoSP.db.collection('users', function(err, collection) {
         collection.find({'organization_name':organization_name}).toArray(function(err, users) {
             if(err) {
                 callback(err);
@@ -124,7 +124,7 @@ exports.findAllInOrganization = function(organization_name, callback) {
 };
 
 exports.findAll = function(callback) {
-    db.collection('users', function(err, collection) {
+    MongoSP.db.collection('users', function(err, collection) {
         collection.find().toArray(function(err, users) {
             if(err) {
                 callback(err);
@@ -137,7 +137,7 @@ exports.findAll = function(callback) {
 
 exports.addUser = function(user, callback) {
     console.log('Adding user: ' + JSON.stringify(user));
-    db.collection('users', function(err, collection) {
+    MongoSP.db.collection('users', function(err, collection) {
         collection.insert(user, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
@@ -151,7 +151,7 @@ exports.addUser = function(user, callback) {
 exports.updateUser = function(id, user) {
     console.log('Updating user: ' + id);
     console.log(JSON.stringify(user));
-    db.collection('users', function(err, collection) {
+    MongoSP.db.collection('users', function(err, collection) {
         collection.update({'_id':new BSON.ObjectID(id)}, user, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
@@ -164,7 +164,7 @@ exports.updateUser = function(id, user) {
 
 exports.deleteUser = function(id, callback) {
     console.log('Deleting user: ' + id);
-    db.collection('users', function(err, collection) {
+    MongoSP.db.collection('users', function(err, collection) {
         collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
