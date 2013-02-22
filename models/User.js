@@ -68,3 +68,82 @@ function getAllUsers(callback) {
         }
     });
 }
+
+// Native Driver
+exports.openDb = function() {
+    db.open(function(err, db) {
+    if(!err) {
+        console.log("Connected to ScrumPlan database");
+        db.collection('users', {safe:true}, function(err, collection) {
+            if (err) {
+                console.log("The  collection doesn't exist. Creating it now...");
+            }
+        });
+    }
+    });
+};
+
+exports.findById = function(id, callback) {
+    console.log('Retrieving user: ' + id);
+    db.collection('users', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, user) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, user);
+            }
+        });
+    });
+};
+
+exports.findAll = function(callback) {
+    db.collection('users', function(err, collection) {
+        collection.find().toArray(function(err, users) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, users);
+            }
+        });
+    });
+};
+
+exports.addUser = function(user, callback) {
+    console.log('Adding user: ' + JSON.stringify(user));
+    db.collection('users', function(err, collection) {
+        collection.insert(user, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
+
+exports.updateUser = function(id, user) {
+    console.log('Updating user: ' + id);
+    console.log(JSON.stringify(user));
+    db.collection('users', function(err, collection) {
+        collection.update({'_id':new BSON.ObjectID(id)}, user, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
+
+exports.deleteUser = function(id, callback) {
+    console.log('Deleting user: ' + id);
+    db.collection('users', function(err, collection) {
+        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
