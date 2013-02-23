@@ -1,3 +1,5 @@
+var SPMongo = require("../lib/db");
+
 // var db = require("../lib/db");
 
 // var TaskSchema = new db.Schema({
@@ -12,67 +14,108 @@
 //     date_created: Date
 // });
 
-// var Task = db.mongoose.model("Tasks", TaskSchema);
+// Native Driver
+exports.openDb = function() {
+    SPMongo.db.open(function(err, db) {
+    if(!err) {
+        console.log("Connected to ScrumPlan database");
+        SPMongo.db.collection('users', {safe:true}, function(err, collection) {
+            if (err) {
+                console.log("The  collection doesn't exist. Creating it now...");
+            }
+        });
+    }
+    });
+};
 
-// module.exports.addTask = addTask;
-// module.exports.getTasksByOrganization = getTasksByOrganization;
-// module.exports.setTask = setTask;
+exports.findById = function(id, callback) {
+    console.log('Retrieving user: ' + id);
+    SPMongo.db.collection('users', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, user) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, user);
+            }
+        });
+    });
+};
 
-// function addTask(task, callback) {
-//     var instance = new Task();
-//     instance.project_name = task.project_name;
-//     instance.delegates = task.delegates;
-//     instance.organization_name = task.organization_name;
-//     instance.task_name = task.task_name;
-//     instance.time_estimate = task.time_estimate;
-//     instance.priority = task.priority;
-//     instance.status = task.status;
-//     instance.notes = task.notes;
-//     instance.date_created = Date.now();
 
-//     instance.save(function (err) {
-//         if (err) {
-//             callback(err);
-//         } else {
-//             callback(null, instance);
-//         }
-//     });
-// }
+exports.findByEmail = function(email, callback) {
+    console.log('Retrieving user by email: ' + email);
+    SPMongo.db.collection('users', function(err, collection) {
+        collection.findOne({'email':email}, function(err, user) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, user);
+            }
+        });
+    });
+};
 
-// function getTasksByOrganization(organization_name, callback) {
-//     Task.find({organization_name: organization_name}, function (err, tasks) {
-//         if(err) {
-//             callback(err);
-//         } else {
-//             callback(null, tasks);
-//         }
-//     });
-// }
+exports.findAllInOrganization = function(organization_name, callback) {
+    console.log('Retrieving user by organization name: ' + organization_name);
+    SPMongo.db.collection('users', function(err, collection) {
+        collection.find({'organization_name':organization_name}).toArray(function(err, users) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, users);
+            }
+        });
+    });
+};
 
-// function setTask (task, callback) {
-//     //Task.find({task})
-//     console.log(task);
-//     // Task.findById(task.id, function(err, task) {
-//     //     if (err) {
-//     //         console.log("%&%&%&EROR", err);
-//     //     } else {
-//     //         console.log("SUCCESS!!!", task);
-//     //     }
-//     // });
-//     Task.findByIdAndUpdate(task.id, {
-//         project_name: task.project_name,
-//         status: task.status,
-//         task_name: task.name,
-//         delegates: task.delegates,
-//         time_estimate: task.time_estimate,
-//         priority: task.priority,
-//         notes: task.notes,
-//         organization_name: task.organization_name
-//     }, function (err, newTask) {
-//         if (err) {
-//             callback(err);
-//         } else {
-//             callback(null, newTask);
-//         }
-//     });
-// }
+exports.findAll = function(callback) {
+    SPMongo.db.collection('users', function(err, collection) {
+        collection.find().toArray(function(err, users) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, users);
+            }
+        });
+    });
+};
+
+exports.addUser = function(user, callback) {
+    console.log('Adding user: ' + JSON.stringify(user));
+    SPMongo.db.collection('users', function(err, collection) {
+        collection.insert(user, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
+
+exports.updateUser = function(id, user) {
+    console.log('Updating user: ' + id);
+    console.log(JSON.stringify(user));
+    SPMongo.db.collection('users', function(err, collection) {
+        collection.update({'_id':new BSON.ObjectID(id)}, user, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
+
+exports.deleteUser = function(id, callback) {
+    console.log('Deleting user: ' + id);
+    SPMongo.db.collection('users', function(err, collection) {
+        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
