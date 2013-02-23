@@ -19,7 +19,7 @@ exports.findById = function(id, callback) {
     console.log('Retrieving tasks: ' + id);
     openDb(function(err, db) {
         db.collection('tasks', function(err, collection) {
-            collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, task) {
+            collection.findOne({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(err, task) {
                 if(err) {
                     callback(err);
                 } else {

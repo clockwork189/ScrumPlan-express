@@ -11,7 +11,7 @@ var SPMongo = require("../lib/db");
 exports.findById = function(id, callback) {
     console.log('Retrieving project: ' + id);
     SPMongo.db.collection('projects', function(err, collection) {
-        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, project) {
+        collection.findOne({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(err, project) {
             if(err) {
                 callback(err);
             } else {
@@ -63,7 +63,7 @@ exports.updateProject = function(id, project, callback) {
     console.log('Updating project: ' + id);
     console.log(JSON.stringify(project));
     SPMongo.db.collection('projects', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, project, {safe:true}, function(err, result) {
+        collection.update({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, project, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {
@@ -76,7 +76,7 @@ exports.updateProject = function(id, project, callback) {
 exports.deleteProject = function(id, callback) {
     console.log('Deleting project: ' + id);
     SPMongo.db.collection('projects', function(err, collection) {
-        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+        collection.remove({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {

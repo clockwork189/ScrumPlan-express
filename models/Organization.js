@@ -24,7 +24,7 @@ exports.openDb = function() {
 exports.findById = function(id, callback) {
     console.log('Retrieving organization: ' + id);
     SPMongo.db.collection('organizations', function(err, collection) {
-        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, organization) {
+        collection.findOne({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(err, organization) {
             if(err) {
                 callback(err);
             } else {
@@ -63,7 +63,7 @@ exports.updateOrganization = function(id, organization, callback) {
     console.log('Updating organization: ' + id);
     console.log(JSON.stringify(organization));
     SPMongo.db.collection('organizations', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, organization, {safe:true}, function(err, result) {
+        collection.update({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, organization, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {
@@ -76,7 +76,7 @@ exports.updateOrganization = function(id, organization, callback) {
 exports.deleteOrganization = function(id, callback) {
     console.log('Deleting organization: ' + id);
     SPMongo.db.collection('organizations', function(err, collection) {
-        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+        collection.remove({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {

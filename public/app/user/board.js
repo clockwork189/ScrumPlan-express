@@ -26,7 +26,7 @@ var Board = function() {
     };
 
     var initiateDraggability = function (container) {
-        container.find('div').draggable({ revert: "invalid" });
+        container.find('div.task').draggable({ revert: "invalid" });
         container.find('td').not('.project-title').droppable({
             activeClass: "active",
             hoverClass: "drag-over",
@@ -72,7 +72,7 @@ var Board = function() {
             
             //scrumData.setTask(taskID, newTask);
         };
-        $(table_div).sortable();
+        container.children('tbody').sortable();
     };
 
     var setTask = function (newtask) {
