@@ -17,13 +17,15 @@ var SPMongo = require("../lib/db");
 // Native Driver
 exports.findById = function(id, callback) {
     console.log('Retrieving tasks: ' + id);
-    SPMongo.db.collection('tasks', function(err, collection) {
-        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, task) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, task);
-            }
+    openDb(function(err, db) {
+        db.collection('tasks', function(err, collection) {
+            collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, task) {
+                if(err) {
+                    callback(err);
+                } else {
+                    callback(null, task);
+                }
+            });
         });
     });
 };
@@ -70,7 +72,7 @@ exports.findAll = function(callback) {
 exports.addTask = function(task, callback) {
     console.log('Adding task: ' + JSON.stringify(task));
     SPMongo.db.collection('tasks', function(err, collection) {
-        collection.insert(user, {safe:true}, function(err, result) {
+        collection.insert(task, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {
@@ -84,10 +86,11 @@ exports.updateTask = function(id, task, callback) {
     console.log('Updating task: ' + id);
     console.log(JSON.stringify(task));
     SPMongo.db.collection('tasks', function(err, collection) {
-        collection.update({'_id':task.id}, task, {safe:true}, function(err, result) {
+        collection.update({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, {$set: task}, {w:1}, function(err, result) {
             if(err) {
                 callback(err);
             } else {
+                console.log("Le Resut: ", result);
                 callback(null, result);
             }
         });
@@ -97,7 +100,7 @@ exports.updateTask = function(id, task, callback) {
 exports.deleteTask = function(id, callback) {
     console.log('Deleting task: ' + id);
     SPMongo.db.collection('tasks', function(err, collection) {
-        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+        collection.remove({'_id':task.id}, {w:1}, function(err, result) {
             if(err) {
                 callback(err);
             } else {

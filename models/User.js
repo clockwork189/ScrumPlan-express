@@ -13,11 +13,23 @@ var SPMongo = require("../lib/db");
 // });
 
 // Native Driver
+// exports.openDb = function() {
+//     SPMongo.db.open(function(err, db) {
+//     if(!err) {
+//         console.log("Connected to ScrumPlan database");
+//         SPMongo.db.collection('users', {safe:true}, function(err, collection) {
+//             if (err) {
+//                 console.log("The  collection doesn't exist. Creating it now...");
+//             }
+//         });
+//     }
+//     });
+// };
 
 exports.findById = function(id, callback) {
     console.log('Retrieving user: ' + id);
     SPMongo.db.collection('users', function(err, collection) {
-        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, user) {
+        collection.findOne({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(err, user) {
             if(err) {
                 callback(err);
             } else {
@@ -83,7 +95,7 @@ exports.updateUser = function(id, user, callback) {
     console.log('Updating user: ' + id);
     console.log(JSON.stringify(user));
     SPMongo.db.collection('users', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, user, {safe:true}, function(err, result) {
+        collection.update({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, user, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {
@@ -96,7 +108,7 @@ exports.updateUser = function(id, user, callback) {
 exports.deleteUser = function(id, callback) {
     console.log('Deleting user: ' + id);
     SPMongo.db.collection('users', function(err, collection) {
-        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+        collection.remove({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {
