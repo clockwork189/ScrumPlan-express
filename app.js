@@ -83,7 +83,7 @@ io.sockets.on("connection", function (socket) {
         
     });
     socket.on("change_task", function (data) {
-        task.changeTask(data, function(err, task) {
+        task.changeTask(data.task, function(err, task) {
             if(err) {
                 console.log("***ERROR: ", err);
             } else {

@@ -84,7 +84,7 @@ exports.updateTask = function(id, task, callback) {
     console.log('Updating task: ' + id);
     console.log(JSON.stringify(task));
     SPMongo.db.collection('tasks', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, task, {safe:true}, function(err, result) {
+        collection.update({'_id':task.id}, task, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {

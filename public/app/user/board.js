@@ -76,6 +76,7 @@ var Board = function() {
     };
 
     var setTask = function (newtask) {
+        console.log("New Task Will Be: ", newtask);
         socket.emit('change_task', { task: newtask });
     };
 
