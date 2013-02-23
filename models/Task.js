@@ -19,7 +19,7 @@ exports.openDb = function() {
     SPMongo.db.open(function(err, db) {
     if(!err) {
         console.log("Connected to ScrumPlan database");
-        SPMongo.db.collection('users', {safe:true}, function(err, collection) {
+        SPMongo.db.collection('tasks', {safe:true}, function(err, collection) {
             if (err) {
                 console.log("The  collection doesn't exist. Creating it now...");
             }
@@ -29,35 +29,35 @@ exports.openDb = function() {
 };
 
 exports.findById = function(id, callback) {
-    console.log('Retrieving user: ' + id);
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, user) {
+    console.log('Retrieving tasks: ' + id);
+    SPMongo.db.collection('tasks', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, task) {
             if(err) {
                 callback(err);
             } else {
-                callback(null, user);
+                callback(null, task);
             }
         });
     });
 };
 
 
-exports.findByEmail = function(email, callback) {
-    console.log('Retrieving user by email: ' + email);
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.findOne({'email':email}, function(err, user) {
+exports.findByProjectName = function(project_name, callback) {
+    console.log('Retrieving all tasks in project name: ' + project_name);
+    SPMongo.db.collection('tasks', function(err, collection) {
+        collection.findOne({'project_name': project_name}, function(err, tasks) {
             if(err) {
                 callback(err);
             } else {
-                callback(null, user);
+                callback(null, tasks);
             }
         });
     });
 };
 
 exports.findAllInOrganization = function(organization_name, callback) {
-    console.log('Retrieving user by organization name: ' + organization_name);
-    SPMongo.db.collection('users', function(err, collection) {
+    console.log('Retrieving tasks by organization name: ' + organization_name);
+    SPMongo.db.collection('tasks', function(err, collection) {
         collection.find({'organization_name':organization_name}).toArray(function(err, users) {
             if(err) {
                 callback(err);
@@ -69,20 +69,20 @@ exports.findAllInOrganization = function(organization_name, callback) {
 };
 
 exports.findAll = function(callback) {
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.find().toArray(function(err, users) {
+    SPMongo.db.collection('tasks', function(err, collection) {
+        collection.find().toArray(function(err, tasks) {
             if(err) {
                 callback(err);
             } else {
-                callback(null, users);
+                callback(null, tasks);
             }
         });
     });
 };
 
-exports.addUser = function(user, callback) {
-    console.log('Adding user: ' + JSON.stringify(user));
-    SPMongo.db.collection('users', function(err, collection) {
+exports.addTask = function(task, callback) {
+    console.log('Adding task: ' + JSON.stringify(task));
+    SPMongo.db.collection('tasks', function(err, collection) {
         collection.insert(user, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
@@ -93,11 +93,11 @@ exports.addUser = function(user, callback) {
     });
 };
 
-exports.updateUser = function(id, user) {
-    console.log('Updating user: ' + id);
-    console.log(JSON.stringify(user));
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, user, {safe:true}, function(err, result) {
+exports.updateUser = function(id, task, callback) {
+    console.log('Updating task: ' + id);
+    console.log(JSON.stringify(task));
+    SPMongo.db.collection('tasks', function(err, collection) {
+        collection.update({'_id':new BSON.ObjectID(id)}, task, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);
             } else {
@@ -107,9 +107,9 @@ exports.updateUser = function(id, user) {
     });
 };
 
-exports.deleteUser = function(id, callback) {
-    console.log('Deleting user: ' + id);
-    SPMongo.db.collection('users', function(err, collection) {
+exports.deleteTask = function(id, callback) {
+    console.log('Deleting task: ' + id);
+    SPMongo.db.collection('tasks', function(err, collection) {
         collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
             if(err) {
                 callback(err);

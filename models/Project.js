@@ -1,4 +1,4 @@
-// var db = require("../lib/db");
+var SPMongo = require("../lib/db");
 
 // var ProjectSchema = new db.Schema({
 //     project_name: String,
@@ -6,32 +6,95 @@
 //     date_created: Date
 // });
 
-// var Project = db.mongoose.model("Project", ProjectSchema);
 
-// module.exports.addProject = addProject;
-// module.exports.getProjectsByOrganization = getProjectsByOrganization;
+// Native Driver
+exports.openDb = function() {
+    SPMongo.db.open(function(err, db) {
+    if(!err) {
+        console.log("Connected to ScrumPlan database");
+        SPMongo.db.collection('projects', {safe:true}, function(err, collection) {
+            if (err) {
+                console.log("The  collection doesn't exist. Creating it now...");
+            }
+        });
+    }
+    });
+};
 
-// function addProject(project, callback) {
-//     var instance = new Project();
-//     instance.project_name = project.project_name;
-//     instance.organization_name = project.organization_name;
-//     instance.date_created = Date.now();
-//     instance.save(function (err) {
-//         if (err) {
-//             callback(err);
-//         } else {
-//             callback(null, instance);
-//         }
-//     });
-// }
+exports.findById = function(id, callback) {
+    console.log('Retrieving project: ' + id);
+    SPMongo.db.collection('projects', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, project) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, project);
+            }
+        });
+    });
+};
 
-// function getProjectsByOrganization(organization_name, callback) {
-//     Project.find({organization_name: organization_name}, function (err, projects) {
-//         if(err) {
-//             callback(err);
-//         } else {
-//             callback(null, projects);
-//         }
-//     });
-// }
+exports.findAllInOrganization = function(organization_name, callback) {
+    console.log('Retrieving project by organization name: ' + organization_name);
+    SPMongo.db.collection('projects', function(err, collection) {
+        collection.find({'organization_name':organization_name}).toArray(function(err, projects) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, projects);
+            }
+        });
+    });
+};
 
+exports.findAll = function(callback) {
+    SPMongo.db.collection('projects', function(err, collection) {
+        collection.find().toArray(function(err, projects) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, projects);
+            }
+        });
+    });
+};
+
+exports.addProject = function(project, callback) {
+    console.log('Adding project: ' + JSON.stringify(project));
+    SPMongo.db.collection('projects', function(err, collection) {
+        collection.insert(project, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
+
+exports.updateProject = function(id, project, callback) {
+    console.log('Updating project: ' + id);
+    console.log(JSON.stringify(project));
+    SPMongo.db.collection('projects', function(err, collection) {
+        collection.update({'_id':new BSON.ObjectID(id)}, project, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};
+
+exports.deleteProject = function(id, callback) {
+    console.log('Deleting project: ' + id);
+    SPMongo.db.collection('projects', function(err, collection) {
+        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    });
+};

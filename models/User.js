@@ -1,15 +1,15 @@
 var SPMongo = require("../lib/db");
 
 // var UserSchema = new db.Schema({
-// 	firstname: {type: String, unique: false},
-// 	lastname: {type: String, unique: false},
-// 	email: {type:String, unique: false},
-// 	organization_name: String,
-// 	github_username: String,
-// 	twitter_id: String,
-// 	salt: String,
-// 	hash: String,
-// 	date_created: Date
+//  firstname: {type: String, unique: false},
+//  lastname: {type: String, unique: false},
+//  email: {type:String, unique: false},
+//  organization_name: String,
+//  github_username: String,
+//  twitter_id: String,
+//  salt: String,
+//  hash: String,
+//  date_created: Date
 // });
 
 // Native Driver
@@ -91,7 +91,7 @@ exports.addUser = function(user, callback) {
     });
 };
 
-exports.updateUser = function(id, user) {
+exports.updateUser = function(id, user, callback) {
     console.log('Updating user: ' + id);
     console.log(JSON.stringify(user));
     SPMongo.db.collection('users', function(err, collection) {
