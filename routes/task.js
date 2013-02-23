@@ -30,21 +30,21 @@ exports.create = function(req, res){
     });
 };
 
-exports.getTasksByOrganization = function(req, res) {
+exports.findAllInOrganization = function(req, res) {
     var organization_name = req.session.organization_name;
-    // Task.getTasksByOrganization(organization_name, function(err, tasks) {
-    //     res.json({tasks: tasks});
-    // });
+    Task.Find(organization_name, function(err, tasks) {
+        res.json({tasks: tasks});
+    });
 };
 
 function createTask (newtask, callback) {
-    // Task.addTask(newtask, function(err, task){
-    //     if(err) {
-    //         callback(err);
-    //     } else {
-    //         callback(null, task);
-    //     }
-    // });
+    Task.addTask(newtask, function(err, task){
+        if(err) {
+            callback(err);
+        } else {
+            callback(null, task);
+        }
+    });
 }
 
 function changeTask (newtask, callback) {

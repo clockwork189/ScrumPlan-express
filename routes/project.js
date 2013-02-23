@@ -10,6 +10,8 @@ exports.create = function(req, res){
         organization_name = "MappedIn";
     }
     project.organization_name = organization_name;
+    project.dateCreated = Date.Now();
+
     createProject(project, function(err, projectName) {
         if(err) {
             console.log("Error: ", err);
@@ -21,18 +23,18 @@ exports.create = function(req, res){
 
 exports.getProjectsByOrganization = function(req, res) {
     var organization_name = req.session.organization_name;
-    // Project.getProjectsByOrganization(organization_name, function(err, projects) {
-    //     res.json({projects: projects});
-    // });
+    Project.findAllInOrganization(organization_name, function(err, projects) {
+        res.json({projects: projects});
+    });
 };
 
 function createProject(project, callback) {
-    // Project.addProject(project, function(err, projectName) {
-    //     if(err) {
-    //         console.log("****************Error", err);
-    //         callback(err);
-    //     } else {
-    //         callback(null, projectName);
-    //     }
-    // });
+    Project.addProject(project, function(err, projectName) {
+        if(err) {
+            console.log("****************Error", err);
+            callback(err);
+        } else {
+            callback(null, projectName);
+        }
+    });
 }
