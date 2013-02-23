@@ -8,19 +8,6 @@ var SPMongo = require("../lib/db");
 
 
 // Native Driver
-exports.openDb = function() {
-    SPMongo.db.open(function(err, db) {
-    if(!err) {
-        console.log("Connected to ScrumPlan database");
-        SPMongo.db.collection('projects', {safe:true}, function(err, collection) {
-            if (err) {
-                console.log("The  collection doesn't exist. Creating it now...");
-            }
-        });
-    }
-    });
-};
-
 exports.findById = function(id, callback) {
     console.log('Retrieving project: ' + id);
     SPMongo.db.collection('projects', function(err, collection) {
