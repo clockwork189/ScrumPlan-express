@@ -53,9 +53,9 @@ exports.manage_users = function(req, res){
 
 exports.manage_projects_tasks = function(req, res){
     var organization_name = req.session.organization_name;
-    Project.getProjectsByOrganization(organization_name, function(err, projects) {
-        User.getUsersByOrganization(organization_name, function(err, users) {
-            Task.getTasksByOrganization(organization_name, function(err, tasks) {
+    Project.findAllInOrganization(organization_name, function(err, projects) {
+        User.findAllInOrganization(organization_name, function(err, users) {
+            Task.findAllInOrganization(organization_name, function(err, tasks) {
                 console.log("Tasks: ", tasks);
                 console.log("projects: ", projects);
                 console.log("Users: ", users);
@@ -67,9 +67,9 @@ exports.manage_projects_tasks = function(req, res){
 
 exports.board = function(req, res){
     var organization_name = req.session.organization_name;
-    Project.getProjectsByOrganization(organization_name, function(err, projects) {
-        User.getUsersByOrganization(organization_name, function(err, users) {
-            Task.getTasksByOrganization(organization_name, function(err, tasks) {
+    Project.findAllInOrganization(organization_name, function(err, projects) {
+        User.findAllInOrganization(organization_name, function(err, users) {
+            Task.findAllInOrganization(organization_name, function(err, tasks) {
                 console.log("Tasks: ", tasks);
                 console.log("projects: ", projects);
                 console.log("Users: ", users);

@@ -1,4 +1,4 @@
-//var Project = require("./../models/Project.js");
+var Project = require("./../models/Project.js");
 
 exports.createProject = createProject;
 

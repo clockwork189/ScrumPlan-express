@@ -1,4 +1,4 @@
-//var Task = require("./../models/Task.js");
+var Task = require("./../models/Task.js");
 
 exports.createTask = createTask;
 exports.changeTask = changeTask;
@@ -48,7 +48,7 @@ function createTask (newtask, callback) {
 }
 
 function changeTask (newtask, callback) {
-    Task.setTask(newtask, function(err, task) {
+    Task.updateTask(newtask.id, newtask, function(err, task) {
         if(err) {
             callback(err);
         } else {

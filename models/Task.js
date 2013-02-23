@@ -80,7 +80,7 @@ exports.addTask = function(task, callback) {
     });
 };
 
-exports.updateUser = function(id, task, callback) {
+exports.updateTask = function(id, task, callback) {
     console.log('Updating task: ' + id);
     console.log(JSON.stringify(task));
     SPMongo.db.collection('tasks', function(err, collection) {
