@@ -1,15 +1,36 @@
 <% include ../layout/header.ejs %>
 <!-- Call to Action Panel -->
 <div class="row">
-    <div class="twelve columns">
-            <h4>Welcome User!</h4>
-            <div class="row">
-                <div class="ten columns">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer arcu velit, imperdiet id malesuada vitae, euismod at dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam et lorem tortor, in varius odio. Aliquam quis dolor sollicitudin odio vestibulum lobortis. Sed viverra nisi id massa cursus porta. Vivamus turpis felis, rutrum non dignissim euismod, aliquam sed ligula. Nullam mollis tristique odio adipiscing pulvinar. Mauris justo lectus, hendrerit non volutpat ut, sodales sit amet nunc. Maecenas in urna sit amet dolor convallis congue. Aenean sapien enim, tristique a semper ut, venenatis non lectus.</p>
+	<div class="twelve columns">
+		<div class="row">
 
-                    <p>Proin convallis condimentum ipsum ut malesuada. Nunc molestie, est sit amet aliquam posuere, metus est dignissim mauris, sed interdum sapien lacus quis sapien. Vivamus a diam arcu, id sagittis mauris. Nunc et velit felis. In ut urna dolor, vitae gravida dui. Proin faucibus dui sed purus pretium aliquet. Pellentesque vestibulum, augue vitae facilisis iaculis, erat augue mattis nisl, a tempus ligula nibh vitae risus. Nullam aliquet enim vel nibh congue laoreet. Fusce mauris lectus, volutpat vel ultrices at, fringilla a lacus. Donec vel viverra augue. Nunc convallis rhoncus tellus sit amet blandit.</p>
-                </div>
-            </div>
-    </div>
+		</div>
+	</div>
 </div>
+<script>
+    var statsObject = {};
+    <% for(var i in projects) { %> 
+        var project_name = "<%= projects[i].project_name %>";
+        statsObject[project_name] = {};
+        statsObject[project_name].tasks = [];
+    <% } %>
+    <% for(var n in tasks) { %>
+        var project_name = "<%= tasks[n].project_name %>";
+        var taskObj = {};
+        taskObj.id = "<%= tasks[n]._id %>";
+        taskObj.project_name = "<%= tasks[n].project_name %>";
+        taskObj.name = "<%= tasks[n].task_name %>";
+        taskObj.status = "<%= tasks[n].status %>";
+        taskObj.delegates = "<%= tasks[n].delegates %>";
+        taskObj.notes = "<%= tasks[n].notes %>";
+        taskObj.time_estimate = "<%= tasks[n].time_estimate %>";
+        taskObj.organization_name = "<%= tasks[n].organization_name %>";
+        taskObj.priority = "<%= tasks[n].priority %>";
+
+        statsObject[project_name].tasks.push(taskObj);
+    <% } %>
+    console.log(statsObject);
+</script>
+<script src="/javascripts/jquery.formToJSON.js"></script>
+<script src="/app/user/stats.js"></script>
 <% include ../layout/footer.ejs %>

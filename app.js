@@ -73,7 +73,6 @@ app.get('/app/manage/users', user.manage_users);
 app.get('/app/manage/projects', user.manage_projects_tasks);
 app.get('/app/board', user.board);
 app.get('/app/stats', user.stats);
-app.get('/app/list', user.list);
 app.get('/app/logout', user.logout);
 app.post('/create/project', project.create);
 app.post('/create/task', task.create);
@@ -81,9 +80,24 @@ app.post('/create/task', task.create);
 io.sockets.on("connection", function (socket) {
 	socket.on("add_task", function (data) {
 		console.log(data.task_name);
+		task.createTask(data, function (err, task) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				console.log("Task added Successfully");
+				res.json(task);
+			}
+		});
 	});
 	socket.on("add_project", function (data) {
-		console.log(data.project_name);
+		task.createProject(data, function (err, project) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				console.log("Project added Successfully");
+				res.json(project);
+			}
+		});
 	});
 	socket.on("change_task", function (data) {
 		task.changeTask(data.task, function(err, task) {

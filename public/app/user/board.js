@@ -195,6 +195,7 @@ var Board = function() {
     var handleCreateTask = function () {
         $("form.task-creation").submit(function() {
             socket.emit('add_task', $(this).serializeFormJSON());
+            addProject($(this).serializeFormJSON());
             return false;
         });
     };
@@ -205,6 +206,17 @@ var Board = function() {
             return false;
         });
     };
-    
+
+    var addProject = function (project) {
+        var tr = $("<tr />").addClass('project').data('project', project.project_name);
+        var i = 0;
+        $("<td />").text(project.project_name).addClass('project-title').appendTo(tr);
+        while(i < 3) {
+            $("<td />").appendTo(tr);
+            i++;
+        }
+        tr.appendTo(table_div);
+    };
+
     return self;
 };

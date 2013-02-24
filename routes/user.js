@@ -74,11 +74,14 @@ exports.board = function(req, res){
 };
 
 exports.stats = function(req, res){
-    res.render('user/stats/index.ejs', { title: 'ScrumPlan: User Stats', layout: 'user/layout/layout' });
-};
-
-exports.list = function(req, res){
-    res.render('user/list/index.ejs', { title: 'ScrumPlan: User List', layout: 'user/layout/layout' });
+    var organization_name = req.session.organization_name;
+    Project.findAllInOrganization(organization_name, function(err, projects) {
+        User.findAllInOrganization(organization_name, function(err, users) {
+            Task.findAllInOrganization(organization_name, function(err, tasks) {
+                res.render('user/stats/index.ejs', { title: 'ScrumPlan: User Stats', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks });
+            });
+        });
+    });
 };
 
 exports.logout = function(req, res){
