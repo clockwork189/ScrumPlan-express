@@ -1,6 +1,6 @@
-<div id="create_task" class="reveal-modal [expand, xlarge, large, medium, small]">
-    <h2>Create A New Task</h2>
-    <form class="project-creation" action="/create/project" method="post">
+<div id="create_project" class="reveal-modal expand">
+    <h2>Create A New Project</h2>
+    <form class="project-creation" method="post">
         <div class="row">
             <div class="four columns">
                 <label class="right inline">Project Name:</label>
@@ -15,14 +15,15 @@
     </form>
     <a class="close-reveal-modal">&#215;</a>
 </div>
-<div id="create_project" class="reveal-modal [expand, xlarge, large, medium, small]">
-    <form class="task-creation" action="/create/task" method="post">
+<div id="create_task" class="reveal-modal expand">
+    <h2>Create A New Task</h2>
+    <form class="task-creation" method="post">
         <div class="row">
             <div class="two mobile-one columns">
                 <label class="right inline">Project:</label>
             </div>
             <div class="ten mobile-three columns">
-                <select class="eight project_select" name="project_name">
+                <select class="project_select" name="project_name" style="width:250px;">
                     <% for(var i in projects) { %>
                         <option value="<%= projects[i].project_name%>"><%= projects[i].project_name%></option>
                     <% } %>
@@ -34,7 +35,7 @@
                 <label class="right inline">Delegates:</label>
             </div>
             <div class="ten mobile-three columns">
-                <select class="eight user_select" name="delegates" multiple>
+                <select class="user_select" name="delegates" multiple style="width:250px;">
                     <% if(users.length > 0) {%>
                         <% for(var i in users) { %>
                             <option value="<%= users[i].email%>"><%= users[i].firstname%> <%= users[i].lastname%> &#60; <%= users[i].email%> &#62;</option>
@@ -64,7 +65,7 @@
                 <label class="right inline">Priority:</label>
             </div>
             <div class="ten mobile-three columns">
-                <select class="eight status priority_select" name="priority">
+                <select class="status priority_select" name="priority" style="width:250px;">
                     <option value="1">Good to have</option>
                     <option value="2">Not Important</option>
                     <option value="3">Important</option>
@@ -78,7 +79,7 @@
                 <label class="right inline">Status:</label>
             </div>
             <div class="ten mobile-three columns">
-                <select class="eight status status_select" name="status">
+                <select class="status status_select" name="status" style="width:250px;">
                     <option value="1">To-do</option>
                     <option value="2">In Progress</option>
                     <option value="3">Verify</option>

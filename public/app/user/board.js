@@ -23,6 +23,8 @@ var Board = function() {
         initForm();
         drawScrumBoard(table_div);
         initiateDraggability($(table_div));
+        handleCreateTask();
+        handleCreateProject();
     };
 
     var initiateDraggability = function (container) {
@@ -32,6 +34,14 @@ var Board = function() {
             hoverClass: "drag-over",
             accept: '.ui-draggable',
             drop: function( event, ui ) {
+                //$(ui.draggable).offset($(this).offset());
+                //Get Details of dragged and dropped
+                var draggedclass = ui.draggable.attr('class'),
+                    droppedclass = 'class' + $(this).attr('name').toLowerCase();
+
+                //update the classes so that it looks od.
+                ui.draggable.removeClass(draggedclass).addClass(droppedclass);
+                ui.draggable.removeAttr('style');
                 moveTask( ui.draggable, $(this) );
             }
         });
@@ -72,7 +82,7 @@ var Board = function() {
             
             //scrumData.setTask(taskID, newTask);
         };
-        container.children('tbody').sortable();
+        //container.children('tbody').sortable();
     };
 
     var setTask = function (newtask) {
@@ -182,5 +192,19 @@ var Board = function() {
         return div;
     };
 
+    var handleCreateTask = function () {
+        $("form.task-creation").submit(function() {
+            socket.emit('add_task', $(this).serializeFormJSON());
+            return false;
+        });
+    };
+
+    var handleCreateProject = function () {
+        $("form.project-creation").submit(function() {
+            socket.emit('add_project', $(this).serializeFormJSON());
+            return false;
+        });
+    };
+    
     return self;
 };

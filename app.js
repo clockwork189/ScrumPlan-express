@@ -12,7 +12,7 @@ var express = require('express'),
 	expressLayouts = require("express-ejs-layouts"),
 	mongoStore = require('connect-mongo')(express),
 	db = require("./lib/db"),
-    socket = require('socket.io'),
+	socket = require('socket.io'),
 	path = require('path');
 
 var app = express();
@@ -23,7 +23,7 @@ app.configure('development', function() {
   app.set('db-name', "ScrumPlan");
   app.use(express.errorHandler({ dumpExceptions: true }));
   app.set('view options', {
-    pretty: true
+	pretty: true
   });
 });
 
@@ -60,7 +60,7 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler());
+	app.use(express.errorHandler());
 });
 
 app.get('/', routes.index);
@@ -79,20 +79,23 @@ app.post('/create/project', project.create);
 app.post('/create/task', task.create);
 
 io.sockets.on("connection", function (socket) {
-    socket.on("new_task", function (data) {
-        
-    });
-    socket.on("change_task", function (data) {
-        task.changeTask(data.task, function(err, task) {
-            if(err) {
-                console.log("***ERROR: ", err);
-            } else {
-                console.log("Task Set Successfully");
-            }
-        });
-    });
+	socket.on("add_task", function (data) {
+		console.log(data.task_name);
+	});
+	socket.on("add_project", function (data) {
+		console.log(data.project_name);
+	});
+	socket.on("change_task", function (data) {
+		task.changeTask(data.task, function(err, task) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				console.log("Task Set Successfully");
+			}
+		});
+	});
 });
 
 server.listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+	console.log("Express server listening on port " + app.get('port'));
 });
