@@ -28,22 +28,19 @@ var Board = function() {
 	};
 
 	var initiateDraggability = function (container) {
-		container.find('div.task').draggable({ revert: "invalid", snap: true });
-		container.find('td').not('.project-title').droppable({
-			accept: '.ui-draggable',
-			drop: function( event, ui ) {
-				//$(ui.draggable).css({"top": 0, "left": 0 });
-				//Get Details of dragged and dropped
-				moveTask( ui.draggable, $(this) );
-				console.log($(this).offset());
+		container.find('td').not('.project-title').sortable({
+			connectWith: container.find('td').not('.project-title'),
+			receive: function(event, ui) {
+				moveTask(ui.item, $(this));
 			}
-		});
-		
-		container.find('td').not('.project-title').disableSelection();
+		}).disableSelection();
+		// moveTask( ui.draggable, $(this) );
+
 		var moveTask = function (element, container) {
 			var taskName = $(element).data('task');
 			var newStatus = container.data("status");
 			var newProject = container.parent('tr').data('project');
+
 			var oldStatus, oldProject;
 			var task = {};
 			for(var i in boardObject) {
@@ -67,16 +64,7 @@ var Board = function() {
 					setTask(task);
 				}
 			}
-			// Set Task;
-			// console.log($(element).data("status"));
-			// console.log($(element).data("task"));
-			// console.log(container.parent("tr").data("project"));
-			// newTask['status'] = container.data('status');
-			// newTask['project'] = container.parent('tr').data('project');
-			
-			//scrumData.setTask(taskID, newTask);
 		};
-		//container.children('tbody').sortable();
 	};
 
 	var setTask = function (newtask) {
@@ -102,7 +90,7 @@ var Board = function() {
 		for(var i in boardObject) {
 			var tr = $("<tr />").addClass('project').data('project', i);
 			$("<td />").text(i).addClass('project-title').appendTo(tr);
-			
+
 			getTodoTasks(boardObject[i], i).appendTo(tr);
 			getInProgressTasks(boardObject[i], i).appendTo(tr);
 			getVerifyTasks(boardObject[i], i).appendTo(tr);
