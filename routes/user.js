@@ -67,7 +67,7 @@ exports.board = function(req, res){
     Project.findAllInOrganization(organization_name, function(err, projects) {
         User.findAllInOrganization(organization_name, function(err, users) {
             Task.findAllInOrganization(organization_name, function(err, tasks) {
-                res.render('user/board/index.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks });
+                res.render('user/board/index.ejs', { title: 'ScrumPlan: Manage Tasks', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks, organization_name: organization_name });
             });
         });
     });
@@ -78,7 +78,7 @@ exports.stats = function(req, res){
     Project.findAllInOrganization(organization_name, function(err, projects) {
         User.findAllInOrganization(organization_name, function(err, users) {
             Task.findAllInOrganization(organization_name, function(err, tasks) {
-                res.render('user/stats/index.ejs', { title: 'ScrumPlan: User Stats', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks });
+                res.render('user/stats/index.ejs', { title: 'ScrumPlan: User Stats', layout: 'user/layout/layout', projects: projects, users: users, tasks: tasks, organization_name: organization_name });
             });
         });
     });
@@ -87,6 +87,16 @@ exports.stats = function(req, res){
 exports.logout = function(req, res){
     req.session.destroy(function(){
         res.redirect('/');
+    });
+};
+
+exports.getProjectsUsersTasks = function(organization_name){
+    Project.findAllInOrganization(organization_name, function(err, projects) {
+        User.findAllInOrganization(organization_name, function(err, users) {
+            Task.findAllInOrganization(organization_name, function(err, tasks) {
+                return {projects: projects, users: users, tasks: tasks};
+            });
+        });
     });
 };
 

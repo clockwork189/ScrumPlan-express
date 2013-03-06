@@ -7,6 +7,7 @@
             </div>
             <div class="eight columns">
                 <input type="text" name="project_name" class="eight project-name">
+                <input type="hidden" name="organization_name" class="eight project-name" value="<%= organization_name %>">
             </div>
             <div class="two columns">
                 <input type="submit" class="success radius button create" value="Create Project"/>
@@ -96,6 +97,7 @@
             </div>
         </div>
         <div class="actions row">
+            <input type="hidden" name="organization_name" class="eight project-name" value="<%= organization_name %>">
             <input type="submit" value="Create Task" class="success radius button create">
         </div>
     </form>

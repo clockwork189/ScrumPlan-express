@@ -13,6 +13,7 @@ var Board = function() {
 		"Very Important": "very_important",
 		"Urgent": "urgent"
 	};
+
 	var task_status = {
 		"1": "todo",
 		"2": "inprogress",
@@ -25,6 +26,7 @@ var Board = function() {
 		initiateDraggability($(table_div));
 		handleCreateTask();
 		handleCreateProject();
+		reload();
 	};
 
 	var initiateDraggability = function (container) {
@@ -87,6 +89,7 @@ var Board = function() {
 	};
 
 	var drawScrumBoard = function (table_div) {
+		$(table_div).children().remove();
 		for(var i in boardObject) {
 			var tr = $("<tr />").addClass('project').data('project', i);
 			$("<td />").text(i).addClass('project-title').appendTo(tr);
@@ -184,6 +187,7 @@ var Board = function() {
 
 	var handleCreateProject = function () {
 		$("form.project-creation").submit(function() {
+			var project = $(this).serializeFormJSON();
 			socket.emit('add_project', $(this).serializeFormJSON());
 			return false;
 		});
@@ -198,6 +202,37 @@ var Board = function() {
 			i++;
 		}
 		tr.appendTo(table_div);
+	};
+
+	var reload = function () {
+		socket.on("reload", function (board) {
+			var boardObj = {};
+			var projects = board.projects;
+			var tasks = board.tasks;
+
+			for(var i in projects) {
+				var project_name = projects[i].project_name;
+				boardObj[project_name] = {};
+				boardObj[project_name].tasks = [];
+			}
+			for(var n in tasks) {
+				var proj_name = tasks[n].project_name;
+				var taskObj = {};
+				taskObj.id = tasks[n]._id;
+				taskObj.project_name = proj_name;
+				taskObj.name = tasks[n].task_name;
+				taskObj.status = tasks[n].status;
+				taskObj.delegates = tasks[n].delegates;
+				taskObj.notes = tasks[n].notes;
+				taskObj.time_estimate = tasks[n].time_estimate;
+				taskObj.organization_name = tasks[n].organization_name;
+				taskObj.priority = tasks[n].priority;
+
+				boardObj[proj_name].tasks.push(taskObj);
+			}
+			boardObject = boardObj;
+			console.log(boardObj);
+		});
 	};
 
 	return self;

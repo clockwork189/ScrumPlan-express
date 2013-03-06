@@ -6,9 +6,6 @@ exports.create = function(req, res){
     var project = {};
     project.project_name = req.body.project_name;
     var organization_name = req.session.organization_name;
-    if(organization_name === undefined) {
-        organization_name = "MappedIn";
-    }
     project.organization_name = organization_name;
     project.dateCreated = Date.Now();
 

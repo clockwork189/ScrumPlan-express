@@ -79,23 +79,24 @@ app.post('/create/task', task.create);
 
 io.sockets.on("connection", function (socket) {
 	socket.on("add_task", function (data) {
-		console.log(data.task_name);
 		task.createTask(data, function (err, task) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
 				console.log("Task added Successfully");
-				res.json(task);
+				var ProjectTaskUserObject = user.getProjectsUsersTasks(project.organization_name);
+				socket.broadcast.emit("reload", ProjectTaskUserObject);
 			}
 		});
 	});
 	socket.on("add_project", function (data) {
-		task.createProject(data, function (err, project) {
+		project.createProject(data, function (err, project) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
 				console.log("Project added Successfully");
-				res.json(project);
+				var ProjectTaskUserObject = user.getProjectsUsersTasks(project.organization_name);
+				socket.broadcast.emit("reload", ProjectTaskUserObject);
 			}
 		});
 	});
@@ -105,6 +106,8 @@ io.sockets.on("connection", function (socket) {
 				console.log("***ERROR: ", err);
 			} else {
 				console.log("Task Set Successfully");
+				var ProjectTaskUserObject = user.getProjectsUsersTasks(project.organization_name);
+				socket.broadcast.emit("reload", ProjectTaskUserObject);
 			}
 		});
 	});
