@@ -11477,7 +11477,13 @@ table tfoot tr td {
   }
 }
 /* @end */
-/* line 49, ../sass/app.scss */
+/* line 52, ../sass/app.scss */
+.dashboard .panel .button.secondary {
+  display: block;
+  margin: 0 auto;
+}
+
+/* line 60, ../sass/app.scss */
 .avatar {
   height: 40px;
   width: 40px;
@@ -11486,7 +11492,7 @@ table tfoot tr td {
   margin-right: 10px;
 }
 
-/* line 57, ../sass/app.scss */
+/* line 68, ../sass/app.scss */
 #loading {
   display: block;
   z-index: 9999;
@@ -11497,48 +11503,48 @@ table tfoot tr td {
   font-size: 20px;
 }
 
-/* line 67, ../sass/app.scss */
+/* line 78, ../sass/app.scss */
 .top-bar {
   margin: 0px;
 }
 
-/* line 71, ../sass/app.scss */
+/* line 82, ../sass/app.scss */
 div.actions {
   height: 75px;
 }
 
-/* line 75, ../sass/app.scss */
+/* line 86, ../sass/app.scss */
 table.scrum-board {
   width: 100%;
   margin-top: -30px;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 79, ../sass/app.scss */
+/* line 90, ../sass/app.scss */
 table.scrum-board .project-title {
   font-weight: bold;
   width: 150px;
 }
-/* line 83, ../sass/app.scss */
+/* line 94, ../sass/app.scss */
 table.scrum-board th {
   text-align: center;
 }
-/* line 86, ../sass/app.scss */
+/* line 97, ../sass/app.scss */
 table.scrum-board th.project {
   width: 150px;
 }
-/* line 91, ../sass/app.scss */
+/* line 102, ../sass/app.scss */
 table.scrum-board td {
   padding: 20px;
   -webkit-transition: "background-color" 1s ease-out;
   -moz-transition: "background-color" 1s ease-out;
   transition: "background-color" 1s ease-out;
 }
-/* line 94, ../sass/app.scss */
+/* line 105, ../sass/app.scss */
 table.scrum-board td.drag-over {
   background: #EFEFEF;
 }
-/* line 97, ../sass/app.scss */
+/* line 108, ../sass/app.scss */
 table.scrum-board td > div {
   max-width: 200px;
   min-height: 100px;
@@ -11546,7 +11552,7 @@ table.scrum-board td > div {
   margin-right: 10px;
 }
 
-/* line 106, ../sass/app.scss */
+/* line 117, ../sass/app.scss */
 div.task-box {
   display: block;
   padding: 6px 7px 7px;

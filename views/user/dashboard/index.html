@@ -3,33 +3,58 @@
 {% block content %}
 <!-- Call to Action Panel -->
 <div class="row">
-    <div class="twelve columns">
-        <h4>Welcome {{user.first_name}} {{user.last_name}}!</h4>
-        <div class="row">
-            <div class="ten columns">
-                <h5>Organizations</h5>
-                <p>
-                    It seems like you do not have any organizations. 
-                    <button class="button secondary">Create new Organization</button>
-                </p>
-                <h5>Boards</h5>
-                <p>
-                    It seems like you do not have any boards.
-                    <button class="button secondary">Create new Board</button>
-                </p>
-                <h5>Projects</h5>
-                <p>
-                    It seems like you do not have any projects. 
-                    <button class="button secondary">Create new Project</button>
-                </p>
-                <h5>Tasks</h5>
-                <p>
-                    It seems like you do not have any tasks. 
-                    <button class="button secondary">Create new Task</button>
-                </p>
-            </div>
-        </div>
-    </div>
+	<div class="large-12 columns">
+		<h4>Welcome {{user.first_name}} {{user.last_name}}!</h4>
+		<div class="row">
+			<div class="large-10 columns dashboard">
+				<div class="panel">
+					<h5>Organizations</h5>
+					{% if organizations.length > 0 %}
+					<p>
+					   Somebodys pretty busy
+					</p>
+					{% else %}
+					<p>
+						It seems like you do not have any organizations. <button class="button secondary small right create_organization">Create new Organization</button>
+					</p>
+					{% endif %}
+				</div>
+				<div class="panel">
+					<h5>Boards</h5>
+					{% if boards.length > 0 %}
+					<p>
+					   Somebodys pretty busy
+					</p>
+					{% else %}
+					<p>
+						It seems like you do not have any boards. 
+						<button class="button secondary small right create_board">Create new Board</button>
+					</p>
+					{% endif %}
+				</div>
+				<div class="panel">
+					<h5>Projects</h5>
+					{% if projects.length > 0 %}
+					<p>
+					   Somebodys pretty busy
+					</p>
+					{% else %}
+					<p>
+						It seems like you do not have any projects. 
+						<button class="button secondary small right create_project">Create new Project</button>
+					</p>
+					{% endif %}
+				</div>
+				<div class="panel">
+					<h5>Tasks</h5>
+					<p>
+						It seems like you do not have any tasks. 
+						<button class="button secondary small right create_task">Create new Task</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% include 'user/layout/footer.html' %}
 {% endblock %}

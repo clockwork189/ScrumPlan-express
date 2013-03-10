@@ -46,6 +46,17 @@
 
 @import "chosen";
 
+.dashboard {
+	.panel {
+		.button {
+			&.secondary {
+				display: block;
+				margin: 0 auto;
+			}
+		}
+	}
+}
+
 .avatar {
 	height: 40px;
 	width: 40px;

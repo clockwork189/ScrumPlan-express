@@ -33,6 +33,19 @@ exports.findAllInOrganization = function(organization_name, callback) {
     });
 };
 
+exports.findByOwnersId = function(owner_id, callback) {
+    console.log('Retrieving projects: ' + owner_id);
+    SPMongo.db.collection('projects', function(err, collection) {
+        collection.find({'owner_id':collection.db.bson_serializer.ObjectID.createFromHexString(owner_id)}, function(err, projects) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, projects);
+            }
+        });
+    });
+};
+
 exports.findAll = function(callback) {
     SPMongo.db.collection('projects', function(err, collection) {
         collection.find().toArray(function(err, projects) {

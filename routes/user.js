@@ -60,8 +60,20 @@ exports.add = function(req, res) {
 };
 
 exports.dashboard = function(req, res){
-	console.log("USER: ",req.session.user[0]);
-	res.render('user/dashboard/index.html', { title: 'ScrumPlan: User Dashboard', user: req.session.user[0]});
+	var current_user = req.session.user[0];
+	Organization.findByOwnersId(current_user._id, function(err, organizations) {
+		Board.findByOwnersId(current_user._id, function(err, boards) {
+			Project.findByOwnersId(current_user._id, function(err, projects) {
+				res.render('user/dashboard/index.html', {
+					title: 'ScrumPlan: User Dashboard',
+					user: current_user,
+					organizations: organizations,
+					boards: boards,
+					projects: projects
+				});
+			});
+		});
+	});
 };
 
 exports.manage_users = function(req, res){
