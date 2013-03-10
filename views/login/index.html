@@ -1,0 +1,55 @@
+{% extends 'login/layout.html' %}
+{% include 'login/header.html' %}
+{% block content %}
+<!-- Call to Action Panel -->
+<div class="row">
+    <div class="large-12 columns">
+        <div class="panel">
+            <h4>Log into Scrum Plan</h4>
+            <div class="row">
+                <div class="large-10 columns">
+                    <p>Enter your ScrumPlan Email and Password below to access your ScrumPlan account</p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <form id="beta-form" action="/login" method="post">
+                    <div class="row">
+                        <div class="large-2 columns">
+                            <label class="right inline">Email:</label>
+                        </div>
+                        <div class="large-7 columns">
+                            <input type="email" name="email" placeholder="Enter Your Email" class="twelve">
+                        </div>
+                        <div class="large-3 columns">
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-2 columns">
+                            <label class="right inline">Password:</label>
+                        </div>
+                        <div class="large-7 columns">
+                            <input type="password" name="password" placeholder="Enter Your Password" class="twelve">
+                        </div>
+                        <div class="large-3 columns">
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-4 columns">
+                            
+                        </div>
+                        <div class="large-4 columns">
+                            <div class="error"></div>
+                            <button class="success radius button left">Submit</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="beta-alert" class="alert-box" style="display:none;"></div>
+        </div>
+    </div>
+</div>
+{% include 'login/footer.html' %}
+{% endblock %}

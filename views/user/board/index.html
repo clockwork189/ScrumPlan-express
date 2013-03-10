@@ -1,0 +1,53 @@
+{% extends 'user/layout/layout.html' %}
+{% include 'user/layout/header.html' %}
+{% block content %}
+<!-- Call to Action Panel -->
+<div id="content" data-app="board">
+	<div class="board actions">
+		<button class="button secondary" id="new_project">Add New Project</button>
+		<button class="button secondary" id="new_task">Add New Task</button>
+	</div>
+	<table class="scrum-board">
+		<thead>
+			<tr>
+				<th>Project</th>
+				<th>To Do</th>
+				<th>In Progress</th> 
+				<th>Verify</th>
+				<th>Done</th> 
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+{% include 'user/board/modals.html' %}
+<script>
+	var boardObject = {};
+	{% for project in projects %}
+		var project_name = "{{ project.project_name }}";
+		boardObject[project_name] = {};
+		boardObject[project_name].tasks = [];
+	{% endfor %}
+	{% for task in tasks %}
+		var project_name = "{{ task.project_name}}";
+		var taskObj = {};
+		taskObj.id = "{{ tasks._id }}";
+		taskObj.project_name = "{{ task.project_name }}";
+		taskObj.name = "{{ task.task_name }}";
+		taskObj.status = "{{ task.status }}";
+		taskObj.delegates = "{{ task.delegates }}";
+		taskObj.notes = "{{ task.notes }}";
+		taskObj.time_estimate = "{{ task.time_estimate }}";
+		taskObj.organization_name = "{{ task.organization_name }}";
+		taskObj.priority = "{{ task.priority }}";
+
+		boardObject[project_name].tasks.push(taskObj);
+	{% endfor %}
+	console.log(boardObject);
+</script>
+<script src="/javascripts/jquery.formToJSON.js"></script>
+<script src="/app/user/board.js"></script>
+{% include 'user/layout/footer.html' %}
+{% endblock %}

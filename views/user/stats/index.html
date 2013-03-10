@@ -1,0 +1,39 @@
+{% extends 'user/layout/layout.html' %}
+{% include 'user/layout/header.html' %}
+{% block content %}
+<!-- Call to Action Panel -->
+<div class="row">
+	<div class="twelve columns">
+		<div class="row">
+
+		</div>
+	</div>
+</div>
+<script>
+    var statsObject = {};
+    <% for(var i in projects) { %> 
+        var project_name = "<%= projects[i].project_name %>";
+        statsObject[project_name] = {};
+        statsObject[project_name].tasks = [];
+    <% } %>
+    <% for(var n in tasks) { %>
+        var project_name = "<%= tasks[n].project_name %>";
+        var taskObj = {};
+        taskObj.id = "<%= tasks[n]._id %>";
+        taskObj.project_name = "<%= tasks[n].project_name %>";
+        taskObj.name = "<%= tasks[n].task_name %>";
+        taskObj.status = "<%= tasks[n].status %>";
+        taskObj.delegates = "<%= tasks[n].delegates %>";
+        taskObj.notes = "<%= tasks[n].notes %>";
+        taskObj.time_estimate = "<%= tasks[n].time_estimate %>";
+        taskObj.organization_name = "<%= tasks[n].organization_name %>";
+        taskObj.priority = "<%= tasks[n].priority %>";
+
+        statsObject[project_name].tasks.push(taskObj);
+    <% } %>
+    console.log(statsObject);
+</script>
+<script src="/javascripts/jquery.formToJSON.js"></script>
+<script src="/app/user/stats.js"></script>
+{% include 'user/layout/footer.html' %}
+{% endblock %}

@@ -8,8 +8,9 @@ var express = require('express'),
 	user = require('./routes/user'),
 	project = require('./routes/project'),
 	task = require('./routes/task'),
+	swig = require('swig'),
 	http = require('http'),
-	expressLayouts = require("express-ejs-layouts"),
+	cons = require("consolidate"),
 	mongoStore = require('connect-mongo')(express),
 	db = require("./lib/db"),
 	socket = require('socket.io'),
@@ -31,12 +32,18 @@ app.configure('production', function() {
   app.set('db-name', "ScrumPlan");
 });
 
+// This helps it know where to look for includes and parent templates
+swig.init({
+    root: __dirname + '/views',
+    cache: true,
+    allowErrors: true // allows errors to be thrown and caught by express instead of suppressed by Swig
+});
+
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
-	app.set('view engine', 'ejs');
-	app.set('layout', 'layout'); // Setting default layout
-	app.use(expressLayouts);
+	app.engine('.html', cons.swig);
+	app.set('view engine', 'html');
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
 	app.use(express.bodyParser());
@@ -65,15 +72,17 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/login', routes.login);
-app.post('/login', user.auth);
 app.get('/register', routes.register);
-app.post('/register', user.create);
 app.get('/app/dashboard', user.dashboard);
 app.get('/app/manage/users', user.manage_users);
 app.get('/app/manage/projects', user.manage_projects_tasks);
 app.get('/app/board', user.board);
 app.get('/app/stats', user.stats);
 app.get('/app/logout', user.logout);
+
+app.post('/login', user.auth);
+app.post('/register', user.create);
+app.post('/add/user', user.add);
 app.post('/create/project', project.create);
 app.post('/create/task', task.create);
 

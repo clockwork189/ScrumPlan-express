@@ -1,0 +1,35 @@
+{% extends 'user/layout/layout.html' %}
+{% include 'user/layout/header.html' %}
+{% block content %}
+<!-- Call to Action Panel -->
+<div class="row">
+    <div class="twelve columns">
+        <h4>Welcome {{user.first_name}} {{user.last_name}}!</h4>
+        <div class="row">
+            <div class="ten columns">
+                <h5>Organizations</h5>
+                <p>
+                    It seems like you do not have any organizations. 
+                    <button class="button secondary">Create new Organization</button>
+                </p>
+                <h5>Boards</h5>
+                <p>
+                    It seems like you do not have any boards.
+                    <button class="button secondary">Create new Board</button>
+                </p>
+                <h5>Projects</h5>
+                <p>
+                    It seems like you do not have any projects. 
+                    <button class="button secondary">Create new Project</button>
+                </p>
+                <h5>Tasks</h5>
+                <p>
+                    It seems like you do not have any tasks. 
+                    <button class="button secondary">Create new Task</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'user/layout/footer.html' %}
+{% endblock %}

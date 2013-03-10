@@ -27,93 +27,87 @@ var SPMongo = require("../lib/db");
 // };
 
 exports.findById = function(id, callback) {
-    console.log('Retrieving user: ' + id);
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.findOne({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(err, user) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, user);
-            }
-        });
-    });
+	console.log('Retrieving user: ' + id);
+	SPMongo.db.collection('users', function(err, collection) {
+		collection.findOne({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(err, user) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, user);
+			}
+		});
+	});
 };
 
 
 exports.findByEmail = function(email, callback) {
-    console.log('Retrieving user by email: ' + email);
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.findOne({'email':email}, function(err, user) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, user);
-            }
-        });
-    });
-};
-
-exports.findAllInOrganization = function(organization_name, callback) {
-    console.log('Retrieving user by organization name: ' + organization_name);
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.find({'organization_name':organization_name}).toArray(function(err, users) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, users);
-            }
-        });
-    });
+	console.log('Retrieving user by email: ' + email);
+	SPMongo.db.collection('users', function(err, collection) {
+		collection.findOne({'email':email}, function(err, user) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, user);
+			}
+		});
+	});
 };
 
 exports.findAll = function(callback) {
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.find().toArray(function(err, users) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, users);
-            }
-        });
-    });
+	SPMongo.db.collection('users', function(err, collection) {
+		collection.find().toArray(function(err, users) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, users);
+			}
+		});
+	});
 };
 
 exports.addUser = function(user, callback) {
-    console.log('Adding user: ' + JSON.stringify(user));
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.insert(user, {safe:true}, function(err, result) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, result);
-            }
-        });
-    });
+	console.log('Adding user: ' + JSON.stringify(user));
+	SPMongo.db.collection('users', function(err, collection) {
+		collection.findOne({'email': user.email}, function(err, usr) {
+			if(usr) {
+				console.log("User already added");
+				callback(null, usr);
+			} else {
+				collection.insert(user, {safe:true}, function(err, result) {
+					if(err) {
+						callback(err);
+					} else {
+						callback(null, result);
+					}
+				});
+			}
+		});
+	});
 };
 
 exports.updateUser = function(id, user, callback) {
-    console.log('Updating user: ' + id);
-    console.log(JSON.stringify(user));
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.update({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, user, {safe:true}, function(err, result) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, result);
-            }
-        });
-    });
+	console.log('Updating user: ' + id);
+	console.log(JSON.stringify(user));
+	SPMongo.db.collection('users', function(err, collection) {
+		collection.update({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, user, {safe:true}, function(err, result) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, result);
+			}
+		});
+	});
 };
 
 exports.deleteUser = function(id, callback) {
-    console.log('Deleting user: ' + id);
-    SPMongo.db.collection('users', function(err, collection) {
-        collection.remove({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, {safe:true}, function(err, result) {
-            if(err) {
-                callback(err);
-            } else {
-                callback(null, result);
-            }
-        });
-    });
+	console.log('Deleting user: ' + id);
+	SPMongo.db.collection('users', function(err, collection) {
+		collection.remove({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(id)}, {safe:true}, function(err, result) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, result);
+			}
+		});
+	});
 };

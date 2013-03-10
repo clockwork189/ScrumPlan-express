@@ -1,0 +1,77 @@
+{% extends 'login/layout.html' %}
+{% include 'login/header.html' %}
+{% block content %}
+<!-- Call to Action Panel -->
+<div class="row">
+	<div class="large-12 columns">
+		<div class="panel">
+			<h4>Register for Scrum Plan</h4>
+			<div class="row">
+				<div class="large-10 columns">
+					<p>Enter the following details to get setup with your very own ScrumPlan account!</p>
+				</div>
+			</div>
+			<hr />
+			<div class="row">
+				<form id="beta-form" action="/register" method="post">
+					<div class="row">
+						<div class="large-2 columns">
+							<label class="right inline">First Name:</label>
+						</div>
+						<div class="large-7 columns">
+							<input type="text" name="first_name" placeholder="Enter Your First Name" class="twelve">
+						</div>
+						<div class="large-3 columns">
+							<div class="error"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-2 columns">
+							<label class="right inline">Last Name:</label>
+						</div>
+						<div class="large-7 columns">
+							<input type="text" name="last_name" placeholder="Enter Your Last Name" class="twelve">
+						</div>
+						<div class="large-3 columns">
+							<div class="error"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-2 columns">
+							<label class="right inline">Email Address:</label>
+						</div>
+						<div class="large-7 columns">
+							<input type="text" name="email" placeholder="Enter Your Email" class="twelve">
+						</div>
+						<div class="large-3 columns">
+							<div class="error"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-2 columns">
+							<label class="right inline">Password:</label>
+						</div>
+						<div class="large-7 columns">
+							<input type="password" name="password" placeholder="Enter a Password" class="twelve email">
+						</div>
+						<div class="large-3 columns">
+							<div class="error"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-4 columns">
+							
+						</div>
+						<div class="large-4 columns">
+							<div class="error"></div>
+							<button class="success radius button left">Submit</a>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="beta-alert" class="alert-box" style="display:none;"></div>
+		</div>
+	</div>
+</div>
+{% include 'login/footer.html' %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'homepage/layout.html' %}
+{% include 'homepage/header.html' %}
+{% block content %}
+<!-- Call to Action Panel -->
+<div class="row">
+	<div class="twelve columns">
+	<div class="panel">
+		<h4>Request an Invite</h4>
+		<div class="row">
+			<div class="large-10 columns">
+			  	<p>The ScrumPlan online service is still in <strong>beta</strong>. You can either download the source from <a href="https://github.com/mitchellbutler/ScrumPlan">GitHub</a> and install the product on your own server, or leave your email below to be contacted when the service goes live.</p>
+			</div>
+		</div>
+		<hr />
+			<div class="row">
+				<form id="beta-form" action="/login" method="post">
+					<div class="large-2 columns">
+					  	<label class="right inline">Email:</label>
+					</div>
+					<div class="large-7 columns">
+					  	<input type="email" name="email" placeholder="Enter Your Email" class="twelve email">
+					</div>
+					<div class="large-3 columns">
+				  		<button class="success radius button left">Submit</a>
+					</div>
+			  	</form>
+			</div>
+			<div id="beta-alert" class="alert-box" style="display:none;"></div>
+	  	</div>
+	</div>
+	<!-- Footer -->
+	<footer class="row">
+		<div class="large-12 columns">
+			<hr />
+			  	<div class="row">
+					<div class="six columns">
+						<p>Copyright&copy; 2013</p>
+					</div>
+				 </div>
+			</div> 
+		</div> 
+	</footer>
+  {% endblock %}

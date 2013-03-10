@@ -59,6 +59,26 @@ exports.addOrganization = function(organization, callback) {
     });
 };
 
+exports.addUserToOrganization = function(email, organization_id, callback) {
+    console.log('Adding User: ' + JSON.stringify(email));
+    SPMongo.db.collection('organizations', function(err, collection) {
+        collection.findOne({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(organization_id)}, function(err, organization) {
+            if(err) {
+                callback(err);
+            } else {
+                organization.members.push(email);
+                collection.update({'_id':collection.db.bson_serializer.ObjectID.createFromHexString(organization_id)}, organization, {safe:true}, function(err, result) {
+                    if(err) {
+                        callback(err);
+                    } else {
+                        callback(null, result);
+                    }
+                });
+            }
+        });
+    });
+};
+
 exports.updateOrganization = function(id, organization, callback) {
     console.log('Updating organization: ' + id);
     console.log(JSON.stringify(organization));

@@ -13,7 +13,6 @@ var Board = function() {
 		"Very Important": "very_important",
 		"Urgent": "urgent"
 	};
-
 	var task_status = {
 		"1": "todo",
 		"2": "inprogress",

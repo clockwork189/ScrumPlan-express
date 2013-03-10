@@ -6,7 +6,6 @@ var SPMongo = require("../lib/db");
 //     date_created: Date
 // });
 
-
 // Native Driver
 exports.findById = function(id, callback) {
     console.log('Retrieving project: ' + id);
