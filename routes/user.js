@@ -60,7 +60,7 @@ exports.add = function(req, res) {
 };
 
 exports.dashboard = function(req, res){
-	var current_user = req.session.user[0];
+	var current_user = req.session.user;
 	Organization.findByOwnersId(current_user._id, function(err, organizations) {
 		Board.findByOwnersId(current_user._id, function(err, boards) {
 			Project.findByOwnersId(current_user._id, function(err, projects) {

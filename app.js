@@ -7,6 +7,7 @@ var express = require('express'),
 	routes = require('./routes'),
 	user = require('./routes/user'),
 	project = require('./routes/project'),
+	organization = require('./routes/organization'),
 	task = require('./routes/task'),
 	swig = require('swig'),
 	http = require('http'),
@@ -35,7 +36,7 @@ app.configure('production', function() {
 // This helps it know where to look for includes and parent templates
 swig.init({
     root: __dirname + '/views',
-    cache: true,
+    cache: false,
     allowErrors: true // allows errors to be thrown and caught by express instead of suppressed by Swig
 });
 
@@ -109,6 +110,17 @@ io.sockets.on("connection", function (socket) {
 			}
 		});
 	});
+	socket.on("create_organization", function (data) {
+		organization.create(data, function (err, organization) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				console.log("Organization added Successfully");
+				socket.broadcast.emit("reload");
+			}
+		});
+	});
+
 	socket.on("change_task", function (data) {
 		task.changeTask(data.task, function(err, task) {
 			if(err) {

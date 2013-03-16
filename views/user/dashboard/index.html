@@ -4,9 +4,14 @@
 <!-- Call to Action Panel -->
 <div class="row">
 	<div class="large-12 columns">
-		<h4>Welcome {{user.first_name}} {{user.last_name}}!</h4>
+		<br/>
 		<div class="row">
-			<div class="large-10 columns dashboard">
+			<div class="large-4 columns">
+				<div class="panel">
+
+				</div>
+			</div>
+			<div class="large-8 columns dashboard">
 				<div class="panel">
 					<h5>Organizations</h5>
 					{% if organizations.length > 0 %}
@@ -14,10 +19,29 @@
 					   Somebodys pretty busy
 					</p>
 					{% else %}
-					<p>
-						It seems like you do not have any organizations. <button class="button secondary small right create_organization">Create new Organization</button>
-					</p>
+					<div class="empty organization">
+						<div class="row">
+							<div class="large-8 column">It seems like you do not have any organizations.<br/> Why not create one?</div>
+							<div class="large-4 column"><a href="#" class="button secondary small right create_organization">Create new Organization</a></div>
+						</div>
+					</div>
 					{% endif %}
+
+					<div class="new organization">
+						<div class="row">
+							<div class="large-12 columns">
+								Sweet, just give your organization a name and you should be good!
+							</div><br/><br/>
+							<div class="large-7 columns">
+								<input type="text" name="organization_name" />
+								<input type="hidden" name="mid" value="{{ user._id }}" />
+							</div>
+							<div class="large-5 columns">
+								<input type="button" class="button small left create" value="Create Organization"/>
+								<input type="button" class="button secondary small right cancel" value="cancel"/>	
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="panel">
 					<h5>Boards</h5>
@@ -28,7 +52,7 @@
 					{% else %}
 					<p>
 						It seems like you do not have any boards. 
-						<button class="button secondary small right create_board">Create new Board</button>
+						<a href="#" data-reveal-id="new_board" class="button secondary small right create_board">Create new Board</a>
 					</p>
 					{% endif %}
 				</div>
@@ -41,20 +65,25 @@
 					{% else %}
 					<p>
 						It seems like you do not have any projects. 
-						<button class="button secondary small right create_project">Create new Project</button>
+						<a href="#" data-reveal-id="new_project" class="button secondary small right create_project">Create new Project</a>
 					</p>
 					{% endif %}
 				</div>
 				<div class="panel">
-					<h5>Tasks</h5>
+					<h5>Check List</h5>
 					<p>
-						It seems like you do not have any tasks. 
-						<button class="button secondary small right create_task">Create new Task</button>
+						It seems like you do not have any checklists. 
+						<a href="#" data-reveal-id="new_task" class="button secondary small right create_task">Create new Check List</a>
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script src="components/boards.js"></script>
+<script src="components/checklists.js"></script>
+<script src="components/organizations.js"></script>
+<script src="components/projects.js"></script>
+<script src="user/dashboard.js"></script>
 {% include 'user/layout/footer.html' %}
 {% endblock %}

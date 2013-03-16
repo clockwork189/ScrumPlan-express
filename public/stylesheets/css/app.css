@@ -11565,3 +11565,8 @@ div.task-box {
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   position: relative;
 }
+
+/* line 133, ../sass/app.scss */
+.new.organization {
+  display: none;
+}

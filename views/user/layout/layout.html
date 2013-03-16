@@ -13,19 +13,20 @@
         <meta name="author" content="Charles De Souza" />
         <!-- Included CSS Files (Compressed) -->
         {% block head %}
-        <link rel="stylesheet" href="/foundation/stylesheets/foundation.min.css">
+        <link rel="stylesheet" href="/stylesheets/css/foundation.min.css">
         <link rel="stylesheet" href="/stylesheets/css/app.css">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
         <script src="/javascripts/jquery-1.9.0.min.js"></script>
-        <script src="/foundation/javascripts/foundation.min.js"></script>
+        <script src="/javascripts/foundation/foundation.js"></script>
+        <script src="/javascripts/foundation/foundation.reveal.js"></script>
         <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
         <!-- Initialize JS Plugins -->
-        <script src="/foundation/javascripts/app.js"></script>
-        <script src="/foundation/javascripts/modernizr.foundation.js"></script>
+        <script src="/javascripts/vendor/custom.modernizr.js"></script>
         <script src="/javascripts/jquery.chosen.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io.connect('http://localhost:3000');
+            $(document).foundation();
         </script>
         {% endblock %}
     </head>
