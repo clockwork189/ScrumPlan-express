@@ -35,9 +35,9 @@ exports.findById = function(id, callback) {
 };
 
 exports.findByOwnersId = function(owner_id, callback) {
-	console.log('Retrieving organization: ' + owner_id);
+	console.log('Retrieving organization by owners id: ' + owner_id);
 	SPMongo.db.collection('organizations', function(err, collection) {
-		collection.find({'owner_id':collection.db.bson_serializer.ObjectID.createFromHexString(owner_id)}, function(err, organizations) {
+		collection.find({'owner_id':owner_id}).toArray(function(err, organizations) {
 			if(err) {
 				callback(err);
 			} else {

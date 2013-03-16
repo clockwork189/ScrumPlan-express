@@ -133,6 +133,13 @@ div.task-box {
 	&.organization {
 		display: none;
 	}
+	&.board {
+		display: none;
+	}
+}
+
+.personal {
+	text-align: center;
 }
 
 // .project_select, .user_select, .priority_select, .status_select {

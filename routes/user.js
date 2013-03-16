@@ -4,6 +4,7 @@ var Project = require("./../models/Project.js");
 var Task = require("./../models/Task.js");
 var Organization = require("./../models/Organization.js");
 var Board = require("./../models/Board.js");
+var md5 = require("MD5");
 
 exports.auth = function(req, res){
 	authenticate(req.body.email, req.body.password, function(err, user){
@@ -64,6 +65,8 @@ exports.dashboard = function(req, res){
 	Organization.findByOwnersId(current_user._id, function(err, organizations) {
 		Board.findByOwnersId(current_user._id, function(err, boards) {
 			Project.findByOwnersId(current_user._id, function(err, projects) {
+				var email = current_user.email.toLowerCase().replace(/ /g,'');
+				current_user.md5Email = md5(email);
 				res.render('user/dashboard/index.html', {
 					title: 'ScrumPlan: User Dashboard',
 					user: current_user,

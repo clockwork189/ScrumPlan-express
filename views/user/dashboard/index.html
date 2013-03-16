@@ -7,26 +7,43 @@
 		<br/>
 		<div class="row">
 			<div class="large-4 columns">
-				<div class="panel">
-
+				<div class="panel personal">
+					<div class="row">
+						<img src="http://www.gravatar.com/avatar/{{ user.md5Email }}?s=150" style="width:150px; border-radius: 50%" />
+					</div>
+					<div class="row">
+						<br/>
+						<p class="info">
+							{{ user.first_name}} {{ user.last_name}}<br/>
+							{{ user.email}}<br/>
+							Organizations: {% if organizations.length > 0 %} {{ organizations.length }} {% else %} 0 {% endif %}<br/>
+							Boards: {% if boards.length > 0 %} {{ boards.length }} {% else %} 0 {% endif %}<br/>
+							Projects: {% if projects.length > 0 %} {{ projects.length }} {% else %} 0 {% endif %}<br/>
+							Checklists: {% if projects.length > 0 %} {{ projects.length }} {% else %} 0 {% endif %}<br/>
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="large-8 columns dashboard">
 				<div class="panel">
 					<h5>Organizations</h5>
-					{% if organizations.length > 0 %}
-					<p>
-					   Somebodys pretty busy
-					</p>
-					{% else %}
-					<div class="empty organization">
-						<div class="row">
-							<div class="large-8 column">It seems like you do not have any organizations.<br/> Why not create one?</div>
-							<div class="large-4 column"><a href="#" class="button secondary small right create_organization">Create new Organization</a></div>
-						</div>
+					<div class="organization display">
+						{% if organizations.length > 0 %}
+								<div class="row">
+								{% for organization in organizations %}
+									<div class="large-12 columns">
+										<a href="#" class="active organizations">{{ organization.name }}</a>
+									</div>
+								{% endfor %}
+									<div class="large-12 column"><a href="#" class="button secondary small right create_organization">Create new Organization</a></div>
+								</div>
+						{% else %}
+							<div class="row">
+								<div class="large-8 column">It seems like you do not have any organizations.<br/> Why not create one?</div>
+								<div class="large-4 column"><a href="#" class="button secondary small right create_organization">Create new Organization</a></div>
+							</div>
+						{% endif %}
 					</div>
-					{% endif %}
-
 					<div class="new organization">
 						<div class="row">
 							<div class="large-12 columns">
@@ -34,7 +51,6 @@
 							</div><br/><br/>
 							<div class="large-7 columns">
 								<input type="text" name="organization_name" />
-								<input type="hidden" name="mid" value="{{ user._id }}" />
 							</div>
 							<div class="large-5 columns">
 								<input type="button" class="button small left create" value="Create Organization"/>
@@ -50,11 +66,28 @@
 					   Somebodys pretty busy
 					</p>
 					{% else %}
-					<p>
-						It seems like you do not have any boards. 
-						<a href="#" data-reveal-id="new_board" class="button secondary small right create_board">Create new Board</a>
-					</p>
+					<div class="empty board">
+						<div class="row">
+							<div class="large-8 column">It seems like you do not have any boards. <br/> Why not create one?</div>
+							<div class="large-4 column"><a href="#" class="button secondary small right create_board">Create new Board</a></div>
+						</div>
+					</div>
 					{% endif %}
+
+					<div class="new board">
+						<div class="row">
+							<div class="large-12 columns">
+								Sweet, just give your board a name and you should be good!
+							</div><br/><br/>
+							<div class="large-7 columns">
+								<input type="text" name="board_name" />
+							</div>
+							<div class="large-5 columns">
+								<input type="button" class="button small left create" value="Create Board"/>
+								<input type="button" class="button secondary small right cancel" value="cancel"/>	
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="panel">
 					<h5>Projects</h5>
@@ -63,10 +96,12 @@
 					   Somebodys pretty busy
 					</p>
 					{% else %}
-					<p>
-						It seems like you do not have any projects. 
-						<a href="#" data-reveal-id="new_project" class="button secondary small right create_project">Create new Project</a>
-					</p>
+					<div class="empty project">
+						<div class="row">
+							<div class="large-8 column">It seems like you do not have any projects.  <br/> Why not create one?</div>
+							<div class="large-4 column"><a href="#" class="button secondary small right create_project">Create new Project</a></div>
+						</div>
+					</div>
 					{% endif %}
 				</div>
 				<div class="panel">
@@ -79,6 +114,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="mid" value="{{ user._id }}" />
 </div>
 <script src="components/boards.js"></script>
 <script src="components/checklists.js"></script>

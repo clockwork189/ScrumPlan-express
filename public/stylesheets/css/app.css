@@ -11570,3 +11570,12 @@ div.task-box {
 .new.organization {
   display: none;
 }
+/* line 136, ../sass/app.scss */
+.new.board {
+  display: none;
+}
+
+/* line 141, ../sass/app.scss */
+.personal {
+  text-align: center;
+}

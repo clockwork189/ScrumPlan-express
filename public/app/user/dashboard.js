@@ -7,19 +7,24 @@ var Dashboard = function () {
 		initializeCreateBoard();
 		initializeCreateProject();
 		initializeCreateTask();
+		getGravatar();
 	};
 
 	var initializeOrganizationActions = function () {
+		var hideEdit = function () {
+			$(".organization.display").show();
+			$(".new.organization").hide();
+			$("small.error").remove();
+			$("input[name=organization_name]").removeClass("error");
+		};
+
 		$(".create_organization").click(function() {
-			$(".empty.organization").hide();
+			$(".organization.display").hide();
 			$(".new.organization").show();
 		});
 
 		$(".new.organization .cancel").click(function () {
-			$(".empty.organization").show();
-			$(".new.organization").hide();
-			$("small.error").remove();
-			$("input[name=organization_name]").removeClass("error");
+			hideEdit();
 		});
 
 		$(".new.organization .create").click(function () {
@@ -33,14 +38,28 @@ var Dashboard = function () {
 				}
 			} else {
 				orgs.create({name: orgName, owner_id: mid });
+				hideEdit();
 			}
 		});
 	};
 
 	var initializeCreateBoard = function () {
-		$(".create_board").click(function() {
+		var hideEdit = function () {
+			$(".empty.board").show();
+			$(".new.board").hide();
+			$("small.error").remove();
+			$("input[name=board_name]").removeClass("error");
+		};
 
+		$(".create_board").click(function() {
+			$(".empty.board").hide();
+			$(".new.board").show();
 		});
+
+		$(".new.board .cancel").click(function () {
+			hideEdit();
+		});
+
 	};
 
 	var initializeCreateProject = function () {
@@ -53,6 +72,10 @@ var Dashboard = function () {
 		$(".create_task").click(function() {
 
 		});
+	};
+
+	var getGravatar = function () {
+
 	};
 
 	return self;
