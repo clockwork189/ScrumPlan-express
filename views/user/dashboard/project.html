@@ -1,0 +1,65 @@
+<div class="panel">
+	<h5>Projects</h5>
+	{% if projects.length > 0 %}
+	<div class="row">
+		{% for project in projects %}
+		<div class="large-12 columns">
+			<a href="#" class="active projects">{{ project.name }}</a>
+		</div>
+		{% endfor %}
+		<div class="large-12 column">
+			<a href="#" class="button secondary small right create_project">Create new Project</a>
+		</div>
+	</div>
+	{% else %}
+	<div class="empty project">
+		<div class="row">
+			<div class="large-8 column">It seems like you do not have any projects.  <br/> Why not create one?</div>
+			<div class="large-4 column"><a href="#" class="button secondary small right create_project">Create new Project</a></div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="new project">
+		<div class="row">
+			<div class="large-12 columns">
+				<div class="row">
+					<div class="large-12 columns">
+						Sweet, just fill the following info and you should be good!<br/><br/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-3 columns">
+						<label>Project Name:</label>
+					</div>
+					<div class="large-9 columns">
+						<input type="text" name="project_name" />
+					</div>
+				</div>
+				{% if boards.length > 0 %}
+				<div class="row">
+					<div class="large-3 columns">
+						<label>Board Name:</label>
+					</div>
+					<div class="large-9 columns">
+						<select name="board_name" class="board_select" style="width:300px;">
+							<option value="">No Board</option>
+							{% for board in boards %}
+								<option value="{{board._id}}">{{ board.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				{% endif %}
+				<div class="row">
+					<div class="large-7 columns">
+
+					</div>
+					<div class="large-5 columns">
+						<input type="button" class="button small left create" value="Create Project"/>
+						<input type="button" class="button secondary small right cancel" value="cancel"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

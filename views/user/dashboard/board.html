@@ -1,0 +1,75 @@
+<div class="panel">
+	<h5>Boards</h5>
+	{% if boards.length > 0 %}
+	<div class="row">
+		{% for board in boards %}
+		<div class="large-12 columns">
+			<a href="#" class="active boards">{{ board.name }}</a>
+		</div>
+		{% endfor %}
+		<div class="large-12 column">
+			<a href="#" class="button secondary small right create_board">Create new Board</a>
+		</div>
+	</div>
+	{% else %}
+	<div class="empty board">
+		<div class="row">
+			<div class="large-8 column">It seems like you do not have any boards. <br/> Why not create one?</div>
+			<div class="large-4 column">
+				<a href="#" class="button secondary small right create_board">Create new Board</a>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="new board">
+		<div class="row">
+			<div class="large-12 columns">
+				<div class="row">
+					<div class="large-12 columns">
+						Sweet, just fill the following info and you should be good!<br/><br/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-3 columns">
+						<label>Board Name:</label>
+					</div>
+					<div class="large-9 columns">
+						<input type="text" name="board_name" />
+					</div>
+				</div>
+				{% if organizations.length > 0 %}
+				<div class="row">
+					<div class="large-3 columns">
+						<label>Organization:</label>
+					</div>
+					<div class="large-9 columns">
+						<select name="organization" class="organization_select" style="width:300px;">
+							<option value="">No Organization</option>
+							{% for organization in organizations %}
+								<option value="{{organization._id}}">{{ organization.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				{% endif %}
+				<div class="row">
+					<div class="large-3 columns">
+						<label>Is Private:</label>
+					</div>
+					<div class="large-9 columns">
+						<input type="checkbox" name="is_private" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-7 columns">
+
+					</div>
+					<div class="large-5 columns">
+						<input type="button" class="button small left create" value="Create Board"/>
+						<input type="button" class="button secondary small right cancel" value="cancel"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
