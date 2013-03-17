@@ -8,6 +8,7 @@ var express = require('express'),
 	user = require('./routes/user'),
 	project = require('./routes/project'),
 	organization = require('./routes/organization'),
+	board = require('./routes/board'),
 	task = require('./routes/task'),
 	swig = require('swig'),
 	http = require('http'),
@@ -116,6 +117,27 @@ io.sockets.on("connection", function (socket) {
 				console.log("***ERROR: ", err);
 			} else {
 				console.log("Organization added Successfully");
+				socket.broadcast.emit("reload");
+			}
+		});
+	});
+	socket.on("create_board", function (data) {
+		board.create(data, function (err, board) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				console.log("Board added Successfully");
+				socket.broadcast.emit("reload");
+			}
+		});
+	});
+	socket.on("create_project", function (data) {
+		console.log("Create Project: ", data);
+		project.create(data, function (err, project) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				console.log("Project added Successfully");
 				socket.broadcast.emit("reload");
 			}
 		});

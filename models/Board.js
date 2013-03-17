@@ -37,7 +37,7 @@ exports.findById = function(id, callback) {
 exports.findByOwnersId = function(owner_id, callback) {
 	console.log('Retrieving board: ' + owner_id);
 	SPMongo.db.collection('boards', function(err, collection) {
-		collection.find({'owner_id':collection.db.bson_serializer.ObjectID.createFromHexString(owner_id)}, function(err, boards) {
+		collection.find({'owner_id':owner_id}).toArray(function(err, boards) {
 			if(err) {
 				callback(err);
 			} else {

@@ -1,37 +1,21 @@
 var Project = require("./../models/Project.js");
+var User = require("./../models/User.js");
 
-exports.createProject = createProject;
+exports.create = function (data, callback) {
 
-exports.create = function(req, res){
-	var project = {};
-	project.project_name = req.body.project_name;
-	var organization_name = req.session.organization_name;
-	project.organization_name = organization_name;
-	project.dateCreated = Date.Now();
+	var newProject = {
+		name: data.name,
+		board: data.board,
+		owner_id: data.owner_id,
+		dateCreated: new Date()
+	};
 
-	createProject(project, function(err, projectName) {
+	Project.addProject(newProject, function(err, project) {
 		if(err) {
-			console.log("Error: ", err);
-		} else {
-			res.redirect("/app/manage/projects");
-		}
+            console.log("****************Error", err);
+            callback(err);
+        } else {
+            callback(null, project);
+        }
 	});
 };
-
-exports.getProjectsByOrganization = function(req, res) {
-	var organization_name = req.session.organization_name;
-	Project.findAllInOrganization(organization_name, function(err, projects) {
-		res.json({projects: projects});
-	});
-};
-
-function createProject(project, callback) {
-	Project.addProject(project, function(err, projectName) {
-		if(err) {
-			console.log("****************Error", err);
-			callback(err);
-		} else {
-			callback(null, projectName);
-		}
-	});
-}

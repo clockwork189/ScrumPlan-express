@@ -11574,8 +11574,12 @@ div.task-box {
 .new.board {
   display: none;
 }
+/* line 139, ../sass/app.scss */
+.new.project {
+  display: none;
+}
 
-/* line 141, ../sass/app.scss */
+/* line 144, ../sass/app.scss */
 .personal {
   text-align: center;
 }

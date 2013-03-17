@@ -1,13 +1,15 @@
 var Dashboard = function () {
 	var self = {};
 	var orgs = new Organizations();
+	var boards = new Boards();
+	var projects = new Projects();
+	var mid = $("input[name=mid]").val();
 
 	self.init = function () {
 		initializeOrganizationActions();
 		initializeCreateBoard();
 		initializeCreateProject();
-		initializeCreateTask();
-		getGravatar();
+		initializeCreateChecklist();
 	};
 
 	var initializeOrganizationActions = function () {
@@ -28,15 +30,11 @@ var Dashboard = function () {
 		});
 
 		$(".new.organization .create").click(function () {
-			var textDiv = $("input[name=organization_name]");
-			var mid = $("input[name=mid]").val();
+			var div = $(".new.organization");
+			var textDiv = $("input[name=organization_name]", div);
+			mid = $("input[name=mid]").val();
 			var orgName = textDiv.val();
-			if(orgName.length <= 0) {
-				textDiv.addClass("error");
-				if(textDiv.parent().find("small.error").length <= 0) {
-					textDiv.parent().append("<small class='error'>Please Enter a Name for your organization</small>");
-				}
-			} else {
+			if(validateText(orgName, textDiv, "Please Enter a Name for your organization")) {
 				orgs.create({name: orgName, owner_id: mid });
 				hideEdit();
 			}
@@ -44,6 +42,7 @@ var Dashboard = function () {
 	};
 
 	var initializeCreateBoard = function () {
+		$(".organization_select").chosen();
 		var hideEdit = function () {
 			$(".empty.board").show();
 			$(".new.board").hide();
@@ -60,22 +59,88 @@ var Dashboard = function () {
 			hideEdit();
 		});
 
+		$(".new.board .create").click(function () {
+			var div = $(".new.board");
+			var boardName = $("input[name=board_name]",div).val();
+			var organization = $("select[name=organization]",div).val();
+			var isPrivate = ( $("input[name=is_private]",div).is(":checked") ? true : false);
+			if(validateText(boardName, div, "Please Enter a Name for your Board")) {
+				boards.create({name: boardName, organization: organization, isPrivate: isPrivate, owner_id: mid });
+				hideEdit();
+			}
+		});
 	};
 
 	var initializeCreateProject = function () {
+		$(".board_select").chosen();
+		var hideEdit = function () {
+			$(".empty.project").show();
+			$(".new.project").hide();
+			$("small.error").remove();
+			$("input[name=project_name]").removeClass("error");
+		};
+
 		$(".create_project").click(function() {
+			$(".empty.project").hide();
+			$(".new.project").show();
+		});
 
+		$(".new.project .cancel").click(function () {
+			hideEdit();
+		});
+
+		$(".new.project .create").click(function () {
+			var div = $(".new.project");
+			var projectName = $("input[name=project_name]", div).val();
+			var board = $("select[name=board_name]",div).val();
+
+			if(validateText(projectName, div, "Please Enter a Name for your Project")) {
+				projects.create({ name: projectName, board: board, owner_id: mid });
+				hideEdit();
+			}
 		});
 	};
 
-	var initializeCreateTask = function () {
-		$(".create_task").click(function() {
+	var initializeCreateChecklist = function () {
+		$(".board_select").chosen();
+		var hideEdit = function () {
+			$(".empty.project").show();
+			$(".new.project").hide();
+			$("small.error").remove();
+			$("input[name=project_name]").removeClass("error");
+		};
 
+		$(".create_project").click(function() {
+			$(".empty.project").hide();
+			$(".new.project").show();
+		});
+
+		$(".new.project .cancel").click(function () {
+			hideEdit();
+		});
+
+		$(".new.project .create").click(function () {
+			var div = $(".new.project");
+			var projectName = $("input[name=project_name]", div).val();
+			var board = $("select[name=board_name]",div).val();
+
+			if(validateText(projectName, div, "Please Enter a Name for your Project")) {
+				projects.create({ name: projectName, board: board, owner_id: mid });
+				hideEdit();
+			}
 		});
 	};
 
-	var getGravatar = function () {
-
+	var validateText = function (text, div, message) {
+		if(text.length <= 0) {
+			div.addClass("error");
+			if(div.parent().find("small.error").length <= 0) {
+				div.parent().append("<small class='error'>" + message + "</small>");
+			}
+			return false;
+		} else {
+			return true;
+		}
 	};
 
 	return self;
