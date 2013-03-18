@@ -45,6 +45,7 @@
 // @import "foundation/components/dropdown";
 
 @import "chosen";
+@import "foundation_icons_general_enclosed/_general_enclosed_foundicons";
 
 .dashboard {
 	.panel {
@@ -144,7 +145,24 @@ div.task-box {
 .personal {
 	text-align: center;
 }
+.row {
+	&.items {
+		border: 1px solid #E0E0E0;
+		padding: 5px 0;
+		margin-bottom: 5px;
 
+		.options {
+			text-align: right;
+			a .gen-enclosed {
+				font-size: 20px;
+			}
+			a .gen-enclosed:hover {
+				color: #fff;
+				cursor: pointer;
+			}
+		}
+	}
+}
 // .project_select, .user_select, .priority_select, .status_select {
 // 	width: 300px;
 // }

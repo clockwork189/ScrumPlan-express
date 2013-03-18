@@ -1,0 +1,67 @@
+<div id="createTask" class="reveal-modal">
+	<h2>Add Task</h2>
+	<div class="large-6 columns">
+		<div class="row">
+			<div class="large-6 columns">
+				<label>Task Name: </label>
+			</div>
+			<div class="large-6 columns">
+				<input type="text" name="task_name" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<label>Project Select: </label>
+			</div>
+			<div class="large-6 columns">
+				<select name="project_select">
+					{% for project in projects %}
+					<option value="{{ project._id }}">{{project.name}}<option>
+					{% end for%}
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<label>Due Date</label>
+			</div>
+			<div class="large-6 columns">
+				<input type="text" name="dueDate" />
+			</div>
+		</div>
+		<div class="row">
+	  		<div class="large-6 columns">
+	  			<label>Time Estimate</label>
+	  		</div>
+	  		<div class="large-6 columns">
+	  			<input type="text" name="timeEstimate" />
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="large-6 columns">
+	  			<label>Assigned To: </label>
+	  		</div>
+	  		<div class="large-6 columns">
+	  			<select name="user_select">
+					{% for user in users %}
+					<option value="{{ user._id }}">{{user.name}}<option>
+					{% end for%}
+				</select>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="large-6 columns">
+	  			<label>Status </label>
+	  		</div>
+	  		<div class="large-6 columns">
+	  			<select name="user_select">
+					<option value="todo">To Do<option>
+					<option value="inprogress">In Progress<option>
+					<option value="verify">Verify<option>
+					<option value="done">Done<option>
+				</select>
+	  		</div>
+	  	</div>
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
