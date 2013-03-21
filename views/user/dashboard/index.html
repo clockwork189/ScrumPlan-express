@@ -6,22 +6,17 @@
 	<div class="large-12 columns">
 		<br/>
 		<div class="row">
-			<div class="large-4 columns">
+			<div class="large-3 columns">
 				{% include 'user/dashboard/profile.html' %}
-				<div class="panel reminders">
-					You have no reminders for this week
-				</div>
-			</div>
-			<div class="large-8 columns dashboard">
 				{% include 'user/dashboard/organization.html' %}
+			</div>
+			<div class="large-6 columns dashboard">
 				{% include 'user/dashboard/board.html' %}
 				{% include 'user/dashboard/project.html' %}
-				<div class="panel">
-					<h5>Check List</h5>
-					<p>
-						It seems like you do not have any checklists. 
-						<a href="#" data-reveal-id="new_task" class="button secondary small right create_task">Create new Check List</a>
-					</p>
+			</div>
+			<div class="large-3 columns dashboard">
+				<div class="panel reminders">
+					You have no reminders for this week
 				</div>
 			</div>
 		</div>
