@@ -31,10 +31,23 @@ exports.findById = function(id, callback) {
 };
 
 
-exports.findByProjectName = function(project_name, callback) {
-    console.log('Retrieving all tasks in project name: ' + project_name);
+exports.findByProjectId = function(project_id, callback) {
+    console.log('Retrieving all tasks in project name: ' + project_id);
     SPMongo.db.collection('tasks', function(err, collection) {
-        collection.findOne({'project_name': project_name}, function(err, tasks) {
+        collection.findOne({'project_id': project_id}, function(err, tasks) {
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, tasks);
+            }
+        });
+    });
+};
+
+exports.findByOwnersId = function(owner_id, callback) {
+    console.log('Retrieving tasks: ' + owner_id);
+    SPMongo.db.collection('tasks', function(err, collection) {
+        collection.find({'owner_id':owner_id}).toArray(function(err, tasks) {
             if(err) {
                 callback(err);
             } else {

@@ -3,29 +3,23 @@ var Task = require("./../models/Task.js");
 exports.createTask = createTask;
 exports.changeTask = changeTask;
 
-exports.create = function(req, res){
-    var task = {};
-    var delegates = req.body.delegates;
-    var delegatesArray = [];
-    task.project_name = req.body.project_name;
-    task.task_name = req.body.task_name;
-    task.organization_name = req.session.organization_name;
-    task.time_estimate = req.body.time_estimate;
-    task.priority = req.body.priority;
-    task.status = req.body.status;
-    task.notes = req.body.notes;
-    
-    if(typeof delegates == "string") {
-        delegatesArray.push(delegates);
-    } else {
-        delegatesArray = delegates;
-    }
-    task.delegates = delegatesArray;
+exports.create = function(data, callback){
+    var task = {
+        name: data.name,
+        description: data.description,
+        project_id: data.project_id,
+        due_date: data.due_date,
+        time_estimate: data.time_estimate,
+        status: data.status,
+        owner_id: data.owner_id,
+        dateCreated: new Date()
+    };
     createTask(task, function(err, task) {
         if(err) {
-            console.log("Error: ", err);
+            console.log("****************Error", err);
+            callback(err);
         } else {
-            res.redirect("/app/manage/projects");
+            callback(null, task);
         }
     });
 };

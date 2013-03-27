@@ -16,6 +16,7 @@ var express = require('express'),
 	mongoStore = require('connect-mongo')(express),
 	db = require("./lib/db"),
 	socket = require('socket.io'),
+	fs = require('fs'),
 	path = require('path');
 
 var app = express();
@@ -38,13 +39,16 @@ app.configure('production', function() {
 swig.init({
     root: __dirname + '/views',
     cache: false,
+    filters: {
+		jsonify: function (input) { return JSON.stringify(input); }
+	},
     allowErrors: true // allows errors to be thrown and caught by express instead of suppressed by Swig
 });
 
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
-	app.engine('.html', cons.swig);
+	app.engine('html', cons.swig);
 	app.set('view engine', 'html');
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
@@ -111,38 +115,108 @@ io.sockets.on("connection", function (socket) {
 			}
 		});
 	});
-	socket.on("create_organization", function (data) {
-		organization.create(data, function (err, organization) {
+	socket.on("request-reload-organizations", function (data) {
+		organization.getAllOrganizations(data.user, function(err, organizations) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				console.log("Organization added Successfully");
-				socket.broadcast.emit("reload");
+				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
+				var obj = {
+					html: html,
+					organizations: organizations
+				};
+				console.log("Successfully received all organizations");
+				socket.emit("reload-organizations", obj);
 			}
 		});
 	});
-	socket.on("create_board", function (data) {
-		board.create(data, function (err, board) {
+	socket.on("create_organization", function (data) {
+		organization.create(data, function (err, organizations) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				console.log("Board added Successfully");
-				socket.broadcast.emit("reload");
+				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
+				var obj = {
+					html: html,
+					organizations: organizations
+				};
+				console.log("Organization added Successfully");
+				socket.emit("reload-organizations", obj);
+			}
+		});
+	});
+	socket.on("remove_organization", function (data) {
+		organization.remove(data, function (err, organizations) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
+				var obj = {
+					html: html,
+					organizations: organizations
+				};
+				console.log("Organization added Successfully");
+				socket.emit("reload-organizations", obj);
+			}
+		});
+	});
+	socket.on("request-reload-projects", function (data) {
+		project.getAllProjects(data.user, function(err, projects) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				var html = fs.readFileSync("./views/user/dashboard/project.html", "utf8");
+				var obj = {
+					html: html,
+					projects: projects
+				};
+				console.log("Successfully received all projects");
+				socket.emit("reload-projects", obj);
 			}
 		});
 	});
 	socket.on("create_project", function (data) {
 		console.log("Create Project: ", data);
-		project.create(data, function (err, project) {
+		project.create(data, function (err, projects) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				console.log("Project added Successfully");
+				var html = fs.readFileSync("./views/user/dashboard/project.html", "utf8");
+				var obj = {
+					html: html,
+					projects: projects
+				};
+				console.log("Project added successfully");
+				socket.emit("reload-projects", obj);
+			}
+		});
+	});
+	socket.on("remove_project", function (data) {
+		project.remove(data, function (err, projects) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				var html = fs.readFileSync("./views/user/dashboard/project.html", "utf8");
+				var obj = {
+					html: html,
+					projects: projects
+				};
+				console.log("Organization added Successfully");
+				socket.emit("reload-projects", obj);
+			}
+		});
+	});
+	socket.on("create_task", function (data) {
+		console.log("Create Task: ", data);
+		task.create(data, function (err, task) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				console.log("Task added Successfully");
 				socket.broadcast.emit("reload");
 			}
 		});
 	});
-
 	socket.on("change_task", function (data) {
 		task.changeTask(data.task, function(err, task) {
 			if(err) {

@@ -26,21 +26,19 @@
 <script>
 	var boardObject = {};
 	{% for project in projects %}
-		var project_name = "{{ project.project_name }}";
+		var project_name = "{{ project._id }}";
 		boardObject[project_name] = {};
 		boardObject[project_name].tasks = [];
 	{% endfor %}
 	{% for task in tasks %}
-		var project_name = "{{ task.project_name}}";
+		var project_name = "{{ task.project_id}}";
 		var taskObj = {};
 		taskObj.id = "{{ tasks._id }}";
-		taskObj.project_name = "{{ task.project_name }}";
-		taskObj.name = "{{ task.task_name }}";
+		taskObj.project_id = "{{ task.project_id }}";
+		taskObj.name = "{{ task.name }}";
 		taskObj.status = "{{ task.status }}";
-		taskObj.delegates = "{{ task.delegates }}";
-		taskObj.notes = "{{ task.notes }}";
 		taskObj.time_estimate = "{{ task.time_estimate }}";
-		taskObj.organization_name = "{{ task.organization_name }}";
+		taskObj.organization_id = "{{ task.organization_id }}";
 		taskObj.priority = "{{ task.priority }}";
 
 		boardObject[project_name].tasks.push(taskObj);

@@ -5,7 +5,6 @@ exports.create = function (data, callback) {
 
 	var newProject = {
 		name: data.name,
-		board: data.board,
 		owner_id: data.owner_id,
 		dateCreated: new Date()
 	};
@@ -15,7 +14,29 @@ exports.create = function (data, callback) {
             console.log("****************Error", err);
             callback(err);
         } else {
-            callback(null, project);
+			Project.findByOwnersId(data.owner_id, function(err, projects) {
+				callback(null, projects);
+			});
         }
+	});
+};
+
+
+exports.remove = function (proj, callback) {
+	Project.deleteProject(proj.id, function(err, organization) {
+		if(err) {
+			console.log("****************Error", err);
+			callback(err);
+		} else {
+			Project.findByOwnersId(proj.owner_id, function(err, projects) {
+				callback(null, projects);
+			});
+		}
+	});
+};
+
+exports.getAllProjects = function (userId, callback) {
+	Project.findByOwnersId(userId, function(err, projects) {
+		callback(null, projects);
 	});
 };

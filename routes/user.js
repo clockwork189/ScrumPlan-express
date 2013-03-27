@@ -63,16 +63,16 @@ exports.add = function(req, res) {
 exports.dashboard = function(req, res){
 	var current_user = req.session.user;
 	Organization.findByOwnersId(current_user._id, function(err, organizations) {
-		Board.findByOwnersId(current_user._id, function(err, boards) {
-			Project.findByOwnersId(current_user._id, function(err, projects) {
+		Project.findByOwnersId(current_user._id, function(err, projects) {
+			Task.findByOwnersId(current_user._id, function(err, tasks) {
 				var email = current_user.email.toLowerCase().replace(/ /g,'');
 				current_user.md5Email = md5(email);
 				res.render('user/dashboard/index.html', {
 					title: 'ScrumPlan: User Dashboard',
 					user: current_user,
-					organizations: organizations,
-					boards: boards,
-					projects: projects
+					projects: projects,
+					//organizations: organizations,
+					tasks: tasks
 				});
 			});
 		});
@@ -97,7 +97,7 @@ exports.manage_projects_tasks = function(req, res){
 exports.board = function(req, res){
 	var organization_name = req.session.organization_name;
 	Project.findAllInOrganization(organization_name, function(err, projects) {
-		User.findAllInOrganization(organization_name, function(err, users) {
+		//User.findAllInOrganization(organization_name, function(err, users) {
 			Task.findAllInOrganization(organization_name, function(err, tasks) {
 
 				var boardObject = {};
@@ -125,11 +125,12 @@ exports.board = function(req, res){
 				res.render('user/board/index.html', {
 					title: 'ScrumPlan: Manage Tasks',
 					projects: projects,
-					users: users, tasks: tasks,
+					//users: users, 
+					tasks: tasks,
 					organization_name: organization_name,
 					boardObject: boardObject
 				});
-			});
+		//	});
 		});
 	});
 };

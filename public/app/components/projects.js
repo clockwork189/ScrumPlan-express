@@ -1,8 +1,14 @@
 var Projects = function () {
 	var self = {};
 
-	self.init = function () {
+	self.init = function (userId) {
+		socket.emit("request-reload-projects", {user: userId});
+	};
 
+	self.reload = function (callback) {
+		socket.on("reload-projects", function (data) {
+			callback(null, data);
+		});
 	};
 
 	self.create = function (project) {
@@ -18,8 +24,8 @@ var Projects = function () {
 
 	};
 
-	self.destroy = function () {
-
+	self.destroy = function (project) {
+		socket.emit("remove_project", project);
 	};
 
 	return self;

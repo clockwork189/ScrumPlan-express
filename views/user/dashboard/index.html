@@ -2,17 +2,19 @@
 {% include 'user/layout/header.html' %}
 {% block content %}
 <!-- Call to Action Panel -->
-<div class="row">
+<div class="dashboard row">
 	<div class="large-12 columns">
 		<br/>
 		<div class="row">
 			<div class="large-3 columns">
-				{% include 'user/dashboard/profile.html' %}
-				{% include 'user/dashboard/organization.html' %}
+				<div class="side profile">
+					{% include 'user/dashboard/profile.html' %}
+				</div>
+				<div class="dashboard organization"></div>
 			</div>
 			<div class="large-6 columns dashboard">
-				{% include 'user/dashboard/board.html' %}
-				{% include 'user/dashboard/project.html' %}
+				<div class="dashboard project"></div>
+				{% include 'user/dashboard/task.html' %}
 			</div>
 			<div class="large-3 columns dashboard">
 				<div class="panel reminders">
@@ -23,10 +25,10 @@
 	</div>
 	<input type="hidden" name="mid" value="{{ user._id }}" />
 </div>
-<script src="components/boards.js"></script>
-<script src="components/checklists.js"></script>
+{% include 'user/dashboard/modals/task.html' %}
 <script src="components/organizations.js"></script>
 <script src="components/projects.js"></script>
+<script src="components/tasks.js"></script>
 <script src="user/dashboard.js"></script>
 {% include 'user/layout/footer.html' %}
 {% endblock %}
