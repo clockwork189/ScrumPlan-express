@@ -206,25 +206,50 @@ io.sockets.on("connection", function (socket) {
 			}
 		});
 	});
-	socket.on("create_task", function (data) {
-		console.log("Create Task: ", data);
-		task.create(data, function (err, task) {
+	socket.on("request-reload-tasks", function (data) {
+		task.getAllTasks(data.user, function(err, tasks) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				console.log("Task added Successfully");
-				socket.broadcast.emit("reload");
+				var html = fs.readFileSync("./views/user/dashboard/task.html", "utf8");
+				var obj = {
+					html: html,
+					tasks: tasks
+				};
+				console.log("Successfully received all tasks");
+				socket.emit("reload-tasks", obj);
 			}
 		});
 	});
-	socket.on("change_task", function (data) {
-		task.changeTask(data.task, function(err, task) {
+
+	socket.on("create_task", function (data) {
+		console.log("Create Task: ", data);
+		task.create(data, function (err, tasks) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				console.log("Task Set Successfully");
-				var ProjectTaskUserObject = user.getProjectsUsersTasks(project.organization_name);
-				socket.broadcast.emit("reload", ProjectTaskUserObject);
+				var html = fs.readFileSync("./views/user/dashboard/task.html", "utf8");
+				var obj = {
+					html: html,
+					tasks: tasks
+				};
+				console.log("Task added successfully");
+				socket.emit("reload-tasks", obj);
+			}
+		});
+	});
+	socket.on("remove_task", function (data) {
+		task.remove(data, function (err, tasks) {
+			if(err) {
+				console.log("***ERROR: ", err);
+			} else {
+				var html = fs.readFileSync("./views/user/dashboard/task.html", "utf8");
+				var obj = {
+					html: html,
+					tasks: tasks
+				};
+				console.log("Organization added Successfully");
+				socket.emit("reload-tasks", obj);
 			}
 		});
 	});

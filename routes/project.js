@@ -23,7 +23,7 @@ exports.create = function (data, callback) {
 
 
 exports.remove = function (proj, callback) {
-	Project.deleteProject(proj.id, function(err, organization) {
+	Project.deleteProject(proj.id, function(err, project) {
 		if(err) {
 			console.log("****************Error", err);
 			callback(err);

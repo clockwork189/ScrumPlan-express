@@ -8,8 +8,8 @@ var Dashboard = function () {
 	self.init = function () {
 		orgs.init(mid);
 		projects.init(mid);
+		tasks.init(mid);
 		reload();
-		initializeCreateTask();
 		initializeCreateChecklist();
 	};
 
@@ -27,6 +27,12 @@ var Dashboard = function () {
 			}
 			drawProjects(data);
 		});
+		tasks.reload(function (err, data) {
+			if(err) {
+				console.log(err);
+			}
+			drawTasks(data);
+		});
 	};
 
 	var drawOrganizations = function (data) {
@@ -42,6 +48,13 @@ var Dashboard = function () {
 			var tpl = swig.compile(data.html)({projects: data.projects});
 			$(".dashboard.project").html(tpl);
 			initializeCreateProject();
+		}
+	};
+	var drawTasks = function (data) {
+		if(data) {
+			var tpl = swig.compile(data.html)({tasks: data.tasks});
+			$(".dashboard.task").html(tpl);
+			initializeCreateTask();
 		}
 	};
 
@@ -113,34 +126,6 @@ var Dashboard = function () {
 		});
 	};
 
-	var initializeCreateChecklist = function () {
-		$(".board_select").chosen();
-		var hideEdit = function () {
-			$(".empty.project").show();
-			$(".new.project").hide();
-			$("small.error").remove();
-			$("input[name=project_name]").removeClass("error");
-		};
-
-		$(".create_project").click(function() {
-			$(".empty.project").hide();
-			$(".new.project").show();
-		});
-
-		$(".new.project .cancel").click(function () {
-			hideEdit();
-		});
-
-		$(".new.project .create").click(function () {
-			var div = $(".new.project");
-			var projectName = $("input[name=project_name]", div).val();
-
-			if(validateText(projectName, div, "Please Enter a Name for your Project")) {
-				projects.create({ name: projectName, owner_id: mid });
-				hideEdit();
-			}
-		});
-	};
 
 	var initializeCreateTask = function () {
 		var emptyInputs = function () {
@@ -150,7 +135,7 @@ var Dashboard = function () {
 			$("input[name='timeEstimate']").val("");
 			$("textarea[name='description']").val("");
 		};
-		$("a.add_task").click(function (e) {
+		$("button.add", $(".project.display")).click(function (e) {
 			$('#createTask').foundation('reveal', 'open');
 			$('#createTask input[name="project_id"]').val($(this).data("project-id"));
 			$('input[name="dueDate"]').datepicker({minDate: new Date()});
@@ -177,6 +162,40 @@ var Dashboard = function () {
 		$("button.cancel").click(function (e) {
 			emptyInputs();
 			$('#createTask').foundation('reveal', 'close');
+		});
+
+		$(".task.display .delete").click(function () {
+			var taskId = $(this).data("task-id");
+			tasks.destroy({id: taskId, owner_id: mid});
+		});
+	};
+
+	var initializeCreateChecklist = function () {
+		$(".board_select").chosen();
+		var hideEdit = function () {
+			$(".empty.project").show();
+			$(".new.project").hide();
+			$("small.error").remove();
+			$("input[name=project_name]").removeClass("error");
+		};
+
+		$(".create_project").click(function() {
+			$(".empty.project").hide();
+			$(".new.project").show();
+		});
+
+		$(".new.project .cancel").click(function () {
+			hideEdit();
+		});
+
+		$(".new.project .create").click(function () {
+			var div = $(".new.project");
+			var projectName = $("input[name=project_name]", div).val();
+
+			if(validateText(projectName, div, "Please Enter a Name for your Project")) {
+				projects.create({ name: projectName, owner_id: mid });
+				hideEdit();
+			}
 		});
 	};
 
