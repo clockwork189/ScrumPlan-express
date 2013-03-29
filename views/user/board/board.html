@@ -1,0 +1,22 @@
+<table class="scrum-board">
+	<thead>
+		<tr>
+			<th>Project</th>
+			<th>To Do</th>
+			<th>In Progress</th> 
+			<th>Verify</th>
+			<th>Done</th> 
+		</tr>
+	</thead>
+	<tbody>
+		{% for project in projects %}
+			<tr>
+				<td>{{ project.name }}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

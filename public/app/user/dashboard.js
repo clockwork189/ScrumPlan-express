@@ -27,12 +27,12 @@ var Dashboard = function () {
 			}
 			drawProjects(data);
 		});
-		tasks.reload(function (err, data) {
-			if(err) {
-				console.log(err);
-			}
-			drawTasks(data);
-		});
+		// tasks.reload(function (err, data) {
+		// 	if(err) {
+		// 		console.log(err);
+		// 	}
+		// 	drawTasks(data);
+		// });
 	};
 
 	var drawOrganizations = function (data) {

@@ -81,7 +81,7 @@ app.get('/login', routes.login);
 app.get('/register', routes.register);
 app.get('/app/dashboard', user.dashboard);
 app.get('/app/manage/users', user.manage_users);
-app.get('/app/manage/projects', user.manage_projects_tasks);
+app.get('/app/projects/:projectid', user.manage_projects);
 app.get('/app/board', user.board);
 app.get('/app/stats', user.stats);
 app.get('/app/logout', user.logout);

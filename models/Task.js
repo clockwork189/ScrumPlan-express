@@ -34,7 +34,7 @@ exports.findById = function(id, callback) {
 exports.findByProjectId = function(project_id, callback) {
     console.log('Retrieving all tasks in project name: ' + project_id);
     SPMongo.db.collection('tasks', function(err, collection) {
-        collection.findOne({'project_id': project_id}, function(err, tasks) {
+        collection.find({'project_id': project_id}).toArray(function(err, tasks) {
             if(err) {
                 callback(err);
             } else {

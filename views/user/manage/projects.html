@@ -1,0 +1,21 @@
+{% extends 'user/layout/layout.html' %}
+{% include 'user/layout/header.html' %}
+{% block content %}
+	<!-- Call to Action Panel -->
+	<div id="content" data-app="manage">
+		<div class="row">
+			<h4>{{ project.name}}</h4>
+		</div>
+		<div class="row">
+			<div class="tasks-container">
+				{% for task in tasks %}
+					<div class="panel secondary task">
+						({{ task.time_estimate }}) {{ task.name }}<a class="close">xsdfsdfsd</a>
+						<p>{{ task.description }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% include 'user/layout/footer.html' %}
+{% endblock %}

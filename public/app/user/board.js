@@ -20,12 +20,12 @@ var Board = function() {
 		"4": "done"
 	};
 	self.init = function () {
-		initForm();
-		drawScrumBoard(table_div);
-		initiateDraggability($(table_div));
-		handleCreateTask();
-		handleCreateProject();
-		reload();
+		// initForm();
+		// drawScrumBoard(table_div);
+		// initiateDraggability($(table_div));
+		// handleCreateTask();
+		// handleCreateProject();
+		// reload();
 	};
 
 	var initiateDraggability = function (container) {

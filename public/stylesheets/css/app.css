@@ -6369,46 +6369,45 @@ div.task-box {
   font-weight: bold;
   font-size: ms(0);
   color: #fff;
-  background-color: red;
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 12px;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
-/* line 134, ../sass/app.scss */
+/* line 133, ../sass/app.scss */
 .new.organization {
   display: none;
 }
-/* line 137, ../sass/app.scss */
+/* line 136, ../sass/app.scss */
 .new.board {
   display: none;
 }
-/* line 140, ../sass/app.scss */
+/* line 139, ../sass/app.scss */
 .new.project {
   display: none;
 }
 
-/* line 145, ../sass/app.scss */
+/* line 144, ../sass/app.scss */
 .personal {
   text-align: center;
 }
 
-/* line 149, ../sass/app.scss */
+/* line 148, ../sass/app.scss */
 .row.items {
   border: 1px solid #E0E0E0;
   padding: 5px 0;
   margin-bottom: 5px;
 }
-/* line 154, ../sass/app.scss */
+/* line 153, ../sass/app.scss */
 .row.items .options {
   text-align: right;
 }
-/* line 156, ../sass/app.scss */
+/* line 155, ../sass/app.scss */
 .row.items .options a .gen-enclosed {
   font-size: 20px;
 }
-/* line 159, ../sass/app.scss */
+/* line 158, ../sass/app.scss */
 .row.items .options a .gen-enclosed:hover {
   color: #fff;
   cursor: pointer;

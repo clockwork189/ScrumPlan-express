@@ -2,25 +2,14 @@
 {% include 'user/layout/header.html' %}
 {% block content %}
 <!-- Call to Action Panel -->
-<div id="content" data-app="board">
-	<div class="board actions">
+<div class="board">
+	<div class="actions">
 		<button class="button secondary" id="new_project">Add New Project</button>
 		<button class="button secondary" id="new_task">Add New Task</button>
 	</div>
-	<table class="scrum-board">
-		<thead>
-			<tr>
-				<th>Project</th>
-				<th>To Do</th>
-				<th>In Progress</th> 
-				<th>Verify</th>
-				<th>Done</th> 
-			</tr>
-		</thead>
-		<tbody>
-			
-		</tbody>
-	</table>
+	<div class="display">
+		{% include 'user/board/board.html' %}
+	</div>
 </div>
 {% include 'user/board/modals.html' %}
 <script>

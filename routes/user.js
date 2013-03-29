@@ -83,51 +83,51 @@ exports.manage_users = function(req, res){
 	res.render('user/manage/users.html', { title: 'ScrumPlan: Manage Users'});
 };
 
-exports.manage_projects_tasks = function(req, res){
-	var organization_name = req.session.organization_name;
-	Project.findAllInOrganization(organization_name, function(err, projects) {
-		User.findAllInOrganization(organization_name, function(err, users) {
-			Task.findAllInOrganization(organization_name, function(err, tasks) {
-				res.render('user/manage/projects_tasks.html', { title: 'ScrumPlan: Manage Tasks', projects: projects, users: users, tasks: tasks });
-			});
+exports.manage_projects = function(req, res){
+	var project_id = req.params.projectid;
+
+	Project.findById(project_id, function(err, project) {
+		Task.findByProjectId(project_id, function(err, tasks) {
+			res.render('user/manage/projects.html', { title: 'ScrumPlan: Manage Tasks', project: project, tasks: tasks });
 		});
 	});
 };
 
 exports.board = function(req, res){
-	var organization_name = req.session.organization_name;
-	Project.findAllInOrganization(organization_name, function(err, projects) {
+	var user = req.session.user;
+	Project.findByOwnersId(user._id, function(err, projects) {
 		//User.findAllInOrganization(organization_name, function(err, users) {
-			Task.findAllInOrganization(organization_name, function(err, tasks) {
+			Task.findByOwnersId(user._id, function(err, tasks) {
 
 				var boardObject = {};
-				for(var project in projects) {
-					var project_name = project.project_name;
-					boardObject[project_name] = {};
-					boardObject[project_name].tasks = [];
+				for(var i = 0; i < projects.length; i++) {
+					var project = projects[i];
+					var project_id = project._id;
+					boardObject[project_id] = {};
+					boardObject[project_id].name = project.name;
+					boardObject[project_id].tasks = [];
 				}
-				for(var task in tasks) {
-					var proj_name = task.project_name;
+				for(var n = 0; n < tasks.length; n++) {
+					var task = tasks[n];
+					console.log("I am a task: ", task);
+					var proj_id = task.project_id;
 					var taskObj = {};
 					taskObj.id = tasks._id;
-					taskObj.project_name = task.project_name;
-					taskObj.name = task.task_name;
+					taskObj.name = task.name;
 					taskObj.status = task.status;
-					taskObj.delegates = task.delegates;
-					taskObj.notes = task.notes;
+					//taskObj.delegates = task.delegates;
+					taskObj.description = task.description;
 					taskObj.time_estimate = task.time_estimate;
-					taskObj.organization_name = task.organization_name;
-					taskObj.priority = task.priority;
+					//taskObj.organization_name = task.organization_name;
+					taskObj.due_date = task.due_date;
 
-					boardObject[proj_name].tasks.push(taskObj);
+					boardObject[proj_id].tasks.push(taskObj);
 				}
-
+				console.log(boardObject);
 				res.render('user/board/index.html', {
 					title: 'ScrumPlan: Manage Tasks',
 					projects: projects,
-					//users: users, 
 					tasks: tasks,
-					organization_name: organization_name,
 					boardObject: boardObject
 				});
 		//	});

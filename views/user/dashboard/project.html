@@ -5,7 +5,7 @@
 			{% for project in projects %}
 			<div class="row">
 				<div class="large-8 columns">
-					<a href="#" class="active projects">{{ project.name }}</a>
+					<a href="/app/projects/{{ project._id }}" class="active projects">{{ project.name }}</a>
 				</div>
 				<div class="large-4 columns">
 					<button class="edit button tiny" data-project-id="{{ project._id }}"><i class="gen-enclosed foundicon-tools"></i></button>
