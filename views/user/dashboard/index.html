@@ -1,5 +1,10 @@
 {% extends 'user/layout/layout.html' %}
 {% include 'user/layout/header.html' %}
+{% block head %}
+<link rel="stylesheet" href="../stylesheets/css/fullcalendar.css" />
+<script src="../javascripts/fullcalendar.min.js"></script>
+<script src="../javascripts/gcal.js"></script>
+{% endblock %}
 {% block content %}
 <!-- Call to Action Panel -->
 <div class="dashboard row">
@@ -17,6 +22,7 @@
 			<div class="dashboard task"></div>
 			</div>
 			<div class="large-3 columns dashboard">
+				<div class="calendar"></div>
 				<div class="panel reminders">
 					You have no reminders for this week
 				</div>

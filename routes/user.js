@@ -98,37 +98,10 @@ exports.board = function(req, res){
 	Project.findByOwnersId(user._id, function(err, projects) {
 		//User.findAllInOrganization(organization_name, function(err, users) {
 			Task.findByOwnersId(user._id, function(err, tasks) {
-
-				var boardObject = {};
-				for(var i = 0; i < projects.length; i++) {
-					var project = projects[i];
-					var project_id = project._id;
-					boardObject[project_id] = {};
-					boardObject[project_id].name = project.name;
-					boardObject[project_id].tasks = [];
-				}
-				for(var n = 0; n < tasks.length; n++) {
-					var task = tasks[n];
-					console.log("I am a task: ", task);
-					var proj_id = task.project_id;
-					var taskObj = {};
-					taskObj.id = tasks._id;
-					taskObj.name = task.name;
-					taskObj.status = task.status;
-					//taskObj.delegates = task.delegates;
-					taskObj.description = task.description;
-					taskObj.time_estimate = task.time_estimate;
-					//taskObj.organization_name = task.organization_name;
-					taskObj.due_date = task.due_date;
-
-					boardObject[proj_id].tasks.push(taskObj);
-				}
-				console.log(boardObject);
 				res.render('user/board/index.html', {
 					title: 'ScrumPlan: Manage Tasks',
 					projects: projects,
-					tasks: tasks,
-					boardObject: boardObject
+					tasks: tasks
 				});
 		//	});
 		});

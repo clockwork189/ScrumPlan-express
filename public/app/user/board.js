@@ -20,11 +20,10 @@ var Board = function() {
 		"4": "done"
 	};
 	self.init = function () {
-		// initForm();
-		// drawScrumBoard(table_div);
-		// initiateDraggability($(table_div));
-		// handleCreateTask();
-		// handleCreateProject();
+		initForm();
+		initiateDraggability($(table_div));
+		handleCreateTask();
+		handleCreateProject();
 		// reload();
 	};
 
@@ -87,83 +86,6 @@ var Board = function() {
 		});
 	};
 
-	var drawScrumBoard = function (table_div) {
-		$(table_div).children().remove();
-		for(var i in boardObject) {
-			var tr = $("<tr />").addClass('project').data('project', i);
-			$("<td />").text(i).addClass('project-title').appendTo(tr);
-
-			getTodoTasks(boardObject[i], i).appendTo(tr);
-			getInProgressTasks(boardObject[i], i).appendTo(tr);
-			getVerifyTasks(boardObject[i], i).appendTo(tr);
-			getDoneTasks(boardObject[i], i).appendTo(tr);
-			tr.appendTo(table_div);
-		}
-	};
-
-	var getTodoTasks = function (project, project_name) {
-		var td = $("<td />");
-		if(project.tasks.length > 0) {
-			for(var i = 0; i < project.tasks.length; i++) {
-				var task = project.tasks[i];
-				if(task.status === "1") {
-					var div = createTaskDiv(task, task.priority, project_name, task_status[task.status]);
-					div.appendTo(td);
-				}
-			}
-		}
-		td.data("status", "1");
-		return td;
-	};
-
-	var getInProgressTasks = function (project, project_name) {
-		var td = $("<td />");
-		if(project.tasks.length > 0) {
-			for(var i = 0; i < project.tasks.length; i++) {
-				var task = project.tasks[i];
-				if(task.status === "2") {
-					var div = createTaskDiv(task, task.priority, project_name, task_status[task.status]);
-					div.appendTo(td);
-					td.data("status", task.status);
-				}
-			}
-		}
-		td.data("status", "2");
-		return td;
-	};
-
-	var getVerifyTasks = function (project, project_name) {
-		var td = $("<td />");
-		if(project.tasks.length > 0) {
-			for(var i = 0; i < project.tasks.length; i++) {
-				var task = project.tasks[i];
-				if(task.status === "3") {
-					var div = createTaskDiv(task, task.priority, project_name, task_status[task.status]);
-					div.appendTo(td);
-					td.data("status", task.status);
-				}
-			}
-		}
-		td.data("status", "3");
-		return td;
-	};
-
-	var getDoneTasks = function (project, project_name) {
-		var td = $("<td />");
-		if(project.tasks.length > 0) {
-			for(var i = 0; i < project.tasks.length; i++) {
-				var task = project.tasks[i];
-				if(task.status === "4") {
-					var div = createTaskDiv(task, task.priority, project_name, task_status[task.status]);
-					div.appendTo(td);
-					td.data("status", task.status);
-				}
-			}
-		}
-		td.data("status", "4");
-		return td;
-	};
-
 	var createTaskDiv = function (task, priority, project_name, task_status) {
 		var div = $("<div />").addClass('task task-box ')
 							.text(task.name)
@@ -201,37 +123,6 @@ var Board = function() {
 			i++;
 		}
 		tr.appendTo(table_div);
-	};
-
-	var reload = function () {
-		socket.on("reload", function (board) {
-			var boardObj = {};
-			var projects = board.projects;
-			var tasks = board.tasks;
-
-			for(var i in projects) {
-				var project_name = projects[i].project_name;
-				boardObj[project_name] = {};
-				boardObj[project_name].tasks = [];
-			}
-			for(var n in tasks) {
-				var proj_name = tasks[n].project_name;
-				var taskObj = {};
-				taskObj.id = tasks[n]._id;
-				taskObj.project_name = proj_name;
-				taskObj.name = tasks[n].task_name;
-				taskObj.status = tasks[n].status;
-				taskObj.delegates = tasks[n].delegates;
-				taskObj.notes = tasks[n].notes;
-				taskObj.time_estimate = tasks[n].time_estimate;
-				taskObj.organization_name = tasks[n].organization_name;
-				taskObj.priority = tasks[n].priority;
-
-				boardObj[proj_name].tasks.push(taskObj);
-			}
-			boardObject = boardObj;
-			console.log(boardObj);
-		});
 	};
 
 	return self;

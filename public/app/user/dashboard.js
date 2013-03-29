@@ -10,6 +10,13 @@ var Dashboard = function () {
 		projects.init(mid);
 		tasks.init(mid);
 		reload();
+		$(".calendar").fullCalendar({
+			header: {
+				left:   'prev',
+				center: 'title',
+				right:  'next'
+			}
+		});
 		initializeCreateChecklist();
 	};
 
@@ -67,6 +74,7 @@ var Dashboard = function () {
 		};
 
 		$(".create_organization").click(function() {
+			$(".empty.organization").hide();
 			$(".organization.display").hide();
 			$(".new.organization").show();
 		});
@@ -94,6 +102,7 @@ var Dashboard = function () {
 
 	var initializeCreateProject = function () {
 		var hideEdit = function () {
+			$(".display.project").show();
 			$(".empty.project").show();
 			$(".new.project").hide();
 			$("small.error").remove();
@@ -101,6 +110,7 @@ var Dashboard = function () {
 		};
 
 		$(".create_project").click(function() {
+			$(".display.project").hide();
 			$(".empty.project").hide();
 			$(".new.project").show();
 		});

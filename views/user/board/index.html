@@ -12,28 +12,6 @@
 	</div>
 </div>
 {% include 'user/board/modals.html' %}
-<script>
-	var boardObject = {};
-	{% for project in projects %}
-		var project_name = "{{ project._id }}";
-		boardObject[project_name] = {};
-		boardObject[project_name].tasks = [];
-	{% endfor %}
-	{% for task in tasks %}
-		var project_name = "{{ task.project_id}}";
-		var taskObj = {};
-		taskObj.id = "{{ tasks._id }}";
-		taskObj.project_id = "{{ task.project_id }}";
-		taskObj.name = "{{ task.name }}";
-		taskObj.status = "{{ task.status }}";
-		taskObj.time_estimate = "{{ task.time_estimate }}";
-		taskObj.organization_id = "{{ task.organization_id }}";
-		taskObj.priority = "{{ task.priority }}";
-
-		boardObject[project_name].tasks.push(taskObj);
-	{% endfor %}
-	console.log(boardObject);
-</script>
 <script src="/javascripts/jquery.formToJSON.js"></script>
 <script src="/app/user/board.js"></script>
 {% include 'user/layout/footer.html' %}

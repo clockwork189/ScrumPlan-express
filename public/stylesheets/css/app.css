@@ -6364,6 +6364,8 @@ table.scrum-board td > div {
 
 /* line 118, ../sass/app.scss */
 div.task-box {
+  min-width: 100px;
+  background-color: #2ba6cb;
   display: block;
   padding: 6px 7px 7px;
   font-weight: bold;
@@ -6375,40 +6377,45 @@ div.task-box {
   position: relative;
 }
 
-/* line 133, ../sass/app.scss */
+/* line 135, ../sass/app.scss */
 .new.organization {
   display: none;
 }
-/* line 136, ../sass/app.scss */
+/* line 138, ../sass/app.scss */
 .new.board {
   display: none;
 }
-/* line 139, ../sass/app.scss */
+/* line 141, ../sass/app.scss */
 .new.project {
   display: none;
 }
 
-/* line 144, ../sass/app.scss */
+/* line 146, ../sass/app.scss */
 .personal {
   text-align: center;
 }
 
-/* line 148, ../sass/app.scss */
+/* line 150, ../sass/app.scss */
 .row.items {
   border: 1px solid #E0E0E0;
   padding: 5px 0;
   margin-bottom: 5px;
 }
-/* line 153, ../sass/app.scss */
+/* line 155, ../sass/app.scss */
 .row.items .options {
   text-align: right;
 }
-/* line 155, ../sass/app.scss */
+/* line 157, ../sass/app.scss */
 .row.items .options a .gen-enclosed {
   font-size: 20px;
 }
-/* line 158, ../sass/app.scss */
+/* line 160, ../sass/app.scss */
 .row.items .options a .gen-enclosed:hover {
   color: #fff;
   cursor: pointer;
+}
+
+/* line 168, ../sass/app.scss */
+.fc-header-title h2 {
+  font-size: 20px;
 }

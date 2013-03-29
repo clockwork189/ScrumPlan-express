@@ -116,6 +116,8 @@ table.scrum-board {
 }
 
 div.task-box { 
+	min-width:100px;
+	background-color: $primary-color;
 	display: block; 
 	padding: 6px 7px 7px; 
 	font-weight: bold; 
@@ -160,6 +162,11 @@ div.task-box {
 				cursor: pointer;
 			}
 		}
+	}
+}
+.fc-header-title {
+	h2 {
+		font-size: 20px;
 	}
 }
 // .project_select, .user_select, .priority_select, .status_select {
