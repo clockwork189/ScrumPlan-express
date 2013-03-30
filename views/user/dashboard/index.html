@@ -15,13 +15,11 @@
 				<div class="side profile">
 					{% include 'user/dashboard/profile.html' %}
 				</div>
-				<div class="dashboard organization"></div>
 			</div>
-			<div class="large-6 columns dashboard">
-				<div class="dashboard project"></div>
-			<div class="dashboard task"></div>
+			<div class="large-6 columns">
+				<div class="organization"></div>
 			</div>
-			<div class="large-3 columns dashboard">
+			<div class="large-3 columns">
 				<div class="calendar"></div>
 				<div class="panel reminders">
 					You have no reminders for this week
@@ -32,6 +30,7 @@
 	<input type="hidden" name="mid" value="{{ user._id }}" />
 </div>
 {% include 'user/dashboard/modals/task.html' %}
+{% include 'user/dashboard/modals/project.html' %}
 <script src="components/organizations.js"></script>
 <script src="components/projects.js"></script>
 <script src="components/tasks.js"></script>

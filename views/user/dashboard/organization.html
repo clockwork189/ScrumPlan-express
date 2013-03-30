@@ -1,22 +1,38 @@
 <div class="panel">
 	<h5>Organizations</h5>
 	<div class="organization display">
-		{% if organizations.length > 0 %}
 			{% for organization in organizations %}
 			<div class="row items">
 				<div class="large-6 columns">
 					<a href="#" class="active organizations">{{ organization.name }}</a>
 				</div>
 				<div class="large-6 columns options">
-					<button class="edit" data-org-id="{{ organization._id }}"><i class="gen-enclosed foundicon-tools"></i></button>
-					<button class="delete" data-org-id="{{ organization._id }}"><i class="gen-enclosed foundicon-remove"></i></button>
+					<a href="#" class="org  new_project action" data-org-id="{{ organization._id }}"><i class="foundicon-plus"></i></a>
+					<a href="#" class="org edit action" data-org-id="{{ organization._id }}"><i class="foundicon-tools"></i></a>
+					<a href="#" class="org delete action" data-org-id="{{ organization._id }}"><i class="foundicon-remove"></i></a>
 				</div>
+			</div>
+			<div class="projects display">
+				{% if organization.projects.length > 0 %}
+					{% for project in organization.projects %}
+					<div class="row items">
+						<div class="large-8 columns">
+							<a href="/app/projects/{{ project._id }}" class="active projects">{{ project.name }}</a>
+						</div>
+						<div class="large-4 columns options">
+							<a href="#" class="project edit" data-project-id="{{ project._id }}"><i class="foundicon-tools"></i></a>
+							<a href="#" class="project delete" data-project-id="{{ project._id }}"><i class="foundicon-remove delete"></i></a>
+							<a href="#" class="project add" data-project-id="{{ project._id }}"><i class="foundicon-add-doc"></i></a>
+						</div>
+					</div>
+					{% endfor %}
+				{% endif %}
 			</div>
 			{% endfor %}
 			<div class="row">
 				<div class="large-12 column"><a href="#" class="button secondary small right create_organization">Create new Organization</a></div>
 			</div>
-		{% else %}
+			<!--
 			<div class="row">
 				<div class="large-12 column">
 					It seems like you do not have any organizations.<br/> 
@@ -28,7 +44,7 @@
 					<a href="#" class="button secondary small right create_organization">Create new Organization</a>
 				</div>
 			</div>
-		{% endif %}
+			-->
 	</div>
 	<div class="new organization">
 		<div class="row">

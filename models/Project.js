@@ -33,6 +33,19 @@ exports.findAllInOrganization = function(organization_name, callback) {
 	});
 };
 
+exports.findByOrganizationId = function(organization_id, callback) {
+	console.log('Retrieving project by organization id: ' + organization_id);
+	SPMongo.db.collection('projects', function(err, collection) {
+		collection.find({'organization_id':organization_id}).toArray(function(err, projects) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, projects);
+			}
+		});
+	});
+};
+
 exports.findByOwnersId = function(owner_id, callback) {
 	console.log('Retrieving projects: ' + owner_id);
 	SPMongo.db.collection('projects', function(err, collection) {

@@ -1,5 +1,9 @@
 var Organization = require("./../models/Organization.js");
-var User = require("./../models/User.js");
+var Project = require("./../models/Project.js");
+
+exports.getAllUsersOrganizationsAndProjects = function (userId, callback) {
+	getAllOrganizationsAndProjects(userId, callback);
+};
 
 exports.create = function (data, callback) {
 	var newOrganization = {
@@ -14,9 +18,7 @@ exports.create = function (data, callback) {
 			console.log("****************Error", err);
 			callback(err);
 		} else {
-			Organization.findByOwnersId(data.owner_id, function(err, organizations) {
-				callback(null, organizations);
-			});
+			getAllOrganizationsAndProjects(data.owner_id, callback);
 		}
 	});
 };
@@ -27,9 +29,7 @@ exports.remove = function (org, callback) {
 			console.log("****************Error", err);
 			callback(err);
 		} else {
-			Organization.findByOwnersId(org.owner_id, function(err, organizations) {
-				callback(null, organizations);
-			});
+			getAllOrganizationsAndProjects(data.owner_id, callback);
 		}
 	});
 };
@@ -37,5 +37,26 @@ exports.remove = function (org, callback) {
 exports.getAllOrganizations = function (userId, callback) {
 	Organization.findByOwnersId(userId, function(err, organizations) {
 		callback(null, organizations);
+	});
+};
+
+var getAllOrganizationsAndProjects = function (userId, callback) {
+	Organization.findByOwnersId(userId, function(err, organizations) {
+		Project.findByOwnersId(userId, function(err, projects) {
+			var orgObj = {};
+			for(var i = 0; i < organizations.length; i ++) {
+				orgObj[organizations[i]._id] = {};
+				orgObj[organizations[i]._id].name = organizations[i].name;
+				orgObj[organizations[i]._id]._id = organizations[i]._id;
+				orgObj[organizations[i]._id].projects = [];
+			}
+
+			for(var n = 0; n < projects.length; n ++) {
+				if(orgObj.hasOwnProperty(projects[n].organization_id)) {
+					orgObj[projects[n].organization_id].projects.push(projects[n]);
+				}
+			}
+			callback(null, orgObj);
+		});
 	});
 };

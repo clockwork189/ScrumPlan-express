@@ -6023,15 +6023,15 @@ table tfoot tr td {
 /* @end */
 /* font-face */
 @font-face {
-  font-family: "GeneralEnclosedFoundicons";
-  src: url("/fonts/foundation_icons_general_enclosed/general_enclosed_foundicons.eot");
-  src: url("/fonts/foundation_icons_general_enclosed/general_enclosed_foundicons.eot?#iefix") format("embedded-opentype"), url("/fonts/foundation_icons_general_enclosed/general_enclosed_foundicons.woff") format("woff"), url("/fonts/foundation_icons_general_enclosed/general_enclosed_foundicons.ttf") format("truetype"), url("/fonts/foundation_icons_general_enclosed/general_enclosed_foundicons.svg#GeneralEnclosedFoundicons") format("svg");
+  font-family: "GeneralFoundicons";
+  src: url("/fonts/foundation_icons_general/general_foundicons.eot");
+  src: url("/fonts/foundation_icons_general/general_foundicons.eot?#iefix") format("embedded-opentype"), url("/fonts/foundation_icons_general/general_foundicons.woff") format("woff"), url("/fonts/foundation_icons_general/general_foundicons.ttf") format("truetype"), url("/fonts/foundation_icons_general/general_foundicons.svg#GeneralFoundicons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
 /* global foundicon styles */
-/* line 7, ../sass/foundation_icons_general_enclosed/_general_enclosed_foundicons.scss */
+/* line 7, ../sass/foundation_icons_general/general_foundicons.scss */
 [class*="foundicon-"] {
   display: inline;
   width: auto;
@@ -6043,266 +6043,300 @@ table tfoot tr td {
   background-repeat: repeat;
 }
 
-/* line 17, ../sass/foundation_icons_general_enclosed/_general_enclosed_foundicons.scss */
+/* line 17, ../sass/foundation_icons_general/general_foundicons.scss */
 [class*="foundicon-"]:before {
-  font-family: "GeneralEnclosedFoundicons";
+  font-family: "GeneralFoundicons";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
 }
 
 /* icons */
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-settings:before {
   content: "\f000";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-heart:before {
   content: "\f001";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-star:before {
   content: "\f002";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-plus:before {
   content: "\f003";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-minus:before {
   content: "\f004";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-checkmark:before {
   content: "\f005";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-remove:before {
   content: "\f006";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-mail:before {
   content: "\f007";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-calendar:before {
   content: "\f008";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-page:before {
   content: "\f009";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-tools:before {
   content: "\f00a";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-globe:before {
   content: "\f00b";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-home:before {
   content: "\f00c";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-quote:before {
   content: "\f00d";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-people:before {
   content: "\f00e";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-monitor:before {
   content: "\f00f";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-laptop:before {
   content: "\f010";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-phone:before {
   content: "\f011";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-cloud:before {
   content: "\f012";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-error:before {
   content: "\f013";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-right-arrow:before {
   content: "\f014";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-left-arrow:before {
   content: "\f015";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-up-arrow:before {
   content: "\f016";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-down-arrow:before {
   content: "\f017";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-trash:before {
   content: "\f018";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-add-doc:before {
   content: "\f019";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-edit:before {
   content: "\f01a";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-lock:before {
   content: "\f01b";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-unlock:before {
   content: "\f01c";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-refresh:before {
   content: "\f01d";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-paper-clip:before {
   content: "\f01e";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-video:before {
   content: "\f01f";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-photo:before {
   content: "\f020";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-graph:before {
   content: "\f021";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-idea:before {
   content: "\f022";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-mic:before {
   content: "\f023";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-cart:before {
   content: "\f024";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-address-book:before {
   content: "\f025";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-compass:before {
   content: "\f026";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-flag:before {
   content: "\f027";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-location:before {
   content: "\f028";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-clock:before {
   content: "\f029";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-folder:before {
   content: "\f02a";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-inbox:before {
   content: "\f02b";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-website:before {
   content: "\f02c";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-smiley:before {
   content: "\f02d";
 }
 
-/* line 6, ../sass/foundation_icons_general_enclosed/_settings.scss */
+/* line 6, ../sass/foundation_icons_general/_settings.scss */
 .foundicon-search:before {
   content: "\f02e";
 }
 
-/* line 53, ../sass/app.scss */
+/* line 3, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel.personal {
+  text-align: center;
+  font-size: 0.8em;
+}
+/* line 9, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .button.secondary {
   display: block;
   margin: 0 auto;
 }
-
-/* line 61, ../sass/app.scss */
-.avatar {
-  height: 40px;
-  width: 40px;
-  border-radius: 20px;
-  float: left;
-  margin-right: 10px;
+/* line 16, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .options a {
+  display: inline-block;
+}
+/* line 22, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .projects.display .items {
+  font-weight: normal;
+  margin-bottom: 0px;
+  padding: 0 0 0 25px;
+}
+/* line 26, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .projects.display .items a {
+  color: #000;
+  font-size: 14px;
+}
+/* line 34, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .items {
+  font-weight: bold;
+  padding: 5px 0;
+  margin-bottom: 5px;
+}
+/* line 39, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .items .options {
+  text-align: right;
+}
+/* line 41, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .items .options a .gen-enclosed {
+  font-size: 20px;
+}
+/* line 44, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .items .options a .gen-enclosed:hover {
+  color: #fff;
+  cursor: pointer;
+}
+/* line 53, ../sass/dashboard/_dashboard.scss */
+.dashboard .fc-header-title h2 {
+  font-size: 20px;
 }
 
-/* line 69, ../sass/app.scss */
+/* line 52, ../sass/app.scss */
 #loading {
   display: block;
   z-index: 9999;
@@ -6313,48 +6347,48 @@ table tfoot tr td {
   font-size: 20px;
 }
 
-/* line 79, ../sass/app.scss */
+/* line 62, ../sass/app.scss */
 .top-bar {
   margin: 0px;
 }
 
-/* line 83, ../sass/app.scss */
+/* line 66, ../sass/app.scss */
 div.actions {
   height: 75px;
 }
 
-/* line 87, ../sass/app.scss */
+/* line 70, ../sass/app.scss */
 table.scrum-board {
   width: 100%;
   margin-top: -30px;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 91, ../sass/app.scss */
+/* line 74, ../sass/app.scss */
 table.scrum-board .project-title {
   font-weight: bold;
   width: 150px;
 }
-/* line 95, ../sass/app.scss */
+/* line 78, ../sass/app.scss */
 table.scrum-board th {
   text-align: center;
 }
-/* line 98, ../sass/app.scss */
+/* line 81, ../sass/app.scss */
 table.scrum-board th.project {
   width: 150px;
 }
-/* line 103, ../sass/app.scss */
+/* line 86, ../sass/app.scss */
 table.scrum-board td {
   padding: 20px;
   -webkit-transition: "background-color" 1s ease-out;
   -moz-transition: "background-color" 1s ease-out;
   transition: "background-color" 1s ease-out;
 }
-/* line 106, ../sass/app.scss */
+/* line 89, ../sass/app.scss */
 table.scrum-board td.drag-over {
   background: #EFEFEF;
 }
-/* line 109, ../sass/app.scss */
+/* line 92, ../sass/app.scss */
 table.scrum-board td > div {
   max-width: 200px;
   min-height: 100px;
@@ -6362,7 +6396,7 @@ table.scrum-board td > div {
   margin-right: 10px;
 }
 
-/* line 118, ../sass/app.scss */
+/* line 101, ../sass/app.scss */
 div.task-box {
   min-width: 100px;
   background-color: #2ba6cb;
@@ -6377,45 +6411,15 @@ div.task-box {
   position: relative;
 }
 
-/* line 135, ../sass/app.scss */
+/* line 118, ../sass/app.scss */
 .new.organization {
   display: none;
 }
-/* line 138, ../sass/app.scss */
+/* line 121, ../sass/app.scss */
 .new.board {
   display: none;
 }
-/* line 141, ../sass/app.scss */
+/* line 124, ../sass/app.scss */
 .new.project {
   display: none;
-}
-
-/* line 146, ../sass/app.scss */
-.personal {
-  text-align: center;
-}
-
-/* line 150, ../sass/app.scss */
-.row.items {
-  border: 1px solid #E0E0E0;
-  padding: 5px 0;
-  margin-bottom: 5px;
-}
-/* line 155, ../sass/app.scss */
-.row.items .options {
-  text-align: right;
-}
-/* line 157, ../sass/app.scss */
-.row.items .options a .gen-enclosed {
-  font-size: 20px;
-}
-/* line 160, ../sass/app.scss */
-.row.items .options a .gen-enclosed:hover {
-  color: #fff;
-  cursor: pointer;
-}
-
-/* line 168, ../sass/app.scss */
-.fc-header-title h2 {
-  font-size: 20px;
 }

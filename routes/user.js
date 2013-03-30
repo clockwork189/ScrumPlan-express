@@ -67,11 +67,27 @@ exports.dashboard = function(req, res){
 			Task.findByOwnersId(current_user._id, function(err, tasks) {
 				var email = current_user.email.toLowerCase().replace(/ /g,'');
 				current_user.md5Email = md5(email);
+
+				// var dashboardObj = {};
+				// dashboardObj.organizations = {};
+				// for(var i = 0; i < organizations.length; i++) {
+				// 	dashboardObj.organizations[organizations._id] = {};
+				// 	dashboardObj.organizations[organizations._id].id = organizations._id;
+				// 	dashboardObj.organizations[organizations._id].name = organizations.name;
+				// 	dashboardObj.organizations[organizations._id].projects = [];
+				// }
+
+				// for(var n = 0; n < projects.length; n++) {
+				// 	if(dashboardObj.organizations.hasOwnProperty(projects[n].organization_id)) {
+				// 		dashboardObj.organizations[projects[n].organization_id].projects.push(projects[n]);
+				// 	}
+				// }
+
 				res.render('user/dashboard/index.html', {
 					title: 'ScrumPlan: User Dashboard',
 					user: current_user,
 					projects: projects,
-					//organizations: organizations,
+					organizations: organizations,
 					tasks: tasks
 				});
 			});

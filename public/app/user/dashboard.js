@@ -17,7 +17,6 @@ var Dashboard = function () {
 				right:  'next'
 			}
 		});
-		initializeCreateChecklist();
 	};
 
 
@@ -28,40 +27,15 @@ var Dashboard = function () {
 			}
 			drawOrganizations(data);
 		});
-		projects.reload(function (err, data) {
-			if(err) {
-				console.log(err);
-			}
-			drawProjects(data);
-		});
-		// tasks.reload(function (err, data) {
-		// 	if(err) {
-		// 		console.log(err);
-		// 	}
-		// 	drawTasks(data);
-		// });
 	};
 
 	var drawOrganizations = function (data) {
 		if(data) {
 			var tpl = swig.compile(data.html)({organizations: data.organizations});
-			$(".dashboard.organization").html(tpl);
+			$(".dashboard .organization").html(tpl);
 			initializeOrganizationActions();
-		}
-	};
-
-	var drawProjects = function (data) {
-		if(data) {
-			var tpl = swig.compile(data.html)({projects: data.projects});
-			$(".dashboard.project").html(tpl);
-			initializeCreateProject();
-		}
-	};
-	var drawTasks = function (data) {
-		if(data) {
-			var tpl = swig.compile(data.html)({tasks: data.tasks});
-			$(".dashboard.task").html(tpl);
-			initializeCreateTask();
+			initializeProjectMethods();
+			initializeTaskMethods();
 		}
 	};
 
@@ -94,50 +68,41 @@ var Dashboard = function () {
 			}
 		});
 
-		$(".organization.display .delete").click(function () {
+		$(".org.delete").click(function () {
 			var orgId = $(this).data("org-id");
 			orgs.destroy({id: orgId, owner_id: mid});
 		});
 	};
 
-	var initializeCreateProject = function () {
-		var hideEdit = function () {
-			$(".display.project").show();
-			$(".empty.project").show();
-			$(".new.project").hide();
-			$("small.error").remove();
-			$("input[name=project_name]").removeClass("error");
+	var initializeProjectMethods = function () {
+		var clearInput = function () {
+			$("input[name=project_name]").val("");
+			$("#createProject").foundation("reveal", "close");
 		};
-
-		$(".create_project").click(function() {
-			$(".display.project").hide();
-			$(".empty.project").hide();
-			$(".new.project").show();
+		$("a.new_project").click(function () {
+			$("#createProject").foundation("reveal", "open");
+			$("#createProject input[name=organization_id]").val($(this).data("org-id"));
 		});
 
-		$(".new.project .cancel").click(function () {
-			hideEdit();
+		$("#createProject .create").click(function () {
+			var project_name = $("input[name=project_name]").val();
+			var organization_id = $("#createProject input[name=organization_id]").val();
+			projects.create({ name: project_name, owner_id: mid, organization_id: organization_id });
+			clearInput();
 		});
 
-		$(".new.project .create").click(function () {
-			var div = $(".new.project");
-			var projectName = $("input[name=project_name]", div).val();
-			var board = $("select[name=board_name]",div).val();
-
-			if(validateText(projectName, div, "Please Enter a Name for your Project")) {
-				projects.create({ name: projectName, owner_id: mid });
-				hideEdit();
-			}
+		$("#createProject .cancel").click(function () {
+			clearInput();
 		});
 
-		$(".project.display .delete").click(function () {
+		$(".project.delete").click(function () {
 			var projectId = $(this).data("project-id");
 			projects.destroy({id: projectId, owner_id: mid});
 		});
 	};
 
 
-	var initializeCreateTask = function () {
+	var initializeTaskMethods = function () {
 		var emptyInputs = function () {
 			$("input[name='task_name']").val("");
 			$("input[name='project_id']").val("");
@@ -145,7 +110,7 @@ var Dashboard = function () {
 			$("input[name='timeEstimate']").val("");
 			$("textarea[name='description']").val("");
 		};
-		$("button.add", $(".project.display")).click(function (e) {
+		$(".projects.display .add").click(function (e) {
 			$('#createTask').foundation('reveal', 'open');
 			$('#createTask input[name="project_id"]').val($(this).data("project-id"));
 			$('input[name="dueDate"]').datepicker({minDate: new Date()});
@@ -177,35 +142,6 @@ var Dashboard = function () {
 		$(".task.display .delete").click(function () {
 			var taskId = $(this).data("task-id");
 			tasks.destroy({id: taskId, owner_id: mid});
-		});
-	};
-
-	var initializeCreateChecklist = function () {
-		$(".board_select").chosen();
-		var hideEdit = function () {
-			$(".empty.project").show();
-			$(".new.project").hide();
-			$("small.error").remove();
-			$("input[name=project_name]").removeClass("error");
-		};
-
-		$(".create_project").click(function() {
-			$(".empty.project").hide();
-			$(".new.project").show();
-		});
-
-		$(".new.project .cancel").click(function () {
-			hideEdit();
-		});
-
-		$(".new.project .create").click(function () {
-			var div = $(".new.project");
-			var projectName = $("input[name=project_name]", div).val();
-
-			if(validateText(projectName, div, "Please Enter a Name for your Project")) {
-				projects.create({ name: projectName, owner_id: mid });
-				hideEdit();
-			}
 		});
 	};
 

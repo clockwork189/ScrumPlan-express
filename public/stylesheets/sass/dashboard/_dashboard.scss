@@ -1,0 +1,59 @@
+.dashboard {
+	.panel {
+		&.personal {
+			text-align: center;
+			font-size: 0.8em;
+		}
+
+		.button {
+			&.secondary {
+				display: block;
+				margin: 0 auto;
+			}
+		}
+
+		.options {
+			a {
+				display: inline-block;
+			}
+		}
+		.projects {
+			&.display {
+				.items {
+					font-weight: normal;
+					margin-bottom: 0px;
+					padding: 0 0 0 25px;
+					a {
+						color: #000;
+						font-size: 14px;
+					}
+				}
+			}
+		}
+
+		.items {
+			font-weight: bold;
+			padding: 5px 0;
+			margin-bottom: 5px;
+
+			.options {
+				text-align: right;
+				a .gen-enclosed {
+					font-size: 20px;
+				}
+				a .gen-enclosed:hover {
+					color: #fff;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+	.fc-header-title {
+		h2 {
+			font-size: 20px;
+		}
+	}
+}
+
+

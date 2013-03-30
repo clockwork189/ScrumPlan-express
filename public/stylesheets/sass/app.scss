@@ -45,26 +45,9 @@
 // @import "foundation/components/dropdown";
 
 @import "chosen";
-@import "foundation_icons_general_enclosed/_general_enclosed_foundicons";
-
-.dashboard {
-	.panel {
-		.button {
-			&.secondary {
-				display: block;
-				margin: 0 auto;
-			}
-		}
-	}
-}
-
-.avatar {
-	height: 40px;
-	width: 40px;
-	border-radius: 20px;
-	float: left;
-	margin-right: 10px;
-}
+@import "foundation_icons_general/general_foundicons";
+@import "dashboard/dashboard";
+@import "board/board";
 
 #loading {
 	display: block;
@@ -140,33 +123,6 @@ div.task-box {
 	}
 	&.project {
 		display: none;
-	}
-}
-
-.personal {
-	text-align: center;
-}
-.row {
-	&.items {
-		border: 1px solid #E0E0E0;
-		padding: 5px 0;
-		margin-bottom: 5px;
-
-		.options {
-			text-align: right;
-			a .gen-enclosed {
-				font-size: 20px;
-			}
-			a .gen-enclosed:hover {
-				color: #fff;
-				cursor: pointer;
-			}
-		}
-	}
-}
-.fc-header-title {
-	h2 {
-		font-size: 20px;
 	}
 }
 // .project_select, .user_select, .priority_select, .status_select {
