@@ -1,5 +1,6 @@
 var Organization = require("./../models/Organization.js");
 var Project = require("./../models/Project.js");
+var Task = require("./../models/Task.js");
 
 exports.getAllUsersOrganizationsAndProjects = function (userId, callback) {
 	getAllOrganizationsAndProjects(userId, callback);
@@ -24,13 +25,17 @@ exports.create = function (data, callback) {
 };
 
 exports.remove = function (org, callback) {
-	Organization.deleteOrganization(org.id, function(err, organization) {
-		if(err) {
-			console.log("****************Error", err);
-			callback(err);
-		} else {
-			getAllOrganizationsAndProjects(data.owner_id, callback);
-		}
+	Organization.deleteOrganization(org.id, function (err, organization) {
+		Project.deleteProjectsInOrganization(org.id, function (err, projects) {
+			Task.deleteTasksInOrganization(org.id, function (err, tasks) {
+				if(err) {
+					console.log("****************Error", err);
+					callback(err);
+				} else {
+					getAllOrganizationsAndProjects(org.owner_id, callback);
+				}
+			});
+		});
 	});
 };
 

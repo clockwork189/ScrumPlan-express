@@ -38,7 +38,7 @@ exports.create = function(req, res){
 		};
 		User.addUser(newUser, function(err, user) {
 			req.session.regenerate(function() {
-				req.session.user = user;
+				req.session.user = user[0];
 				res.redirect('app/dashboard');
 			});
 		});

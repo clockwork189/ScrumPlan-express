@@ -110,3 +110,15 @@ exports.deleteProject = function(id, callback) {
 		});
 	});
 };
+exports.deleteProjectsInOrganization = function(orgid, callback) {
+	console.log('Deleting project in organization: ' + orgid);
+	SPMongo.db.collection('projects', function(err, collection) {
+		collection.remove({'organization_id': orgid}, {safe:true}, function(err, result) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, result);
+			}
+		});
+	});
+};

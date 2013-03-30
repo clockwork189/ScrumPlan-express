@@ -48,7 +48,21 @@
 			}
 		}
 	}
-
+	.new {
+		&.organization {
+			display: none;
+		}
+		&.board {
+			display: none;
+		}
+		&.project {
+			display: none;
+		}
+	}
+	.fc-header {
+		border: 0px;
+		margin-bottom: 0.25em;
+	}
 	.fc-header-title {
 		h2 {
 			font-size: 20px;

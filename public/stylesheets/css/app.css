@@ -6331,7 +6331,24 @@ table tfoot tr td {
   color: #fff;
   cursor: pointer;
 }
-/* line 53, ../sass/dashboard/_dashboard.scss */
+/* line 52, ../sass/dashboard/_dashboard.scss */
+.dashboard .new.organization {
+  display: none;
+}
+/* line 55, ../sass/dashboard/_dashboard.scss */
+.dashboard .new.board {
+  display: none;
+}
+/* line 58, ../sass/dashboard/_dashboard.scss */
+.dashboard .new.project {
+  display: none;
+}
+/* line 62, ../sass/dashboard/_dashboard.scss */
+.dashboard .fc-header {
+  border: 0px;
+  margin-bottom: 0.25em;
+}
+/* line 67, ../sass/dashboard/_dashboard.scss */
 .dashboard .fc-header-title h2 {
   font-size: 20px;
 }
@@ -6409,17 +6426,4 @@ div.task-box {
   margin-bottom: 12px;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   position: relative;
-}
-
-/* line 118, ../sass/app.scss */
-.new.organization {
-  display: none;
-}
-/* line 121, ../sass/app.scss */
-.new.board {
-  display: none;
-}
-/* line 124, ../sass/app.scss */
-.new.project {
-  display: none;
 }
