@@ -9,13 +9,14 @@ exports.create = function(data, callback){
 		time_estimate: data.time_estimate,
 		status: data.status,
 		owner_id: data.owner_id,
+		organization_id: data.organization_id,
 		dateCreated: new Date()
 	};
 	Task.addTask(task, function(err, task){
 		if(err) {
 			callback(err);
 		} else {
-			Task.findByOwnersId(data.owner_id, function(err, tasks) {
+			Task.findByOwnersId(data.owner_id, function (err, tasks) {
 				callback(null, tasks);
 			});
 		}
@@ -23,12 +24,12 @@ exports.create = function(data, callback){
 };
 
 exports.remove = function (task, callback) {
-	Task.deleteTask(task.id, function(err, t) {
+	Task.deleteTask(task.id, function (err, t) {
 		if(err) {
 			console.log("****************Error", err);
 			callback(err);
 		} else {
-			Task.findByOwnersId(task.owner_id, function(err, tasks) {
+			Task.findByOwnersId(task.owner_id, function (err, tasks) {
 				callback(null, tasks);
 			});
 		}
@@ -36,7 +37,7 @@ exports.remove = function (task, callback) {
 };
 
 exports.getAllTasks = function (userId, callback) {
-	Task.findByOwnersId(userId, function(err, tasks) {
+	Task.findByOwnersId(userId, function (err, tasks) {
 		callback(null, tasks);
 	});
 };

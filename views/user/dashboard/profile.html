@@ -4,11 +4,27 @@
 	</div>
 	<div class="row">
 		<br/>
-		<p class="info">
-			{{ user.first_name}} {{ user.last_name}}<br/>
-			{{ user.email}}<br/>
-			Organizations: {% if organizations.length > 0 %} {{ organizations.length }} {% else %} 0 {% endif %}<br/>
-			Projects: {% if projects.length > 0 %} {{ projects.length }} {% else %} 0 {% endif %}<br/>
-		</p>
+			<div class="name">
+				{{ user.first_name}} {{ user.last_name}}
+			</div>
+			<div class="email">
+				{{ user.email}}
+			</div>
+			Organizations: 
+			<div id="org_count">
+				{% if organizations.length > 0 %} 
+					{{ organizations.length }} 
+				{% else %} 
+					0 
+				{% endif %}
+			</div><br/>
+			Projects: 
+			<div id="projects_count">
+				{% if projects.length > 0 %} 
+					{{ projects.length }} 
+				{% else %} 
+					0 
+				{% endif %}
+			</div><br/>
 	</div>
 </div>

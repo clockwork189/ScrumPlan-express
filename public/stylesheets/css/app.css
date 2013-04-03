@@ -6292,63 +6292,78 @@ table tfoot tr td {
   text-align: center;
   font-size: 0.8em;
 }
-/* line 9, ../sass/dashboard/_dashboard.scss */
+/* line 7, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel.personal #org_count, .dashboard .panel.personal #projects_count, .dashboard .panel.personal .name, .dashboard .panel.personal .email {
+  display: inline-block;
+  line-height: 20px;
+}
+/* line 12, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel.personal #org_count, .dashboard .panel.personal #projects_count {
+  font-weight: bold;
+}
+/* line 18, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .button.secondary {
   display: block;
   margin: 0 auto;
 }
-/* line 16, ../sass/dashboard/_dashboard.scss */
+/* line 25, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .options a {
   display: inline-block;
 }
-/* line 22, ../sass/dashboard/_dashboard.scss */
+/* line 30, ../sass/dashboard/_dashboard.scss */
+.dashboard .panel .projects.display {
+  border-bottom: 1px dotted #D0D0D0;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+/* line 34, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .projects.display .items {
   font-weight: normal;
   margin-bottom: 0px;
-  padding: 0 0 0 25px;
+  padding: 0 0 10px 25px;
 }
-/* line 26, ../sass/dashboard/_dashboard.scss */
+/* line 38, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .projects.display .items a {
   color: #000;
   font-size: 14px;
 }
-/* line 34, ../sass/dashboard/_dashboard.scss */
+/* line 46, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .items {
   font-weight: bold;
   padding: 5px 0;
   margin-bottom: 5px;
 }
-/* line 39, ../sass/dashboard/_dashboard.scss */
+/* line 51, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .items .options {
   text-align: right;
 }
-/* line 41, ../sass/dashboard/_dashboard.scss */
+/* line 53, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .items .options a .gen-enclosed {
   font-size: 20px;
 }
-/* line 44, ../sass/dashboard/_dashboard.scss */
+/* line 56, ../sass/dashboard/_dashboard.scss */
 .dashboard .panel .items .options a .gen-enclosed:hover {
   color: #fff;
   cursor: pointer;
 }
-/* line 52, ../sass/dashboard/_dashboard.scss */
+/* line 64, ../sass/dashboard/_dashboard.scss */
 .dashboard .new.organization {
   display: none;
 }
-/* line 55, ../sass/dashboard/_dashboard.scss */
+/* line 67, ../sass/dashboard/_dashboard.scss */
 .dashboard .new.board {
   display: none;
 }
-/* line 58, ../sass/dashboard/_dashboard.scss */
+/* line 70, ../sass/dashboard/_dashboard.scss */
 .dashboard .new.project {
   display: none;
 }
-/* line 62, ../sass/dashboard/_dashboard.scss */
+/* line 74, ../sass/dashboard/_dashboard.scss */
 .dashboard .fc-header {
   border: 0px;
   margin-bottom: 0.25em;
 }
-/* line 67, ../sass/dashboard/_dashboard.scss */
+/* line 79, ../sass/dashboard/_dashboard.scss */
 .dashboard .fc-header-title h2 {
   font-size: 20px;
 }

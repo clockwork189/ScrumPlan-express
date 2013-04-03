@@ -21,7 +21,7 @@ var express = require('express'),
 
 var app = express();
 var server = http.createServer(app);
-var io = socket.listen(server);
+var io = socket.listen(server, { log: false});
 
 app.configure('development', function() {
   app.set('db-name', "ScrumPlan");
@@ -83,6 +83,7 @@ app.get('/app/dashboard', user.dashboard);
 app.get('/app/manage/users', user.manage_users);
 app.get('/app/projects/:projectid', user.manage_projects);
 app.get('/app/board', user.board);
+app.get('/app/board/:organizationid', user.organization_board);
 app.get('/app/stats', user.stats);
 app.get('/app/logout', user.logout);
 

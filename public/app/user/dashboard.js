@@ -5,6 +5,7 @@ var Dashboard = function () {
 	var tasks = new Tasks();
 	var mid = $("input[name=mid]").val();
 	var maker = new Creator();
+	var dashboardObj = {};
 
 	self.init = function () {
 		orgs.init(mid);
@@ -28,6 +29,7 @@ var Dashboard = function () {
 				console.log(err);
 			}
 			drawOrganizations(data);
+			dashboardObj = data.organizations;
 		});
 	};
 
@@ -38,7 +40,20 @@ var Dashboard = function () {
 			initializeOrganizationActions();
 			initializeProjectMethods();
 			initializeTaskMethods();
+			setOrganizationProjectNumber(data.organizations);
 		}
+	};
+
+	var setOrganizationProjectNumber = function (orgs) {
+		var orgCount = 0;
+		var projectCount = 0;
+		for(var i in orgs) {
+			orgCount++;
+			projectCount += orgs[i].projects.length;
+		}
+
+		$("#org_count").text(orgCount);
+		$("#projects_count").text(projectCount);
 	};
 
 	var initializeOrganizationActions = function () {
@@ -72,7 +87,6 @@ var Dashboard = function () {
 
 		$(".org.delete").click(function () {
 			var orgId = $(this).data("org-id");
-			console.log({id: orgId, owner_id: mid});
 			orgs.destroy({id: orgId, owner_id: mid});
 		});
 	};
@@ -93,9 +107,9 @@ var Dashboard = function () {
 	var initializeTaskMethods = function () {
 		$(".projects.display .add").click(function (e) {
 			$('#createTask').foundation('reveal', 'open');
-			$('#createTask input[name="project_id"]').val($(this).data("project-id"));
 			$('input[name="dueDate"]').datepicker({minDate: new Date()});
 			$("select[name='user_select']").chosen();
+			$("input[name='project_id']").val($(this).data("project-id"));
 		});
 
 		$(".task.display .delete").click(function () {

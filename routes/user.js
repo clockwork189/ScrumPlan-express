@@ -3,7 +3,6 @@ var hash = require('./../library/Password').hash;
 var Project = require("./../models/Project.js");
 var Task = require("./../models/Task.js");
 var Organization = require("./../models/Organization.js");
-var Board = require("./../models/Board.js");
 var md5 = require("MD5");
 
 exports.auth = function(req, res){
@@ -68,21 +67,6 @@ exports.dashboard = function(req, res){
 				var email = current_user.email.toLowerCase().replace(/ /g,'');
 				current_user.md5Email = md5(email);
 
-				// var dashboardObj = {};
-				// dashboardObj.organizations = {};
-				// for(var i = 0; i < organizations.length; i++) {
-				// 	dashboardObj.organizations[organizations._id] = {};
-				// 	dashboardObj.organizations[organizations._id].id = organizations._id;
-				// 	dashboardObj.organizations[organizations._id].name = organizations.name;
-				// 	dashboardObj.organizations[organizations._id].projects = [];
-				// }
-
-				// for(var n = 0; n < projects.length; n++) {
-				// 	if(dashboardObj.organizations.hasOwnProperty(projects[n].organization_id)) {
-				// 		dashboardObj.organizations[projects[n].organization_id].projects.push(projects[n]);
-				// 	}
-				// }
-
 				res.render('user/dashboard/index.html', {
 					title: 'ScrumPlan: User Dashboard',
 					user: current_user,
@@ -121,6 +105,21 @@ exports.board = function(req, res){
 				});
 		//	});
 		});
+	});
+};
+
+exports.organization_board = function(req, res){
+	var organization_id = req.params.organizationid;
+	Project.findByOrganizationId(organization_id, function(err, projects) {
+		//User.findAllInOrganization(organization_name, function(err, users) {
+			//Task.findByOwnersId(user._id, function(err, tasks) {
+				res.render('user/board/index.html', {
+					title: 'ScrumPlan: Manage Tasks',
+					projects: projects,
+					tasks: tasks
+				});
+		//	});
+		//});
 	});
 };
 

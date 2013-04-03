@@ -3,6 +3,15 @@
 		&.personal {
 			text-align: center;
 			font-size: 0.8em;
+
+			#org_count, #projects_count, .name, .email {
+				display: inline-block;
+				line-height: 20px;
+			}
+
+			#org_count, #projects_count {
+				font-weight: bold;
+			}
 		}
 
 		.button {
@@ -19,10 +28,13 @@
 		}
 		.projects {
 			&.display {
+				border-bottom: 1px dotted #D0D0D0;
+				margin-bottom: 10px;
+				padding-bottom: 10px;
 				.items {
 					font-weight: normal;
 					margin-bottom: 0px;
-					padding: 0 0 0 25px;
+					padding: 0 0 10px 25px;
 					a {
 						color: #000;
 						font-size: 14px;

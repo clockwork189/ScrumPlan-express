@@ -22,7 +22,6 @@ var Creator = function () {
 				var time_estimate = $("input[name='timeEstimate']").val();
 				var status = $("select[name='user_select']").val();
 				var description = $("textarea[name='description']").val();
-
 				//if(validateText(task_name, div, "Please Enter a Name for your Task")) {
 					tasks.create({name: task_name, description: description, project_id: project_id, due_date: due_date, time_estimate: time_estimate, status: status, owner_id: mid});
 					emptyInputs();
