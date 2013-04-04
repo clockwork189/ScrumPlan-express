@@ -58,11 +58,16 @@ var getAllOrganizationsAndProjects = function (userId, callback) {
 				}
 
 				for(var n = 0; n < projects.length; n ++) {
+					projects[n].tasks = [];
 					if(orgObj.hasOwnProperty(projects[n].organization_id)) {
+						for(var k = 0; k < tasks.length; k++) {
+							if(tasks[k].project_id == projects[n]._id) {
+								projects[n].tasks.push(tasks[k]);
+							}
+						}
 						orgObj[projects[n].organization_id].projects.push(projects[n]);
 					}
 				}
-
 				callback(null, orgObj);
 			});
 		});

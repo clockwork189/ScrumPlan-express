@@ -15,28 +15,28 @@
 						<tr>
 							<td>{{ project.name }}</td>
 							<td>
-								{% for task in organization.tasks %}	
+								{% for task in project.tasks %}	
 									{% if task.project_id == project._id  and task.status == "todo" %}
 										<div class="task task-box" data-project-id="{{ task.project_id }}" data-task_status="{{ task.status }}" data-task-id="{{ task._id}}">({{task.time_estimate}}){{ task.name }}</div>
 									{% endif %}
 								{% endfor%}
 							</td>
 							<td>
-								{% for task in organization.tasks %}	
+								{% for task in project.tasks %}	
 									{% if task.project_id == project._id  and task.status == "inprogress" %}
 										<div class="task task-box" data-project-id="{{ task.project_id }}" data-task_status="{{ task.status }}" data-task-id="{{ task._id}}">({{task.time_estimate}}){{ task.name }}</div>
 									{% endif %}
 								{% endfor%}
 							</td>
 							<td>
-								{% for task in organization.tasks %}	
+								{% for task in project.tasks %}	
 									{% if task.project_id == project._id  and task.status == "verify" %}
 										<div class="task task-box" data-project-id="{{ task.project_id }}" data-task_status="{{ task.status }}" data-task-id="{{ task._id}}">({{task.time_estimate}}){{ task.name }}</div>
 									{% endif %}
 								{% endfor%}
 							</td>
 							<td>
-								{% for task in organization.tasks %}	
+								{% for task in project.tasks %}	
 									{% if task.project_id == project._id  and task.status == "done" %}
 										<div class="task task-box" data-project-id="{{ task.project_id }}" data-task_status="{{ task.status }}" data-task-id="{{ task._id}}">({{task.time_estimate}}){{ task.name }}</div>
 									{% endif %}
