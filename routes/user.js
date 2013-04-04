@@ -95,16 +95,9 @@ exports.manage_projects = function(req, res){
 
 exports.board = function(req, res){
 	var user = req.session.user;
-	Project.findByOwnersId(user._id, function(err, projects) {
-		//User.findAllInOrganization(organization_name, function(err, users) {
-			Task.findByOwnersId(user._id, function(err, tasks) {
-				res.render('user/board/index.html', {
-					title: 'ScrumPlan: Manage Tasks',
-					projects: projects,
-					tasks: tasks
-				});
-		//	});
-		});
+	res.render('user/board/index.html', {
+		user: user,
+		title: 'ScrumPlan: Manage Tasks'
 	});
 };
 

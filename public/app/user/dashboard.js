@@ -8,9 +8,7 @@ var Dashboard = function () {
 	var dashboardObj = {};
 
 	self.init = function () {
-		orgs.init(mid);
-		projects.init(mid);
-		tasks.init(mid);
+		loadTemplates();
 		reload();
 		$(".calendar").fullCalendar({
 			header: {
@@ -22,25 +20,35 @@ var Dashboard = function () {
 		maker.initializeCreateActions();
 	};
 
+	var loadTemplates = function () {
+		socket.emit("req-load-dashboard-templates");
+		socket.on("load-templates", function (templates) {
+			for(var i = 0; i < templates.length; i++) {
+				$("<script />")
+					.prop({type: "text/template", id: templates[i].id})
+					.html(templates[i].html)
+					.appendTo($("body"));
+			}
+		});
+	};
 
 	var reload = function () {
-		orgs.reload(function (err, data) {
-			if(err) {
-				console.log(err);
-			}
+		orgs.init(mid);
+		socket.on("reload", function (data) {
 			drawOrganizations(data);
-			dashboardObj = data.organizations;
+			dashboardObj = data;
 		});
 	};
 
 	var drawOrganizations = function (data) {
 		if(data) {
-			var tpl = swig.compile(data.html)({organizations: data.organizations});
+			var template = $("#organization-template").html();
+			var tpl = swig.compile(template)({organizations: data});
 			$(".dashboard .organization").html(tpl);
 			initializeOrganizationActions();
 			initializeProjectMethods();
 			initializeTaskMethods();
-			setOrganizationProjectNumber(data.organizations);
+			setOrganizationProjectNumber(data);
 		}
 	};
 

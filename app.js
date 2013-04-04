@@ -1,8 +1,6 @@
-
 /**
  * Module dependencies.
  */
-
 var express = require('express'),
 	routes = require('./routes'),
 	user = require('./routes/user'),
@@ -94,102 +92,73 @@ app.post('/create/project', project.create);
 app.post('/create/task', task.create);
 
 io.sockets.on("connection", function (socket) {
-	socket.on("add_task", function (data) {
-		task.createTask(data, function (err, task) {
-			if(err) {
-				console.log("***ERROR: ", err);
-			} else {
-				console.log("Task added Successfully");
-				var ProjectTaskUserObject = user.getProjectsUsersTasks(project.organization_name);
-				socket.broadcast.emit("reload", ProjectTaskUserObject);
-			}
-		});
+	socket.on("req-load-dashboard-templates", function (data) {
+		var templates = [];
+		var template = {
+			html: fs.readFileSync("./views/user/dashboard/organization.html", "utf8"),
+			id: "organization-template"
+		};
+		templates.push(template);
+		socket.emit("load-templates", templates);
 	});
-	socket.on("add_project", function (data) {
-		project.createProject(data, function (err, project) {
-			if(err) {
-				console.log("***ERROR: ", err);
-			} else {
-				console.log("Project added Successfully");
-				var ProjectTaskUserObject = user.getProjectsUsersTasks(project.organization_name);
-				socket.broadcast.emit("reload", ProjectTaskUserObject);
-			}
-		});
+
+	socket.on("req-load-board-templates", function (data) {
+		var templates = [];
+		var template = {
+			html: fs.readFileSync("./views/user/board/board.html", "utf8"),
+			id: "board-template"
+		};
+		templates.push(template);
+		socket.emit("load-templates", templates);
 	});
+
 	socket.on("request-reload-organizations", function (data) {
-		organization.getAllUsersOrganizationsAndProjects(data.user, function(err, organizations) {
+		organization.getAllUsersOrganizationsAndProjects(data.user, function(err, result) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				console.log("***Orgs:", organizations);
-				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
-				var obj = {
-					html: html,
-					organizations: organizations
-				};
-				console.log("Successfully received all organizations ", organizations);
-				socket.emit("reload-organizations", obj);
+				console.log("Successfully received all organizations ", result);
+				socket.emit("reload", result);
 			}
 		});
 	});
 	socket.on("create_organization", function (data) {
-		organization.create(data, function (err, organizations) {
+		organization.create(data, function (err, result) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
-				var obj = {
-					html: html,
-					organizations: organizations
-				};
 				console.log("Organization added Successfully");
-				socket.emit("reload-organizations", obj);
+				socket.emit("reload", result);
 			}
 		});
 	});
 	socket.on("remove_organization", function (data) {
-		organization.remove(data, function (err, organizations) {
+		organization.remove(data, function (err, result) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
-				var obj = {
-					html: html,
-					organizations: organizations
-				};
-				console.log("Organization added Successfully");
-				socket.emit("reload-organizations", obj);
+				console.log("Organization removed Successfully");
+				socket.emit("reload", result);
 			}
 		});
 	});
 	socket.on("create_project", function (data) {
-		console.log("Create Project: ", data);
-		project.create(data, function (err, organizations) {
+		project.create(data, function (err, result) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
-				var obj = {
-					html: html,
-					organizations: organizations
-				};
 				console.log("Project added successfully");
-				socket.emit("reload-organizations", obj);
+				socket.emit("reload", result);
 			}
 		});
 	});
 	socket.on("remove_project", function (data) {
-		project.remove(data, function (err, organizations) {
+		project.remove(data, function (err, result) {
 			if(err) {
 				console.log("***ERROR: ", err);
 			} else {
-				var html = fs.readFileSync("./views/user/dashboard/organization.html", "utf8");
-				var obj = {
-					html: html,
-					organizations: organizations
-				};
 				console.log("Project removed Successfully");
-				socket.emit("reload-organizations", obj);
+				socket.emit("reload", result);
 			}
 		});
 	});

@@ -12,7 +12,6 @@ var Organizations = function () {
 	};
 
 	self.create = function (org) {
-		//console.log(org);
 		socket.emit("create_organization", org);
 	};
 

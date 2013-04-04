@@ -48,20 +48,23 @@ exports.getAllOrganizations = function (userId, callback) {
 var getAllOrganizationsAndProjects = function (userId, callback) {
 	Organization.findByOwnersId(userId, function(err, organizations) {
 		Project.findByOwnersId(userId, function(err, projects) {
-			var orgObj = {};
-			for(var i = 0; i < organizations.length; i ++) {
-				orgObj[organizations[i]._id] = {};
-				orgObj[organizations[i]._id].name = organizations[i].name;
-				orgObj[organizations[i]._id]._id = organizations[i]._id;
-				orgObj[organizations[i]._id].projects = [];
-			}
-
-			for(var n = 0; n < projects.length; n ++) {
-				if(orgObj.hasOwnProperty(projects[n].organization_id)) {
-					orgObj[projects[n].organization_id].projects.push(projects[n]);
+			Task.findByOwnersId(userId, function(err, tasks) {
+				var orgObj = {};
+				for(var i = 0; i < organizations.length; i ++) {
+					orgObj[organizations[i]._id] = {};
+					orgObj[organizations[i]._id].name = organizations[i].name;
+					orgObj[organizations[i]._id]._id = organizations[i]._id;
+					orgObj[organizations[i]._id].projects = [];
 				}
-			}
-			callback(null, orgObj);
+
+				for(var n = 0; n < projects.length; n ++) {
+					if(orgObj.hasOwnProperty(projects[n].organization_id)) {
+						orgObj[projects[n].organization_id].projects.push(projects[n]);
+					}
+				}
+
+				callback(null, orgObj);
+			});
 		});
 	});
 };

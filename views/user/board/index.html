@@ -6,13 +6,17 @@
 	<div class="actions">
 		<button class="button secondary" id="new_project">Add New Project</button>
 		<button class="button secondary" id="new_task">Add New Task</button>
+		<input type="hidden" value="{{ user._id }}" name="mid" />
 	</div>
 	<div class="display">
-		{% include 'user/board/board.html' %}
 	</div>
 </div>
-{% include 'user/board/modals.html' %}
-<script src="/javascripts/jquery.formToJSON.js"></script>
+{% include 'user/modals/task.html' %}
+{% include 'user/modals/project.html' %}
+<script src="user/creator.js"></script>
+<script src="components/organizations.js"></script>
+<script src="components/projects.js"></script>
+<script src="components/tasks.js"></script>
 <script src="/app/user/board.js"></script>
 {% include 'user/layout/footer.html' %}
 {% endblock %}
