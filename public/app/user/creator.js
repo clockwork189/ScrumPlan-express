@@ -18,12 +18,22 @@ var Creator = function () {
 				var div = $("#createTask");
 				var task_name = $("input[name='task_name']").val();
 				var project_id = $("input[name='project_id']").val();
+				var organization_id = $("input[name='organization_id']").val();
 				var due_date = $("input[name='dueDate']").val();
 				var time_estimate = $("input[name='timeEstimate']").val();
 				var status = $("select[name='user_select']").val();
 				var description = $("textarea[name='description']").val();
 				//if(validateText(task_name, div, "Please Enter a Name for your Task")) {
-					tasks.create({name: task_name, description: description, project_id: project_id, due_date: due_date, time_estimate: time_estimate, status: status, owner_id: mid});
+					tasks.create({
+						name: task_name,
+						description: description,
+						project_id: project_id,
+						due_date: due_date,
+						time_estimate: time_estimate,
+						status: status,
+						organization_id: organization_id,
+						owner_id: mid
+					});
 					emptyInputs();
 					$('#createTask').foundation('reveal', 'close');
 					//console.log({name: task_name, project_id: project_id, due_date: due_date, time_estimate: time_estimate, status: status});

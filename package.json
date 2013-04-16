@@ -14,7 +14,7 @@
     "mongodb": "*",
   	"crypto": "*",
   	"connect-mongo": "*",
-	"MD5": "*",
+	  "MD5": "*",
   	"express-ejs-layouts": "0.3.1"
   }
 }

@@ -20,9 +20,9 @@
 							<a href="/app/projects/{{ project._id }}" class="active projects">{{ project.name }}</a>
 						</div>
 						<div class="large-4 columns options">
-							<a href="#" class="project edit" data-project-id="{{ project._id }}"><i class="foundicon-tools"></i></a>
-							<a href="#" class="project delete" data-project-id="{{ project._id }}"><i class="foundicon-remove delete"></i></a>
-							<a href="#" class="project add" data-project-id="{{ project._id }}"><i class="foundicon-add-doc"></i></a>
+							<a href="#" class="project edit" data-project-id="{{ project._id }}" data-organization-id="{{ organization._id}}"><i class="foundicon-tools"></i></a>
+							<a href="#" class="project delete" data-project-id="{{ project._id }}" data-organization-id="{{ organization._id}}"><i class="foundicon-remove delete"></i></a>
+							<a href="#" class="project add" data-project-id="{{ project._id }}" data-organization-id="{{ organization._id}}"><i class="foundicon-add-doc"></i></a>
 						</div>
 					</div>
 					{% endfor %}

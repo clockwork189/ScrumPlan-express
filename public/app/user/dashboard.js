@@ -118,6 +118,7 @@ var Dashboard = function () {
 			$('input[name="dueDate"]').datepicker({minDate: new Date()});
 			$("select[name='user_select']").chosen();
 			$("input[name='project_id']").val($(this).data("project-id"));
+			$("input[name='organization_id']").val($(this).data("organization-id"));
 		});
 
 		$(".task.display .delete").click(function () {
